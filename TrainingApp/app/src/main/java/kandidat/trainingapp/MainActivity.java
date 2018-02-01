@@ -3,7 +3,7 @@ package kandidat.trainingapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
+//testing git again
 public class MainActivity extends AppCompatActivity {
 
     @Override
