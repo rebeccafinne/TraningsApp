@@ -12,12 +12,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
+    //Testing git
     public void signIn(View view) {
 
 
     }
-
+    //Testing git with branches
     public void createAccount(View view) {
 
     }
