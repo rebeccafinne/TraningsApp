@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "496890021814",
+    "firebase_url": "https://trainingapp-3e341.firebaseio.com",
+    "project_id": "trainingapp-3e341",
+    "storage_bucket": "trainingapp-3e341.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496890021814:android:1421171b0711df8a",
+        "android_client_info": {
+          "package_name": "kandidat.trainingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496890021814-cis03m6k4ldco3b7soeh9qr90ksfp08v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kandidat.trainingapp",
+            "certificate_hash": "2dd7e55ffd17d22bb04403dab8ad685e6a5c4b2c"
+          }
+        },
+        {
+          "client_id": "496890021814-5pqos81i0pp9k6lqgr8nnqbmnmjgp9ov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASBzFUW9zuWMik21tNa8bZa96DH5jaY_U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496890021814-5pqos81i0pp9k6lqgr8nnqbmnmjgp9ov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
