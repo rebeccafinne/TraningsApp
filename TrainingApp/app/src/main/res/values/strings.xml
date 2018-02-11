@@ -22,5 +22,6 @@
     <string name="title_activity_create_account">CreateAccount</string>
     <string name="have_account">Already have an account? Sign in.</string>
     <string name="sign_up">Sign Up</string>
+    <string name="title_activity_profile_activitu">ProfileActivitu</string>
 
 </resources>

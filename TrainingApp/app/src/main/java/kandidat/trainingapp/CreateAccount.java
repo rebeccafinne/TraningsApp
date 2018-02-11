@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 public class CreateAccount extends AppCompatActivity implements View.OnClickListener{
 
     EditText editEmail, editPassword;
+    String email, password;
     private FirebaseAuth mAuth;
 
     @Override
@@ -42,8 +43,8 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     }
 
     private void registrerUser(){
-        String email = editEmail.getText().toString().trim();
-        String password = editPassword.getText().toString().trim();
+        email = editEmail.getText().toString().trim();
+        password = editPassword.getText().toString().trim();
 
         if(email.isEmpty()){
             editEmail.setError("You can not leave the Emailfield empty");
@@ -75,6 +76,10 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                 //If the user get successfully registered
                 if(task.isSuccessful()){
                     Toast.makeText(getApplicationContext(),"User is successfully registered",Toast.LENGTH_SHORT).show();
+                    mAuth.signInWithEmailAndPassword(email,password);
+                    Intent loginIntent = new Intent(CreateAccount.this, ProfileActivity.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
                 }else{
                     //If the email is already in database
                     if(task.getException() instanceof FirebaseAuthUserCollisionException){
@@ -92,7 +97,7 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            
+
             case R.id.create_button:
                 registrerUser();
                 break;
