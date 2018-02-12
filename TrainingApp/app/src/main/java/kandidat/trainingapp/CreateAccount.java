@@ -16,10 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 public class CreateAccount extends AppCompatActivity implements View.OnClickListener{
 
     EditText editEmail, editPassword;
+    String email, password;
     private FirebaseAuth mAuth;
 
     @Override
@@ -41,8 +43,8 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     }
 
     private void registrerUser(){
-        String email = editEmail.getText().toString().trim();
-        String password = editPassword.getText().toString().trim();
+        email = editEmail.getText().toString().trim();
+        password = editPassword.getText().toString().trim();
 
         if(email.isEmpty()){
             editEmail.setError("You can not leave the Emailfield empty");
@@ -57,11 +59,11 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
         }
         //Firebase does not accept passwords with less than 6 chars
         if(password.length()<6){
-            editPassword.setError("Please choose an password with more 6 chars");
+            editPassword.setError("Please choose an password with at least 6 charachters");
             editPassword.requestFocus();
             return;
         }
-        // Checks if the entered email matches an valid emailpattern
+        // Checks if the entered email matches an valid email pattern error otherwise
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             editEmail.setError("Please enter an valid email");
             editEmail.requestFocus();
@@ -71,8 +73,21 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                //If the user get successfully registered
                 if(task.isSuccessful()){
                     Toast.makeText(getApplicationContext(),"User is successfully registered",Toast.LENGTH_SHORT).show();
+                    mAuth.signInWithEmailAndPassword(email,password);
+                    Intent loginIntent = new Intent(CreateAccount.this, ProfileActivity.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
+                }else{
+                    //If the email is already in database
+                    if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                        Toast.makeText(getApplicationContext(),"Email has already been used!", Toast.LENGTH_SHORT).show();
+                        //If some other error occurs
+                    }else{
+                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
