@@ -99,6 +99,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                     Intent loginIntent = new Intent(CreateActivity.this, ProfileActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(loginIntent);
+                    mauth.getCurrentUser().sendEmailVerification();
                 // generates a message why user wasn't put in the database
                 }else{
                     Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
@@ -109,8 +110,8 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
 
     public void addUsertoDatabase(){
         //Sets a unique id to the user that gets added
-        String userId = mrefUsers.push().getKey();
-        UserInformation theUser = new UserInformation(editUsername.getText().toString().trim(),editEmail.getText().toString().trim());
+        String userId = mauth.getCurrentUser().getUid();
+        UserInformation theUser = new UserInformation(userId,editUsername.getText().toString().trim(),editEmail.getText().toString().trim());
         mrefUsers.child(userId).setValue(theUser);
     }
 

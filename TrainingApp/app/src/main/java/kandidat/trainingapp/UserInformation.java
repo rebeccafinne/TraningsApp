@@ -6,6 +6,7 @@ package kandidat.trainingapp;
 
 public class UserInformation {
 
+    public String userId;
     public String username;
     public String email;
     public int points;
@@ -15,10 +16,10 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(String username, String email){
+    public UserInformation(String userId, String username, String email){
         this.username = username;
-
         this.email = email;
+        this.userId = userId;
         this.points = 0;
     }
 
@@ -28,6 +29,10 @@ public class UserInformation {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public int getPoints() {
