@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,33 +39,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    //Testing git
+
     private void signIn() {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             editEmail.setError("You can not leave the Email-field empty");
             editEmail.requestFocus();
             return;
         }
 
-        if(password.isEmpty()){
-            editPassword.setError("Please fill in the Password-field");
-            editPassword.requestFocus();
+        //Makes check that the entered email is a valid one.
+        if (!Patterns.EMAIL_ADDRESS.matcher(editEmail.getText().toString().trim()).matches()) {
+            editEmail.setError("Not a valid email");
+            editEmail.requestFocus();
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            if (password.isEmpty()) {
+                editPassword.setError("Please fill in the Password-field");
+                editPassword.requestFocus();
+                return;
+            }
+
+            signInToAccount(email,password);
+
+    }
+
+    public void signInToAccount(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Intent loginIntent = new Intent(MainActivity.this, ProfileActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(loginIntent);
 
-                }else{
-                    Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
