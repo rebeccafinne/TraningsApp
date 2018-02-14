@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // When Create account button is pressed
             case R.id.create_button:
-                startActivity(new Intent(this,CreateAccount.class ));
+                startActivity(new Intent(this,CreateActivity.class ));
                 break;
         }
     }
