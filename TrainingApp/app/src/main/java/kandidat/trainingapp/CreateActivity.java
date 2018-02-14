@@ -46,46 +46,51 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void registerUser(){
+        //Makes the check that user typed in something in email-field.
         if(editEmail.getText().toString().trim().isEmpty()){
             editEmail.setError("Email is required");
             editEmail.requestFocus();
             return;
         }
-
+        //Makes check that the entered email is a valid one.
         if(!Patterns.EMAIL_ADDRESS.matcher(editEmail.getText().toString().trim()).matches()){
             editEmail.setError("Not a valid email");
             editEmail.requestFocus();
             return;
         }
-
+        //Makes check that user typed in something in password-field.
         if(editPassword.getText().toString().trim().isEmpty()){
             editPassword.setError("Password is required");
             editPassword.requestFocus();
             return;
         }
-
+        //Makes check that the typed password is at least 6 characters long.
         if (editPassword.getText().toString().trim().length() < 6){
             editPassword.setError("Password should contain at least 6 characthers");
             editPassword.requestFocus();
             return;
         }
 
+        //If all checks is ok then create the account.
         createAccount(editEmail.getText().toString().trim(),editPassword.getText().toString().trim());
     }
 
+
     public void createAccount(String email, String password){
-      mauth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-          @Override
-          public void onComplete(@NonNull Task<AuthResult> task) {
-              if(task.isSuccessful()){
-                  Intent loginIntent = new Intent(CreateActivity.this, ProfileActivity.class);
-                  loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                  startActivity(loginIntent);
-              }else{
-                  Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-              }
-          }
-      });
+        mauth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                // if the user was put in correctly in database
+                if(task.isSuccessful()){
+                    Intent loginIntent = new Intent(CreateActivity.this, ProfileActivity.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
+                // generates a message why user wasn't put in the database
+                }else{
+                    Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
