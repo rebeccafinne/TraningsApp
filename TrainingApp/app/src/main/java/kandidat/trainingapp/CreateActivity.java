@@ -17,12 +17,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText editEmail, editPassword;
+    private EditText editEmail, editPassword, editUsername;
     public String text;
     FirebaseAuth mauth;
+    DatabaseReference mrefUsers;
 
 
 
@@ -40,12 +43,22 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
 
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
+        editUsername = (EditText) findViewById(R.id.editUsername);
 
+        //Firebase auth used to authorise a user
         mauth = FirebaseAuth.getInstance();
+        //Firebase database reference used to store values in database
+        mrefUsers = FirebaseDatabase.getInstance().getReference("users");
 
     }
 
     public void registerUser(){
+        //Username will only be used as the displayable name
+        if(editUsername.getText().toString().trim().isEmpty()){
+            editUsername.setError("Please, choose a username of your liking.");
+            editUsername.requestFocus();
+            return;
+        }
         //Makes the check that user typed in something in email-field.
         if(editEmail.getText().toString().trim().isEmpty()){
             editEmail.setError("Email is required");
@@ -82,6 +95,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> task) {
                 // if the user was put in correctly in database
                 if(task.isSuccessful()){
+                    addUsertoDatabase();
                     Intent loginIntent = new Intent(CreateActivity.this, ProfileActivity.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(loginIntent);
@@ -91,6 +105,13 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
+    }
+
+    public void addUsertoDatabase(){
+        //Sets a unique id to the user that gets added
+        String userId = mrefUsers.push().getKey();
+        UserInformation theUser = new UserInformation(editUsername.getText().toString().trim(),editEmail.getText().toString().trim());
+        mrefUsers.child(userId).setValue(theUser);
     }
 
     @Override
