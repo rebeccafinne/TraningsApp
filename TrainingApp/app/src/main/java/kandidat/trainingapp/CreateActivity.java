@@ -17,14 +17,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateActivity extends AppCompatActivity implements View.OnClickListener{
-
+    private final String TAG = "FB_CREATE";
     private EditText editEmail, editPassword, editUsername;
     private FirebaseAuth mauth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mrefUsers;
 
     @Override
@@ -45,17 +45,19 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         //Firebase auth used to authorise a user
         mauth = FirebaseAuth.getInstance();
 
-        //Firebase authListener used to check the current state of the user
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-            }
-        };
-
         //Firebase database reference used to store values in database
         mrefUsers = FirebaseDatabase.getInstance().getReference("users");
 
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
     }
 
     public void registerUser(){
@@ -95,17 +97,15 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    public void createAccount(String email, String password){
+    public void createAccount(final String email, final String password){
         mauth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 // if the user was put in correctly in database
                 if(task.isSuccessful()){
                     addUsertoDatabase();
-                    Intent loginIntent = new Intent(CreateActivity.this, ProfileActivity.class);
-                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(loginIntent);
-                    mauth.getCurrentUser().sendEmailVerification();
+                    signIn(email,password);
+
                 // generates a message why user wasn't put in the database
                 }else{
                     Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
@@ -119,6 +119,10 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         String userId = mauth.getCurrentUser().getUid();
         UserInformation theUser = new UserInformation(userId,editUsername.getText().toString().trim(),editEmail.getText().toString().trim());
         mrefUsers.child(userId).setValue(theUser);
+    }
+
+    public void signIn(String email, String password){
+        mauth.signInWithEmailAndPassword(email,password);
     }
 
     @Override
