@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editEmail, editPassword;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editPassword = findViewById(R.id.editPassword);
         mAuth = FirebaseAuth.getInstance();
 
+
         //Firebase authListener used to check if user is or isn't signed in.
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                user = firebaseAuth.getCurrentUser();
                 //User is signed in
                 if(user != null){
                     Log.d(TAG, "User signed in " + user.getUid());
@@ -101,9 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Intent loginIntent = new Intent(MainActivity.this, ProfileActivity.class);
-                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(loginIntent);
+                    Log.d(TAG, "User signed in " + mAuth.getCurrentUser().getUid());
 
                 } else {
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
