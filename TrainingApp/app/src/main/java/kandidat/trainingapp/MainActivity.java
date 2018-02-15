@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 user = firebaseAuth.getCurrentUser();
-                //User is signed in
+                //If the user state is signed in show profile page.
                 if(user != null){
                     Log.d(TAG, "User signed in " + user.getUid());
                     Intent loginIntent = new Intent(MainActivity.this, ProfileActivity.class);
