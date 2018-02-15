@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -16,7 +17,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         welcomeText = (TextView) findViewById(R.id.profile_text);
-        mAuth =FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         welcomeText.setText("Welcome " + mAuth.getCurrentUser().getEmail());
     }
 }

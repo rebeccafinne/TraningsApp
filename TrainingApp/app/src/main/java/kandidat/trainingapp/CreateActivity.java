@@ -23,12 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CreateActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText editEmail, editPassword, editUsername;
-    public String text;
-    FirebaseAuth mauth;
-    DatabaseReference mrefUsers;
-
-
-
+    private FirebaseAuth mauth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mrefUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +44,15 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
 
         //Firebase auth used to authorise a user
         mauth = FirebaseAuth.getInstance();
+
+        //Firebase authListener used to check the current state of the user
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+            }
+        };
+
         //Firebase database reference used to store values in database
         mrefUsers = FirebaseDatabase.getInstance().getReference("users");
 
