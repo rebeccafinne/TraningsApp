@@ -17,8 +17,11 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private final String TAG = "FB_PROFILE";
     private FirebaseAuth mAuth;
+    private DatabaseReference mrefUser;
     private DatabaseReference mrefUsername;
-    private TextView welcomeText;
+    private DatabaseReference mrefPoints;
+    private String usernameCap;
+    private TextView welcomeText,pointsText;
 
 
     @Override
@@ -27,18 +30,23 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_profile);
         findViewById(R.id.logOut_btn).setOnClickListener(this);
         welcomeText = (TextView) findViewById(R.id.profile_text);
+        pointsText = (TextView) findViewById(R.id.profile_points);
         mAuth = FirebaseAuth.getInstance();
-        createWelcome( FirebaseDatabase.getInstance().getReference("users").child(mAuth.getUid()).child("username"));
+        createWelcome( FirebaseDatabase.getInstance().getReference("users").child(mAuth.getUid()));
     }
 
     // Create customised welcomemessage with username
     public void createWelcome(DatabaseReference userNameRef){
-        mrefUsername = userNameRef;
+        mrefUsername = userNameRef.child("username");
+        mrefPoints = userNameRef.child("points");
+
         mrefUsername.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String username = dataSnapshot.getValue(String.class);
-                welcomeText.setText("Welcome " + username);
+                //Capitalize username
+                usernameCap = username.substring(0,1).toUpperCase() + username.substring(1);
+                welcomeText.setText("Welcome " +  usernameCap + "!");
             }
 
             @Override
@@ -46,6 +54,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
+        mrefPoints.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Integer points = dataSnapshot.getValue(Integer.class);
+                pointsText.setText("You have collected " + points + " points." );
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override
