@@ -123,6 +123,10 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
 
     public void signIn(String email, String password){
         mauth.signInWithEmailAndPassword(email,password);
+        Intent loginIntent = new Intent(CreateActivity.this, ProfileActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(loginIntent);
+
     }
 
     @Override

@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
-
+    private final String TAG = "FB_PROFILE";
     private FirebaseAuth mAuth;
     private DatabaseReference mrefUsername;
     private TextView welcomeText;
