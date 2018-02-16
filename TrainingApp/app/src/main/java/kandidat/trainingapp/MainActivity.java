@@ -3,6 +3,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,13 +13,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 //testing git again
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
+    private final String TAG = "FB_SIGNIN";
     EditText editEmail, editPassword;
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,42 +34,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         mAuth = FirebaseAuth.getInstance();
+
+
+        //Firebase authListener used to check if user is or isn't signed in.
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                user = firebaseAuth.getCurrentUser();
+                //If the user state is signed in show profile page.
+                if(user != null){
+                    Log.d(TAG, "User signed in " + user.getUid());
+                    Intent loginIntent = new Intent(MainActivity.this, ProfileActivity.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
+                }else{
+                    Log.d(TAG,"Signed out at the moment.");
+                }
+            }
+        };
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        //Connect the AuthListener
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        //Disconenct the AuthListener
+        if(mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
 
+    }
 
-    //Testing git
     private void signIn() {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             editEmail.setError("You can not leave the Email-field empty");
             editEmail.requestFocus();
             return;
         }
 
-        if(password.isEmpty()){
-            editPassword.setError("Please fill in the Password-field");
-            editPassword.requestFocus();
+        //Makes check that the entered email is a valid one.
+        if (!Patterns.EMAIL_ADDRESS.matcher(editEmail.getText().toString().trim()).matches()) {
+            editEmail.setError("Not a valid email");
+            editEmail.requestFocus();
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            if (password.isEmpty()) {
+                editPassword.setError("Please fill in the Password-field");
+                editPassword.requestFocus();
+                return;
+            }
+
+            signInToAccount(email,password);
+
+    }
+
+    public void signInToAccount(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Intent loginIntent = new Intent(MainActivity.this, ProfileActivity.class);
-                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(loginIntent);
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "User signed in " + mAuth.getCurrentUser().getUid());
 
-                }else{
-                    Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -81,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // When Create account button is pressed
             case R.id.create_button:
-                startActivity(new Intent(this,CreateAccount.class ));
+                startActivity(new Intent(this,CreateActivity.class ));
                 break;
         }
     }

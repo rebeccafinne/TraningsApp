@@ -23,5 +23,8 @@
     <string name="have_account">Already have an account? Sign in.</string>
     <string name="sign_up">Sign Up</string>
     <string name="title_activity_profile_activitu">ProfileActivitu</string>
+    <string name="log_out">Log Out</string>
+    <string name="welcome">Welcome</string>
+    <string name="points">Points</string>
 
 </resources>
