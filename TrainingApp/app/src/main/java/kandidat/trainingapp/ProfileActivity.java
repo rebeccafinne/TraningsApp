@@ -3,12 +3,16 @@ package kandidat.trainingapp;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.util.TimeZone;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity{
     private final String TAG = "FB_PROFILE";
 
     private String usernameCap;
-    private TextView welcomeText,pointsText;
+    private TextView welcomeText;
 
 
     @Override
@@ -44,16 +48,14 @@ public class ProfileActivity extends AppCompatActivity{
         findViewById(R.id.logOut_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signOut();
-                startMainIntent();
-                /*Intent loginIntent = new Intent(ProfileActivity.this, MainActivity.class);
-                loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(loginIntent);*/
+                signOut();
+
+
             }
         });
 
         welcomeText = (TextView) findViewById(R.id.profile_text);
-        pointsText = (TextView) findViewById(R.id.profile_points);
+
 
     }
 
@@ -78,9 +80,9 @@ public class ProfileActivity extends AppCompatActivity{
                 UserInformation user = dataSnapshot.getValue(UserInformation.class);
 
                 //Capitalize username
-                usernameCap = user.getUsername().substring(0,1).toUpperCase() + user.getUsername().substring(1);
-                welcomeText.setText("Welcome " + usernameCap  + "!");
-                pointsText.setText("You have collected " + user.getPoints() + " points." );
+                //usernameCap = user.getUsername().substring(0,1).toUpperCase() + user.getUsername().substring(1);
+                welcomeText.setText("Welcome " + mAuth.getCurrentUser().getDisplayName()  + "!");
+
             }
 
             @Override
@@ -88,6 +90,21 @@ public class ProfileActivity extends AppCompatActivity{
 
             }
         });
+    }
+
+    public void signOut(){
+        AuthUI.getInstance().signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            startActivity(MainActivity.createIntent(ProfileActivity.this));
+                            finish();
+                        } else {
+                            // Signout failed
+                        }
+                    }
+                });
     }
 
 

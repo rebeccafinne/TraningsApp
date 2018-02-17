@@ -26,5 +26,6 @@
     <string name="log_out">Log Out</string>
     <string name="welcome">Welcome</string>
     <string name="points">Points</string>
+    <string name="sign">Sign In / Sign Up</string>
 
 </resources>

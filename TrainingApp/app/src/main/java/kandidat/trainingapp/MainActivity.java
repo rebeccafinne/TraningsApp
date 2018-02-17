@@ -20,6 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //testing git again
 public class MainActivity extends AppCompatActivity{
@@ -56,17 +61,16 @@ public class MainActivity extends AppCompatActivity{
             }
         };
 
-        findViewById(R.id.create_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,CreateActivity.class ));
-            }
-        });
         findViewById(R.id.sign_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                List<AuthUI.IdpConfig> selectedProviders = new ArrayList<>();
+                selectedProviders.add(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
+                selectedProviders.add(new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
                 startActivityForResult(
                         AuthUI.getInstance().createSignInIntentBuilder()
+                                .setProviders(selectedProviders)
+                                .setIsSmartLockEnabled(true)
                                 .build(),
                         RC_SIGN_IN);
             }
@@ -106,13 +110,12 @@ public class MainActivity extends AppCompatActivity{
     private void handleSignInResponse(int resultCode, Intent data) {
         IdpResponse response = IdpResponse.fromResultIntent(data);
         Toast toast;
+
         // Successfully signed in
         if (resultCode == ResultCodes.OK) {
-            /*Intent loginIntent = new Intent(MainActivity.this, ProfileActivity.class);
-            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(loginIntent);
-            */
+
             startProfileIntent(response);
+
 
         } else {
             // Sign in failed
@@ -146,45 +149,5 @@ public class MainActivity extends AppCompatActivity{
         in.setClass(context, MainActivity.class);
         return in;
     }
-
-    /*private void signIn() {
-        String email = editEmail.getText().toString().trim();
-        String password = editPassword.getText().toString().trim();
-
-        if (email.isEmpty()) {
-            editEmail.setError("You can not leave the Email-field empty");
-            editEmail.requestFocus();
-            return;
-        }
-
-        //Makes check that the entered email is a valid one.
-        if (!Patterns.EMAIL_ADDRESS.matcher(editEmail.getText().toString().trim()).matches()) {
-            editEmail.setError("Not a valid email");
-            editEmail.requestFocus();
-            return;
-        }
-
-        if (password.isEmpty()) {
-            editPassword.setError("Please fill in the Password-field");
-            editPassword.requestFocus();
-            return;
-        }
-
-            signInToAccount(email,password);
-
-    }
-
-    public void signInToAccount(String email, String password){
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "User signed in " + mAuth.getCurrentUser().getUid());
-
-                } else {
-                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
-    }
+ }
 

@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+//This class isn't used at the moment and don't think it will be
+
 public class CreateActivity extends AppCompatActivity{
     private final String TAG = "FB_CREATE";
     private EditText editEmail, editPassword, editUsername;
