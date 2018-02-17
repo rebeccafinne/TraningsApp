@@ -1,5 +1,6 @@
 package kandidat.trainingapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.icu.util.TimeZone;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,17 +29,26 @@ public class ProfileActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+
         //A reference to Authentication in Firebase
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        createWelcome( FirebaseDatabase.getInstance().getReference("users").child(mAuth.getUid()));
+
+        //If there is no user signed in then it should return to mainActivity
+        if(mAuth.getCurrentUser() == null){
+            startMainIntent();
+
+        }
+
+        createWelcome( FirebaseDatabase.getInstance().getReference("users").child(mAuth.getUid()),mAuth);
 
         findViewById(R.id.logOut_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                Intent loginIntent = new Intent(ProfileActivity.this, MainActivity.class);
+                startMainIntent();
+                /*Intent loginIntent = new Intent(ProfileActivity.this, MainActivity.class);
                 loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(loginIntent);
+                startActivity(loginIntent);*/
             }
         });
 
@@ -46,8 +57,20 @@ public class ProfileActivity extends AppCompatActivity{
 
     }
 
+    private void startMainIntent() {
+        startActivity(MainActivity.createIntent(this));
+        finish();
+        return;
+    }
+
+    public static Intent createIntent(Context context, IdpResponse idpResponse) {
+        Intent in = IdpResponse.getIntent(idpResponse);
+        in.setClass(context, ProfileActivity.class);
+        return in;
+    }
+
     // Create customised welcomemessage with username
-    public void createWelcome(DatabaseReference userRef){
+    public void createWelcome(DatabaseReference userRef, final FirebaseAuth mAuth){
 
        userRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -56,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity{
 
                 //Capitalize username
                 usernameCap = user.getUsername().substring(0,1).toUpperCase() + user.getUsername().substring(1);
-                welcomeText.setText("Welcome " +  usernameCap + "!");
+                welcomeText.setText("Welcome " + usernameCap  + "!");
                 pointsText.setText("You have collected " + user.getPoints() + " points." );
             }
 
@@ -66,4 +89,6 @@ public class ProfileActivity extends AppCompatActivity{
             }
         });
     }
+
+
 }

@@ -60,12 +60,7 @@ public class CreateActivity extends AppCompatActivity{
     }
 
     public void registerUser(DatabaseReference mrefUser,FirebaseAuth mauth){
-        //Username will only be used as the displayable name
-        if(editUsername.getText().toString().trim().isEmpty()){
-            editUsername.setError("Please, choose a username of your liking.");
-            editUsername.requestFocus();
-            return;
-        }
+
         //Makes the check that user typed in something in email-field.
         if(editEmail.getText().toString().trim().isEmpty()){
             editEmail.setError("Email is required");
@@ -78,6 +73,13 @@ public class CreateActivity extends AppCompatActivity{
             editEmail.requestFocus();
             return;
         }
+        //Username will only be used as the displayable name
+        if(editUsername.getText().toString().trim().isEmpty()){
+            editUsername.setError("Please, choose a username of your liking.");
+            editUsername.requestFocus();
+            return;
+        }
+
         //Makes check that user typed in something in password-field.
         if(editPassword.getText().toString().trim().isEmpty()){
             editPassword.setError("Password is required");
