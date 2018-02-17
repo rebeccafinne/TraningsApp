@@ -1,11 +1,14 @@
 package kandidat.trainingapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.icu.util.TimeZone;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -14,12 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProfileActivity extends AppCompatActivity{
     private final String TAG = "FB_PROFILE";
-    private FirebaseAuth mAuth;
-    private DatabaseReference mrefUser;
-    private DatabaseReference mrefUsername;
-    private DatabaseReference mrefPoints;
+
     private String usernameCap;
     private TextView welcomeText,pointsText;
 
@@ -28,25 +28,59 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        findViewById(R.id.logOut_btn).setOnClickListener(this);
+
+
+        //A reference to Authentication in Firebase
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        //If there is no user signed in then it should return to mainActivity
+        if(mAuth.getCurrentUser() == null){
+            startMainIntent();
+
+        }
+
+        createWelcome( FirebaseDatabase.getInstance().getReference("users").child(mAuth.getUid()),mAuth);
+
+        findViewById(R.id.logOut_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                startMainIntent();
+                /*Intent loginIntent = new Intent(ProfileActivity.this, MainActivity.class);
+                loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(loginIntent);*/
+            }
+        });
+
         welcomeText = (TextView) findViewById(R.id.profile_text);
         pointsText = (TextView) findViewById(R.id.profile_points);
-        mAuth = FirebaseAuth.getInstance();
-        createWelcome( FirebaseDatabase.getInstance().getReference("users").child(mAuth.getUid()));
+
+    }
+
+    private void startMainIntent() {
+        startActivity(MainActivity.createIntent(this));
+        finish();
+        return;
+    }
+
+    public static Intent createIntent(Context context, IdpResponse idpResponse) {
+        Intent in = IdpResponse.getIntent(idpResponse);
+        in.setClass(context, ProfileActivity.class);
+        return in;
     }
 
     // Create customised welcomemessage with username
-    public void createWelcome(DatabaseReference userNameRef){
-        mrefUsername = userNameRef.child("username");
-        mrefPoints = userNameRef.child("points");
+    public void createWelcome(DatabaseReference userRef, final FirebaseAuth mAuth){
 
-        mrefUsername.addValueEventListener(new ValueEventListener() {
+       userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String username = dataSnapshot.getValue(String.class);
+                UserInformation user = dataSnapshot.getValue(UserInformation.class);
+
                 //Capitalize username
-                usernameCap = username.substring(0,1).toUpperCase() + username.substring(1);
-                welcomeText.setText("Welcome " +  usernameCap + "!");
+                usernameCap = user.getUsername().substring(0,1).toUpperCase() + user.getUsername().substring(1);
+                welcomeText.setText("Welcome " + usernameCap  + "!");
+                pointsText.setText("You have collected " + user.getPoints() + " points." );
             }
 
             @Override
@@ -54,31 +88,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
-
-        mrefPoints.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Integer points = dataSnapshot.getValue(Integer.class);
-                pointsText.setText("You have collected " + points + " points." );
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.logOut_btn:
-                mAuth.signOut();
-                Intent loginIntent = new Intent(this, MainActivity.class);
-                loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(loginIntent);
-                break;
-        }
-    }
+
 }

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "kandidat.trainingapp"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -21,6 +21,7 @@ android {
 
 dependencies {
     implementation 'com.google.firebase:firebase-auth:11.8.0'
+    //noinspection GradleCompatible
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
@@ -31,6 +32,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.firebaseui:firebase-ui-auth:1.2.0'
     testCompile 'junit:junit:4.12'
     compile 'com.google.firebase:firebase-core:11.8.0'
 
