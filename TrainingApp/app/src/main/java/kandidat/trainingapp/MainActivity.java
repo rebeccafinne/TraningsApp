@@ -2,24 +2,16 @@ package kandidat.trainingapp;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,34 +24,13 @@ public class MainActivity extends AppCompatActivity{
     private static final int RC_SIGN_IN = 100;
     EditText editEmail, editPassword;
 
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        mAuth = FirebaseAuth.getInstance();
-
-        // Keeps track of if the user was signed in or not when the application was closed
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                //If the user state is signed in show profile page.
-                if(user != null){
-                    Log.d(TAG, "User signed in " + user.getUid());
-                    Intent loginIntent = new Intent(MainActivity.this, ProfileActivity.class);
-                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(loginIntent);
-                    finish();
-                }else{
-                    Log.d(TAG,"Signed out at the moment.");
-                }
-            }
-        };
 
         findViewById(R.id.sign_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,38 +55,32 @@ public class MainActivity extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RC_SIGN_IN){
-            handleSignInResponse(resultCode, data);
+            getSignInResponse(resultCode, data);
             return;
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //Connect the AuthListener
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    public void onStop(){
-        super.onStop();
-        //Disconenct the AuthListener
-        if(mAuthListener != null){
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-
-    }
 
     @MainThread
-    private void handleSignInResponse(int resultCode, Intent data) {
+    private void getSignInResponse(int resultCode, Intent data) {
         IdpResponse response = IdpResponse.fromResultIntent(data);
         Toast toast;
 
         // Successfully signed in
         if (resultCode == ResultCodes.OK) {
+            final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference userRef = database.getReference("users");
+            UserInformation theUser = new UserInformation(
+                    mAuth.getCurrentUser().getUid(),
+                    mAuth.getCurrentUser().getDisplayName(),
+                    mAuth.getCurrentUser().getEmail());
+            userRef.child(mAuth.getCurrentUser().getUid()).setValue(theUser);
 
-            startProfileIntent(response);
+            startActivity(ProfileActivity.createIntent(this, response));
+            finish();
 
+            return;
 
         } else {
             // Sign in failed
@@ -135,13 +100,12 @@ public class MainActivity extends AppCompatActivity{
                 toast.show();
                 return;
             }
-        }
-        toast = Toast.makeText(this, "Unknown Error!", Toast.LENGTH_LONG);
-        toast.show();
-    }
 
-    private void startProfileIntent(IdpResponse response) {
-        startActivity(ProfileActivity.createIntent(this, response ));
+            toast = Toast.makeText(this, "Unknown Error!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+
     }
 
     public static Intent createIntent(Context context) {
