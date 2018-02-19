@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class UserInformation {
 
     public String userId;
-    public String username;
+    public String displayName;
     public String email;
     public int points;
     public ArrayList<UserInformation> friends;
@@ -19,15 +19,15 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(String userId, String username, String email){
-        this.username = username;
+    public UserInformation(String userId, String displayName, String email){
+        this.displayName = displayName;
         this.email = email;
         this.userId = userId;
         this.points = 0;
     }
 
-    public String getUsername() {
-        return username;
+    public String getDisplayName() {
+        return displayName;
     }
 
     public String getEmail() {
