@@ -1,5 +1,7 @@
 package kandidat.trainingapp;
 
+import java.util.ArrayList;
+
 /**
  * Created by rasti on 2018-02-12.
  */
@@ -10,6 +12,7 @@ public class UserInformation {
     public String username;
     public String email;
     public int points;
+    public ArrayList<UserInformation> friends;
 
 
 

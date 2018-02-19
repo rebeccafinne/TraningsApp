@@ -24,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends AppCompatActivity{
     private final String TAG = "FB_PROFILE";
 
-    private String usernameCap;
     private TextView welcomeText;
 
 
@@ -80,8 +79,9 @@ public class ProfileActivity extends AppCompatActivity{
                 UserInformation user = dataSnapshot.getValue(UserInformation.class);
 
                 //Capitalize username
-                //usernameCap = user.getUsername().substring(0,1).toUpperCase() + user.getUsername().substring(1);
-                welcomeText.setText("Welcome " + mAuth.getCurrentUser().getDisplayName()  + "!");
+               String userDisplayCap = mAuth.getCurrentUser().getDisplayName().substring(0,1).toUpperCase() +
+                        mAuth.getCurrentUser().getDisplayName().substring(1);
+                welcomeText.setText("Welcome " + userDisplayCap + "!");
 
             }
 
