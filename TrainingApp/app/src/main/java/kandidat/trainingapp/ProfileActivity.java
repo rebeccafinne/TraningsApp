@@ -55,15 +55,20 @@ public class ProfileActivity extends AppCompatActivity{
         });
 
         welcomeText = (TextView) findViewById(R.id.profile_text);
-        skipButton.findViewById(R.id.skipButton);
+        skipButton = (Button) findViewById(R.id.skipButton);
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                skipPicture(view);
             }
         });
 
 
+
+    }
+
+    public void skipPicture(View v){
+        setContentView(R.layout.activity_training);
 
     }
 
