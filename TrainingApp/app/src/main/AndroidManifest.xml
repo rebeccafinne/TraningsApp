@@ -24,7 +24,15 @@
         </activity>
         <activity android:name=".TrainingActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".CreateActivity"></activity>
+        <activity android:name=".CreateActivity" />
+        <activity
+            android:name=".CardioActivity"
+            android:label="@string/title_activity_cardio"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GymActivity"
+            android:label="@string/title_activity_gym"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
