@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -25,6 +26,8 @@ public class ProfileActivity extends AppCompatActivity{
     private final String TAG = "FB_PROFILE";
 
     private TextView welcomeText;
+    private Button logInButton;
+    private Button skipButton;
 
 
     @Override
@@ -52,6 +55,14 @@ public class ProfileActivity extends AppCompatActivity{
         });
 
         welcomeText = (TextView) findViewById(R.id.profile_text);
+        skipButton.findViewById(R.id.skipButton);
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
+
 
 
     }
