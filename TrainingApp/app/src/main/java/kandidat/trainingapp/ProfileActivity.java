@@ -68,8 +68,8 @@ public class ProfileActivity extends AppCompatActivity{
     }
 
     public void skipPicture(View v){
-        setContentView(R.layout.activity_training);
-
+        Intent intent = new Intent(this, AppMainActivity.class);
+        startActivity(intent);
     }
 
     private void startMainIntent() {

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/action_me"
+        android:enabled="true"
+        android:icon="@drawable/me_grey"
+        android:title="@string/me"
+        app:showAsAction="" />
+
+    <item
+        android:id="@+id/action_workout"
+        android:enabled="true"
+        android:icon="@drawable/log_workout_grey"
+        android:title="@string/workout"
+        app:showAsAction="" />
+
+    <item
+        android:id="@+id/action_favorites"
+        android:enabled="true"
+        android:icon="@drawable/favorites_grey"
+        android:title="@string/favorites"
+        app:showAsAction="" />
+
+    <item
+        android:id="@+id/action_leaderboard"
+        android:enabled="true"
+        android:icon="@drawable/friends_grey"
+        android:title="@string/leaderboard"
+        app:showAsAction="" />
+
+</menu>
