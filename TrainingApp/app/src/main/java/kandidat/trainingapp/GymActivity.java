@@ -61,6 +61,13 @@ public class GymActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Clicked stop" , Toast.LENGTH_SHORT).show();
+                if(timer != null){
+                    timer.stopTimer();
+                    timerThread.interrupt();
+                    timerThread = null;
+
+                    timer = null;
+                }
             }
         });
     }
