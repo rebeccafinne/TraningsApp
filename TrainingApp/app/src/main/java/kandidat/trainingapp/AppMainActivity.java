@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.app.TabActivity;
 
 /**
  * Created by rebeccafinne on 2018-02-22.
@@ -20,6 +21,8 @@ public class AppMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_running);
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+        
+        mBottomNav.setSelectedItemId(R.id.action_workout);
 
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
