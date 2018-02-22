@@ -17,6 +17,7 @@ public class GymActivity extends AppCompatActivity {
     private TextView timerText;
     private Button btnTimerStart;
     private Button btnTimerStop;
+    private Button btnTimerPaus;
 
     private Context context;
     private Timer timer;
@@ -43,6 +44,7 @@ public class GymActivity extends AppCompatActivity {
         timerText = (TextView) findViewById(R.id.timer_text);
         btnTimerStart = (Button) findViewById(R.id.btn_timer_start);
         btnTimerStop = (Button) findViewById(R.id.btn_timer_stop);
+        btnTimerPaus = (Button) findViewById(R.id.btn_timer_paus);
 
         btnTimerStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +54,8 @@ public class GymActivity extends AppCompatActivity {
                     timer = new Timer(context);
                     timerThread = new Thread(timer);
                     timerThread.start();
-                    timer.startTimer();
                 }
+                timer.startTimer();
             }
         });
 
@@ -70,7 +72,16 @@ public class GymActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnTimerPaus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Clicked Paus", Toast.LENGTH_SHORT).show();
+                timer.pausTimer();
+            }
+        });
     }
+
 
     public void updateTimerText(final String time){
         runOnUiThread(new Runnable() {

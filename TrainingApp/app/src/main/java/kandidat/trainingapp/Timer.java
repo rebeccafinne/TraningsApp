@@ -13,6 +13,10 @@ public class Timer implements Runnable{
 
     private Context timerContext;
     private long timerStartTime;
+    private long timeWhenPaused;
+    private long timePaused;
+    private long totalTimePaused;
+    private Boolean paused;
 
     private boolean isRunning;
 
@@ -21,8 +25,21 @@ public class Timer implements Runnable{
     }
 
     public void startTimer() {
-        timerStartTime = System.currentTimeMillis();
-        isRunning = true;
+        if (paused == null){
+            timerStartTime = System.currentTimeMillis();
+            totalTimePaused = 0;
+            timePaused = 0;
+            isRunning = true;
+        }
+        paused = false;
+        totalTimePaused = totalTimePaused + timePaused;
+    }
+
+    public void pausTimer() {
+        if (!paused) {
+            timeWhenPaused = System.currentTimeMillis();
+            paused = true;
+        }
     }
 
     public void stopTimer(){
@@ -32,15 +49,18 @@ public class Timer implements Runnable{
     @Override
     public void run() {
         while (isRunning){
-            long since = System.currentTimeMillis() - timerStartTime;
+            if (!paused) {
+                long since = System.currentTimeMillis() - timerStartTime - totalTimePaused;
 
-            int seconds = (int) (since/1000) % 60;
-            int minutes = (int) (since/MILLIS_TO_MINUTES) % 60;
-            int hours   = (int) (since/MILLIS_TO_HOURS) %24;
+                int seconds = (int) (since / 1000) % 60;
+                int minutes = (int) (since / MILLIS_TO_MINUTES) % 60;
+                int hours = (int) (since / MILLIS_TO_HOURS) % 24;
 
-            ((GymActivity)timerContext).updateTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+                ((GymActivity) timerContext).updateTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
 
-            //"%02d:%02d:%02d"
+            }else{
+                timePaused = System.currentTimeMillis() - timeWhenPaused;
+            }
 
             try {
                 Thread.sleep(10);
