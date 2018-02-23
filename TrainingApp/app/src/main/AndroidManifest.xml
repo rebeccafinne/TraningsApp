@@ -26,7 +26,6 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".AppMainActivity" />
-
         <activity
             android:name=".CardioActivity"
             android:label="@string/title_activity_cardio"
@@ -35,6 +34,8 @@
             android:name=".GymActivity"
             android:label="@string/title_activity_gym"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".StatsActivity" />
+        <activity android:name=".ChartActivity"></activity>
     </application>
 
 </manifest>

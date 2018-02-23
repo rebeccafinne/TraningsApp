@@ -38,5 +38,7 @@
     <string name="workout">Log Workout</string>
     <string name="favorites">Favorites</string>
     <string name="leaderboard">Friends</string>
+    <string name="stats">Stats</string>
+    <string name="charts">Charts</string>
 
 </resources>
