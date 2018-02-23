@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class UserInformation {
 
-    public String userId;
-    public String displayName;
-    public String email;
-    public int points;
+    private String userId;
+    private String displayName;
+    private String email;
+    private int points;
     public ArrayList<UserInformation> friends;
 
 

@@ -54,7 +54,7 @@ public class ProfileActivity extends AppCompatActivity{
             }
         });
 
-        welcomeText = (TextView) findViewById(R.id.profile_text);
+        welcomeText = (TextView) findViewById(R.id.welcome_text);
         skipButton = (Button) findViewById(R.id.skipButton);
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,17 +16,17 @@
         <ImageView
             android:id="@+id/profilePicture"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="130dp"
+            android:contentDescription="TODO"
             android:gravity="center"
-            android:src="@android:drawable/sym_def_app_icon"
-            android:contentDescription="TODO" />
+            android:src="@android:drawable/sym_def_app_icon" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/nameInProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""
+            android:text="hej"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             />
     </LinearLayout>
