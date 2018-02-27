@@ -36,7 +36,7 @@ public class Timer implements Runnable{
     }
 
     public void pausTimer() {
-        if (!paused) {
+        if (!paused && isRunning) {
             timeWhenPaused = System.currentTimeMillis();
             paused = true;
         }
@@ -68,5 +68,7 @@ public class Timer implements Runnable{
                 e.printStackTrace();
             }
         }
+        //When stoped running, reset text.
+        ((GymActivity) timerContext).updateTimerText("00:00:00"); //TODO något annat än att nollställa
     }
 }
