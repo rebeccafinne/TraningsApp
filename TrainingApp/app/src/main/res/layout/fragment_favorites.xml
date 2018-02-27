@@ -5,15 +5,14 @@
     tools:context="kandidat.trainingapp.FavoritesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ListView
+        android:id="@+id/favorite_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:divider="@color/authui_colorPrimary"
+        android:dividerHeight="2dp"
+        android:choiceMode="multipleChoice" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 
 </FrameLayout>
