@@ -52,7 +52,7 @@ public class FavoritesFragment extends Fragment {
 
         // Create an ArrayAdapter from List
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-                (getContext(), android.R.layout.simple_list_item_checked, fruits_list);
+                (getContext(), android.R.layout.simple_list_item_multiple_choice, fruits_list);
 
         // DataBind ListView with items from ArrayAdapter
         listView.setAdapter(arrayAdapter);

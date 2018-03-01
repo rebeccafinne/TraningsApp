@@ -5,8 +5,15 @@
     <color name="colorPrimarLight">#63a4ff</color>
     <color name="colorButtonCharts">#95AABF</color>
     <color name="colorButtonStats">#7393BA</color>
+    <color name="colorAccent">#FFC832</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBottomNavBar">#C6E2FF</color>
 
 
 
-    <color name="colorAccent">#FF4081</color>
+
+
+
+
 </resources>
