@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TrainingApp</string>
+    <string name="app_name">BetterTogether</string>
     <string name="sign_in">Sign in</string>
     <string name="user_name">Username</string>
     <string name="password">Password</string>
