@@ -61,7 +61,9 @@
             android:name=".ChartActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".DailyActivity"></activity>
+        <activity android:name=".DailyActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
