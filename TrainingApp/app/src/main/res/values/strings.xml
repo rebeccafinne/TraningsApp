@@ -41,4 +41,11 @@
     <string name="stats">Stats</string>
     <string name="charts">Charts</string>
 
+
+    <!-- Strings for training -->
+    <string name="gym">Log Gym Exercise</string>
+    <string name="cardio">Log Cardio Exercise</string>
+    <string name="daily">Log Daily Activity</string>
+
+
 </resources>

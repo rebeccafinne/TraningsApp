@@ -1,20 +1,22 @@
 package kandidat.trainingapp;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableRow;
+import android.widget.Button;
 
 
-public class TrainingFragment extends Fragment {
+public class TrainingFragment extends Fragment implements View.OnClickListener {
+
+    Button gymButton, cardioButton, dailyButton;
 
     public static TrainingFragment newInstance() {
         TrainingFragment fragment = new TrainingFragment();
         return fragment;
+
     }
 
 
@@ -28,8 +30,32 @@ public class TrainingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_training, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_training, container, false);
+
+        gymButton = (Button) rootView.findViewById(R.id.gymButton);
+        gymButton.setOnClickListener(this);
+        cardioButton = (Button) rootView.findViewById(R.id.cardioButton);
+        cardioButton.setOnClickListener(this);
+        dailyButton = (Button) rootView.findViewById(R.id.dailyButton);
+        dailyButton.setOnClickListener(this);
+
+        return rootView;
     }
 
 
+    @Override
+    public void onClick(View view) {
+        Intent intent;
+
+        if(view.getId() == R.id.gymButton){
+            intent = new Intent(getActivity(), TrainingActivity.class);
+            startActivity(intent);
+        }else if(view.getId() == R.id.cardioButton){
+            intent = new Intent(getActivity(), CardioActivity.class);
+            startActivity(intent);
+        }else{
+            intent = new Intent(getActivity(), DailyActivity.class);
+            startActivity(intent);
+        }
+    }
 }
