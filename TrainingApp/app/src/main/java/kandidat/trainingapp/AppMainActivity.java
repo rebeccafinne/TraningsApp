@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.app.TabActivity;
+import android.support.v7.widget.Toolbar;
 
 /**
  * Created by rebeccafinne on 2018-02-22.
@@ -17,10 +19,19 @@ public class AppMainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNav;
 
+    private Toolbar toolbar;
+    ActionBar actionBar;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_running);
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        // toolbar = getSupportActionBar(); // or getActionBar();
+        getSupportActionBar().setTitle("BetterTogether");
+        //getSupportActionBar().setLogo(R.drawable.settingsbuttonwhite);
         
         mBottomNav.setSelectedItemId(R.id.action_workout);
 
@@ -58,6 +69,9 @@ public class AppMainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, TrainingFragment.newInstance());
         transaction.commit();
+
+
+
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);

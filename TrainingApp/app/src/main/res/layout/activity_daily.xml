@@ -6,4 +6,6 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.DailyActivity">
 
+    <include layout="@layout/layout_toolbar"/>
+
 </android.support.constraint.ConstraintLayout>

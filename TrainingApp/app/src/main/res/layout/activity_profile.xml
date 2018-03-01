@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.ProfileActivity">
 
+    <include layout="@layout/layout_toolbar"/>
+
     <TextView
+        android:maxHeight="?attr/actionBarSize"
+
         android:id="@+id/welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

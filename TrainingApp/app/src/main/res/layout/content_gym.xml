@@ -8,4 +8,6 @@
     tools:context="kandidat.trainingapp.GymActivity"
     tools:showIn="@layout/activity_gym">
 
+    <include layout="@layout/layout_toolbar"/>
+
 </android.support.constraint.ConstraintLayout>

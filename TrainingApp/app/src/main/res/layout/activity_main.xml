@@ -8,6 +8,8 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
+    <include layout="@layout/layout_toolbar"/>
+
 
     <TextView
         android:id="@+id/textView"
@@ -20,7 +22,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:maxHeight="?attr/actionBarSize"
+        />
 
     <Button
         android:id="@+id/sign_button"

@@ -13,6 +13,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
 
     Button gymButton, cardioButton, dailyButton;
 
+
     public static TrainingFragment newInstance() {
         TrainingFragment fragment = new TrainingFragment();
         return fragment;

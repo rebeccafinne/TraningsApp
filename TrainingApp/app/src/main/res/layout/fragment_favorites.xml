@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.FavoritesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
 
     <ListView
         android:id="@+id/favorite_list"
