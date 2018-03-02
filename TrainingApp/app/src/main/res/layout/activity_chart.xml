@@ -6,11 +6,14 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.ChartActivity">
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_activity_toolbar"/>
 
     <TextView
+
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:text="This is the chart activty" />
 </android.support.constraint.ConstraintLayout>

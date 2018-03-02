@@ -9,7 +9,7 @@
 
     tools:context="kandidat.trainingapp.TrainingActivity">
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_activity_toolbar"/>
 
     <EditText
 

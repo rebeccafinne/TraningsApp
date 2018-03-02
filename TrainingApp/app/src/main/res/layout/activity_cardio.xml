@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.CardioActivity">
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_activity_toolbar"/>
 
 
     <android.support.design.widget.AppBarLayout

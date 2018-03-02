@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.AppMainActivity">
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_fragment_toolbar"/>
 
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@layout/layout_toolbar"
+        android:layout_above="@layout/layout_fragment_toolbar"
         android:layout_marginTop="?attr/actionBarSize"
         android:animateLayoutChanges="true">
 

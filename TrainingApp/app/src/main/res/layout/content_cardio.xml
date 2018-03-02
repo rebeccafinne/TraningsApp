@@ -8,6 +8,6 @@
     tools:context="kandidat.trainingapp.CardioActivity"
     tools:showIn="@layout/activity_cardio">
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_activity_toolbar"/>
 
 </android.support.constraint.ConstraintLayout>

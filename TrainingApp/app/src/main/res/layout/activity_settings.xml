@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kandidat.trainingapp.TrainingActivity">
+    tools:context="kandidat.trainingapp.SettingsActivity">
 
     <include layout="@layout/layout_activity_toolbar"/>
 
