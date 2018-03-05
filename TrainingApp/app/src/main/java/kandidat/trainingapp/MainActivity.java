@@ -20,7 +20,6 @@ import java.util.List;
 
 //testing git again
 public class MainActivity extends AppCompatActivity{
-    private final String TAG = "FB_SIGNIN";
     private static final int RC_SIGN_IN = 100;
     EditText editEmail, editPassword;
 
