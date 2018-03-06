@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toTopOf="@+id/logOut_btn"
         app:layout_constraintEnd_toStartOf="@+id/skipButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_text"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_text"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="8dp" />
 
