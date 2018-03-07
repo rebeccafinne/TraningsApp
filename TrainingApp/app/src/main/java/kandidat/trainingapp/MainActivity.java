@@ -2,6 +2,7 @@ package kandidat.trainingapp;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,9 +21,11 @@ import java.util.List;
 
 //testing git again
 public class MainActivity extends AppCompatActivity{
-    private final String TAG = "FB_SIGNIN";
     private static final int RC_SIGN_IN = 100;
     EditText editEmail, editPassword;
+    private FirebaseAuth mauth;
+    private  FirebaseAuth.AuthStateListener mAuthListener;
+
 
 
 
@@ -31,6 +34,17 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mauth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(mauth.getCurrentUser() != null){
+
+                    startProfileIntent();
+                   finish();
+                }
+            }
+        };
 
         findViewById(R.id.sign_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +63,20 @@ public class MainActivity extends AppCompatActivity{
 
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        mauth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(mauth.getCurrentUser() != null){
+            mauth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     @Override
@@ -112,6 +140,14 @@ public class MainActivity extends AppCompatActivity{
         Intent in = new Intent();
         in.setClass(context, MainActivity.class);
         return in;
+    }
+
+
+
+    public void startProfileIntent() {
+        startActivity(ProfileActivity.createIntent(this));
+        finish();
+        return;
     }
  }
 

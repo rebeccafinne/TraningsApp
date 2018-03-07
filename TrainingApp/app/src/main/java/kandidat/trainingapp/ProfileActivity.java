@@ -84,6 +84,14 @@ public class ProfileActivity extends AppCompatActivity{
         return in;
     }
 
+    public static Intent createIntent(Context context) {
+        Intent in = new Intent();
+        in.setClass(context, ProfileActivity.class);
+        return in;
+    }
+
+
+
     // Create customised welcomemessage with username
     public void createWelcome(DatabaseReference userRef, final FirebaseAuth mAuth){
 
