@@ -10,39 +10,50 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="left"
+        android:layout_gravity="start"
         android:maxHeight="?attr/actionBarSize"
         android:orientation="horizontal"
-        android:paddingStart="0dp">
+        android:weightSum="1">
 
         <ImageButton
             android:id="@+id/settings_button"
             android:layout_width="54dp"
             android:layout_height="54dp"
-            android:maxHeight="?attr/actionBarSize"
             android:layout_gravity="start"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:paddingLeft="0dp"
-            android:paddingStart="0dp"
-            android:paddingTop="0dp"
+            android:background="@color/colorPrimary"
             android:clickable="true"
-            android:src="@drawable/settings_small"
-            android:background="@color/colorPrimary"/>
+            android:gravity="start"
+            android:maxHeight="?attr/actionBarSize"
+            android:scaleType="fitStart"
+            android:src="@drawable/settings_small" />
 
         <TextView
             android:id="@+id/toolbar_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-
-            android:layout_marginStart="8dp"
-
-
-            android:textColor="@color/colorWhite"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
             android:maxHeight="?attr/actionBarSize"
             android:text="BetterToghether"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorWhite"
             android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/add_favorites_button"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:background="@color/colorPrimary"
+            android:maxHeight="?attr/actionBarSize"
+
+            android:maxWidth="54dp"
+            app:srcCompat="@drawable/plus_sign" />
 
 
     </LinearLayout>

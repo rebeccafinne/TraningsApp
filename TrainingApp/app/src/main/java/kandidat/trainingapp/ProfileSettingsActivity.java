@@ -23,13 +23,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             save(view);
         }
     });
-        backArrow = (ImageButton) findViewById(R.id.back_button);
-        backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goBack(view);
-            }
-        });
+
     }
 
     private void save(View view) {
@@ -38,7 +32,5 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         finish();
     }
 
-    private void goBack(View view){
-        finish();
-    }
+   
 }
