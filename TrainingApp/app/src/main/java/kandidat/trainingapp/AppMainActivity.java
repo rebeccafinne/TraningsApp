@@ -26,7 +26,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
     private Toolbar toolbar;
     private TextView toolText;
-    private ImageButton settingsButton;
+    private ImageButton settingsButton, addFavoritesButton;
     ActionBar actionBar;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,8 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
         settingsButton = (ImageButton) toolbar.findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(this);
+        addFavoritesButton = (ImageButton) toolbar.findViewById(R.id.add_favorites_button);
+        addFavoritesButton.setOnClickListener(this);
 
 
         toolText.setText("Workout");
@@ -108,7 +110,12 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
 
-        Intent intent = new Intent(this, ProfileSettingsActivity.class);
+        Intent intent;
+        if(view.getId() == R.id.settings_button){
+            intent = new Intent(this, ProfileSettingsActivity.class);
+        } else{
+            intent = new Intent(this, AddFavoritesActivity.class);
+        }
         startActivity(intent);
 
     }
