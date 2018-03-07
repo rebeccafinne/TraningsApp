@@ -108,7 +108,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
 
-        Intent intent = new Intent(this, SettingsActivity.class);
+        Intent intent = new Intent(this, ProfileSettingsActivity.class);
         startActivity(intent);
 
     }

@@ -15,7 +15,7 @@
         android:paddingStart="0dp">
 
         <ImageButton
-            android:id="@+id/settings_button"
+            android:id="@+id/back_button"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:maxHeight="?attr/actionBarSize"

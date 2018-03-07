@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
 
     private Button save;
+    private ImageButton backArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +23,22 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             save(view);
         }
     });
+        backArrow = (ImageButton) findViewById(R.id.back_button);
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goBack(view);
+            }
+        });
     }
 
     private void save(View view) {
-        Intent intent = new Intent(this, AppMainActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, AppMainActivity.class);
+        //startActivity(intent);
+        finish();
+    }
+
+    private void goBack(View view){
+        finish();
     }
 }

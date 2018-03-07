@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.ProfileSettingsActivity">
 
+    <include layout="@layout/layout_activity_toolbar"/>
+
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
