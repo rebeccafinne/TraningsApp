@@ -20,14 +20,13 @@ import android.widget.TextView;
  * Created by rebeccafinne on 2018-02-22.
  */
 
-public class AppMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class AppMainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNav;
 
     private Toolbar toolbar;
     private TextView toolText;
     private ImageButton settingsButton, addFavoritesButton;
-    ActionBar actionBar;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,18 +36,23 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
         toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
         settingsButton = (ImageButton) toolbar.findViewById(R.id.settings_button);
-        settingsButton.setOnClickListener(this);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                settings(view);
+            }
+        });
         addFavoritesButton = (ImageButton) toolbar.findViewById(R.id.add_favorites_button);
-        addFavoritesButton.setOnClickListener(this);
+        addFavoritesButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                addFavorite(view);
+            }
+        });
 
 
         toolText.setText("Workout");
         settingsButton.setImageResource(R.drawable.settings_small);
-
-        // setSupportActionBar(toolbar);
-        // toolbar = getSupportActionBar(); // or getActionBar();
-        //getSupportActionBar().setTitle("BetterTogether");
-        //getSupportActionBar().setLogo(R.drawable.settings);
         
         mBottomNav.setSelectedItemId(R.id.action_workout);
 
@@ -70,15 +74,12 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
                         selectedFragment = TrainingFragment.newInstance();
                         break;
                     case R.id.action_favorites:
-
                         toolText.setText("Favorites");
-
                         selectedFragment = FavoritesFragment.newInstance();
 
                         break;
                     case R.id.action_leaderboard:
                         toolText.setText("Friends");
-
                         selectedFragment = LeaderboardFragment.newInstance();
 
                         break;
@@ -97,26 +98,15 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         transaction.replace(R.id.frame_layout, TrainingFragment.newInstance());
         transaction.commit();
 
-
-
-
-
-
-        //Used to select an item programmatically
-        //bottomNavigationView.getMenu().getItem(2).setChecked(true);
-
     }
 
-    @Override
-    public void onClick(View view) {
 
-        Intent intent;
-        if(view.getId() == R.id.settings_button){
-            intent = new Intent(this, ProfileSettingsActivity.class);
-        } else{
-            intent = new Intent(this, AddFavoritesActivity.class);
-        }
+    private void settings(View view){
+        Intent intent = new Intent(this, ProfileSettingsActivity.class);
         startActivity(intent);
-
+    }
+    private void addFavorite(View view){
+        Intent intent = new Intent(this, AddFavoritesActivity.class);
+        startActivity(intent);
     }
 }
