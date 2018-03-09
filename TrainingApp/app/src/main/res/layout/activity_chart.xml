@@ -6,14 +6,26 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.ChartActivity">
 
-    <include layout="@layout/layout_activity_toolbar"/>
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_activity_toolbar" />
 
     <TextView
 
         android:id="@+id/textView2"
-        android:layout_marginTop="?attr/actionBarSize"
 
+        android:layout_width="161dp"
+        android:layout_height="507dp"
+        android:layout_marginTop="408dp"
+        android:text="This is the chart activty"
+        app:layout_constraintTop_toTopOf="@+id/lineChart"
+        tools:layout_editor_absoluteX="112dp" />
+
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is the chart activty" />
+        android:layout_height="400dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="56dp"></com.github.mikephil.charting.charts.BarChart>
 </android.support.constraint.ConstraintLayout>

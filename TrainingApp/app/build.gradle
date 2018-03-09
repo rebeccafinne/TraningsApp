@@ -20,6 +20,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
     implementation 'com.google.firebase:firebase-auth:11.8.0'
     //noinspection GradleCompatible
     implementation 'com.android.support:design:26.1.0'
