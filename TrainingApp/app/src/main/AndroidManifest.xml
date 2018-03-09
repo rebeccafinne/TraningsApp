@@ -67,7 +67,9 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity android:name=".ProfileSettingsActivity" />
-        <activity android:name=".AddFavoritesActivity"></activity>
+        <activity android:name=".AddFavoritesActivity" />
+        <activity android:name=".AddNewGymActiviy" />
+        <activity android:name=".AddNewDailyActivity"></activity>
     </application>
 
 </manifest>
