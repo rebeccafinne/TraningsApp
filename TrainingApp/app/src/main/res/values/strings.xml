@@ -46,6 +46,22 @@
     <string name="gym">Log Gym Exercise</string>
     <string name="cardio">Log Cardio Exercise</string>
     <string name="daily">Log Daily Activity</string>
+    <string name="stairs">Stairs</string>
+    <string name="busstop">Bus Stops</string>
+    <string name="stand">Stand up</string>
+    <string name="addStairsText">How many stairs do you want to add?</string>
+    <string name="save">Save</string>
+
+    <string-array name="amount_of_stairs">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 
 
 </resources>
