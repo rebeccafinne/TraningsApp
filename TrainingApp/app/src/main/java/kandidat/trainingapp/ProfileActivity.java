@@ -101,9 +101,9 @@ public class ProfileActivity extends AppCompatActivity{
                 UserInformation user = dataSnapshot.getValue(UserInformation.class);
 
                 //Capitalize username
-               String userDisplayCap = mAuth.getCurrentUser().getDisplayName().substring(0,1).toUpperCase() +
-                        mAuth.getCurrentUser().getDisplayName().substring(1);
-                welcomeText.setText("Welcome " + userDisplayCap + "!");
+//               String userDisplayCap = mAuth.getCurrentUser().getDisplayName().substring(0,1).toUpperCase() +
+//                        mAuth.getCurrentUser().getDisplayName().substring(1);
+                welcomeText.setText("Welcome " ); // + userDisplayCap + "!");
 
             }
 
