@@ -48,4 +48,11 @@
     <string name="daily">Log Daily Activity</string>
 
 
+    <!-- String to GYM -->
+    <string name="start_pause_timer">Start</string>
+    <string name="stop_timer">Stop</string>
+    <string name="paus_timer">Paus</string>
+    <string name="add_ex">Add exercise</string>
+    <string name="add_wrkout">Add Workout</string>
+
 </resources>
