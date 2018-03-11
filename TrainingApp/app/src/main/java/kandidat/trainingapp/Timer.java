@@ -56,7 +56,7 @@ public class Timer implements Runnable{
                 int minutes = (int) (since / MILLIS_TO_MINUTES) % 60;
                 int hours = (int) (since / MILLIS_TO_HOURS) % 24;
 
-                ((GymActivity) timerContext).updateTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+                ((TrainingActivity) timerContext).updateTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
 
             }else{
                 timePaused = System.currentTimeMillis() - timeWhenPaused;
