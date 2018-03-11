@@ -69,6 +69,6 @@ public class Timer implements Runnable{
             }
         }
         //When stoped running, reset text.
-        ((GymActivity) timerContext).updateTimerText("00:00:00"); //TODO något annat än att nollställa
+        ((TrainingActivity) timerContext).updateTimerText("00:00:00"); //TODO något annat än att nollställa
     }
 }
