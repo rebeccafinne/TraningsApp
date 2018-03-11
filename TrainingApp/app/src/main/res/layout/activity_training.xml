@@ -7,6 +7,34 @@
     tools:context="kandidat.trainingapp.TrainingActivity">
 
     <Button
+        android:id="@+id/btn_timer_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:text="@string/stop_timer"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_paus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_timer_paus"
+        app:layout_constraintTop_toTopOf="@+id/btn_timer_paus" />
+
+    <Button
+        android:id="@+id/btn_timer_paus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:text="@string/paus_timer"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start"
+        app:layout_constraintEnd_toStartOf="@+id/btn_timer_stop"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_timer_start"
+        app:layout_constraintTop_toTopOf="@+id/btn_timer_start"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
         android:id="@+id/btn_timer_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,9 +44,11 @@
         android:text="@string/start_pause_timer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_timer_paus"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timer_text" />
+        app:layout_constraintTop_toBottomOf="@+id/timer_text"
+        app:layout_constraintVertical_bias="0.056" />
 
     <TextView
         android:id="@+id/timer_text"
@@ -26,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:layout_weight="1"
         android:text="00:00:00"
         android:textSize="24sp"
