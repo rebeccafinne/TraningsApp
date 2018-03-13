@@ -49,12 +49,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".GymActivity"
-            android:configChanges="orientation"
-            android:label="@string/title_activity_gym"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".StatsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
