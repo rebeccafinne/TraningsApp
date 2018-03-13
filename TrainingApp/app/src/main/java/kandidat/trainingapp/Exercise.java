@@ -24,7 +24,7 @@ public class Exercise {
     public String getName(){
         return name;
     }
-    public void reName(String name){
+    public void setName(String name){
         this.name = name;
     }
 

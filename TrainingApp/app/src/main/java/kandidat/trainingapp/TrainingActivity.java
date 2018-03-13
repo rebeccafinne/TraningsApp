@@ -106,15 +106,15 @@ public class TrainingActivity extends AppCompatActivity {
 
         lstExercises.setAdapter(adapter);
 
-/*        lstExercises.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lstExercises.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                workout.addExercise();
+                workout.getExercise(i).setName("Nytt namn");
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Clickade", Toast.LENGTH_SHORT).show(); //TODO remove when working
             }
         });
-*/
+
 
         btnAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
