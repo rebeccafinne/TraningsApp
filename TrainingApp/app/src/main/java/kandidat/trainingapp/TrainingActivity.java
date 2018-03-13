@@ -4,7 +4,9 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +21,20 @@ public class TrainingActivity extends AppCompatActivity {
     private Timer timer;
     private Thread timerThread;
 
+    String[] testText = {"hej", "Adios", "Goddag"};
+
     private final String TAG = "FB_TRAINING";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
+
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                R.layout.activity_listview, testText);
+
+        ListView lstExercises = findViewById(R.id.list_view_gym_exercies);
+        lstExercises.setAdapter(adapter);
+
 
         timerText = (TextView) findViewById(R.id.timer_text);
         btnTimerStart = (Button) findViewById(R.id.btn_timer_start);
