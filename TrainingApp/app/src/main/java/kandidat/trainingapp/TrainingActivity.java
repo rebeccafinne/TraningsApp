@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -21,7 +22,8 @@ public class TrainingActivity extends AppCompatActivity {
     private Timer timer;
     private Thread timerThread;
 
-    String[] testText = {"hej", "Adios", "Goddag"};
+    private String[] exercises;
+    private Button btnAddExercise;
 
     private final String TAG = "FB_TRAINING";
     @Override
@@ -29,12 +31,22 @@ public class TrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
-        ArrayAdapter adapter = new ArrayAdapter(this,
-                R.layout.activity_listview, testText);
+        exercises = getResources().getStringArray(R.array.exercises);
+
+        final ArrayAdapter adapter = new ArrayAdapter(this,
+                R.layout.activity_listview, exercises);
 
         ListView lstExercises = findViewById(R.id.list_view_gym_exercies);
         lstExercises.setAdapter(adapter);
 
+        lstExercises.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                exercises[i] = "new string";
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(), "Clickade", Toast.LENGTH_SHORT).show(); //TODO remove when working
+            }
+        });
 
         timerText = (TextView) findViewById(R.id.timer_text);
         btnTimerStart = (Button) findViewById(R.id.btn_timer_start);
@@ -79,7 +91,6 @@ public class TrainingActivity extends AppCompatActivity {
         });
 
     }
-
 
     public void updateTimerText(final String time){
         runOnUiThread(new Runnable() {

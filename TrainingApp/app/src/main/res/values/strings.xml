@@ -55,4 +55,10 @@
     <string name="add_ex">Add exercise</string>
     <string name="add_wrkout">Add Workout</string>
 
+    <!-- Exercise names -->
+    <string-array name="exercises">
+        <item>Pull Ups</item>
+        <item>Biceps Curl</item>
+    </string-array>
+
 </resources>
