@@ -4,9 +4,12 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,53 +20,49 @@ import java.util.List;
 
 public class TrainingActivity extends AppCompatActivity {
 
+    //**********************************************************************************************
+    //*****************************Common stuff*****************************************************
+    //**********************************************************************************************
+    private Context context;
+    private final String TAG = "FB_TRAINING";
+
+    //**********************************************************************************************
+    //******************************Timer and stuff for that****************************************
+    //**********************************************************************************************
     private TextView timerText;
     private Button btnTimerStart;
     private Button btnTimerStop;
     private Button btnTimerPaus;
 
-    private Context context;
     private Timer timer;
     private Thread timerThread;
 
-    private List<String> exercises;
+    //**********************************************************************************************
+    //******************************Stuff for the listview *****************************************
+    //**********************************************************************************************
+    private Workout workout;
     private Button btnAddExercise;
 
-    private final String TAG = "FB_TRAINING";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
-        exercises = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.exercises)));
+        context = this;
 
-        final ArrayAdapter adapter = new ArrayAdapter(this,
-                R.layout.activity_listview, exercises);
-
-        ListView lstExercises = findViewById(R.id.list_view_gym_exercies);
-        lstExercises.setAdapter(adapter);
-
-        lstExercises.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                exercises.set(i, exercises.get(i) + " I");
-                adapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(), "Clickade", Toast.LENGTH_SHORT).show(); //TODO remove when working
-            }
-        });
-
+        //******************************************************************************************
+        //**************************For the timer **************************************************
+        //******************************************************************************************
         timerText = findViewById(R.id.timer_text);
         btnTimerStart = findViewById(R.id.btn_timer_start);
         btnTimerStop = findViewById(R.id.btn_timer_stop);
         btnTimerPaus = findViewById(R.id.btn_timer_paus);
-        btnAddExercise = findViewById(R.id.btn_add_ex);
-
-        context = this;
 
         btnTimerStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked start " , Toast.LENGTH_SHORT).show(); //TODO remove when everything works.
+                Toast.makeText(getApplicationContext(), "Clicked start " ,
+                        Toast.LENGTH_SHORT).show(); //TODO remove when everything works.
                 if(timer == null){
                     timer = new Timer(context);
                     timerThread = new Thread(timer);
@@ -95,10 +94,32 @@ public class TrainingActivity extends AppCompatActivity {
             }
         });
 
+        //******************************************************************************************
+        //**************************For the listview ***********************************************
+        //******************************************************************************************
+        btnAddExercise = findViewById(R.id.btn_add_ex);
+
+        workout = new Workout();
+
+        ListView lstExercises = findViewById(R.id.list_view_gym_exercies);
+        final CustomAdapter adapter = new CustomAdapter();
+
+        lstExercises.setAdapter(adapter);
+
+/*        lstExercises.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                workout.addExercise();
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(), "Clickade", Toast.LENGTH_SHORT).show(); //TODO remove when working
+            }
+        });
+*/
+
         btnAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                exercises.add("Exercise");
+                workout.addExercise();
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Klickade Add Exercise", Toast.LENGTH_SHORT).show(); //TODO remove when working
             }
@@ -113,5 +134,41 @@ public class TrainingActivity extends AppCompatActivity {
                 timerText.setText(time);
             }
         });
+    }
+
+
+    class CustomAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return workout.nbrOfExercises();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            view = getLayoutInflater().inflate(R.layout.costum_layout, null);
+
+            TextView repsView = view.findViewById(R.id.text_reps);
+            TextView setsView = view.findViewById(R.id.text_sets);
+            TextView weightView = view.findViewById(R.id.text_weight);
+
+            if ( workout.getExercise(i) != null) {
+                repsView.setText(workout.getExercise(i).getName());
+                setsView.setText(workout.getExercise(i).getName());
+                weightView.setText(workout.getExercise(i).getName());
+            }
+
+            return view;
+        }
     }
 }

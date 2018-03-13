@@ -35,6 +35,22 @@ public class Exercise {
         this.description = description;
     }
 
+    public void newRow(int set, int rep, int weight){
+        Row newRow = new Row(set, rep, weight);
+        rows.add(newRow);
+    }
+
+    //TODO fix with different rows
+    public int getSets(int rownumber){
+        return rows.get(rownumber).getSets();
+    }
+    public int getReps(int rownumber){
+        return rows.get(rownumber).getReps();
+    }
+    public int getWeight(int rownumber){
+        return rows.get(rownumber).getReps();
+    }
+
     class Row{
         private int sets;
         private int reps;
