@@ -1,6 +1,7 @@
 package kandidat.trainingapp;
 
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -119,10 +120,21 @@ public class TrainingActivity extends AppCompatActivity {
         btnAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                workout.addExercise();
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(TrainingActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_exercise, null);
+                TextView mExerciseHeader = mView.findViewById(R.id.ex_name);
+                TextView mGarbageText = mView.findViewById(R.id.textView10);
+
+                workout.addExercise(); //TODO what if each exercise have their own textview from the beginning?
+
+                mBuilder.setView(mView);
+                AlertDialog exerciseDialog = mBuilder.create();
+                exerciseDialog.show();
+
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Klickade Add Exercise", Toast.LENGTH_SHORT).show(); //TODO remove when working
-            }
+             }
+
         });
 
     }
@@ -158,14 +170,14 @@ public class TrainingActivity extends AppCompatActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.costum_layout, null);
 
-            TextView repsView = view.findViewById(R.id.text_reps);
+     //       TextView repsView = view.findViewById(R.id.text_reps);
             TextView setsView = view.findViewById(R.id.text_sets);
-            TextView weightView = view.findViewById(R.id.text_weight);
+   //         TextView weightView = view.findViewById(R.id.text_weight);
 
             if ( workout.getExercise(i) != null) {
-                repsView.setText(workout.getExercise(i).getName());
+ //               repsView.setText(workout.getExercise(i).getName());
                 setsView.setText(workout.getExercise(i).getName());
-                weightView.setText(workout.getExercise(i).getName());
+ //               weightView.setText(workout.getExercise(i).getName());
             }
 
             return view;
