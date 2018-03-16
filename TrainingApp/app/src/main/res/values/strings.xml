@@ -58,6 +58,13 @@
     <string name="ex_name">Exercise name</string>
     <string name="name_of_exercise">Name of Exercise</string>
 
+    <string name="sets">Sets</string>
+    <string name="reps">Reps</string>
+    <string name="weight">Weight</string>
+    <string name="add_row">Add Row</string>
+    <string name="description_opt">Description (optional)</string>
+    <string name="done">Done</string>
+
     <!-- Exercise names -->
     <string-array name="exercises">
         <item>Pull Ups</item>

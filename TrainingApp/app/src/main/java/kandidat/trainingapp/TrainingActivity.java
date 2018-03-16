@@ -42,7 +42,9 @@ public class TrainingActivity extends AppCompatActivity {
     //******************************Stuff for the listview *****************************************
     //**********************************************************************************************
     private Workout workout;
+    private Exercise exercise;
     private Button btnAddExercise;
+    private Button btnAddRow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +106,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         ListView lstExercises = findViewById(R.id.list_view_gym_exercies);
         final CustomAdapter adapter = new CustomAdapter();
+        final RowAdapter rowAdapter = new RowAdapter();
 
         lstExercises.setAdapter(adapter);
 
@@ -120,12 +123,16 @@ public class TrainingActivity extends AppCompatActivity {
         btnAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                workout.addExercise(); //TODO what if each exercise have their own textview from the beginning?
+                exercise = workout.getExercise(workout.nbrOfExercises()-1);
+
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(TrainingActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_exercise, null);
                 TextView mExerciseHeader = mView.findViewById(R.id.ex_name);
-                TextView mGarbageText = mView.findViewById(R.id.textView10);
+                ListView lstRows = mView.findViewById(R.id.lst_rows);
+                lstRows.setAdapter(rowAdapter);
 
-                workout.addExercise(); //TODO what if each exercise have their own textview from the beginning?
+                rowAdapter.notifyDataSetChanged();
 
                 mBuilder.setView(mView);
                 AlertDialog exerciseDialog = mBuilder.create();
@@ -133,6 +140,17 @@ public class TrainingActivity extends AppCompatActivity {
 
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Klickade Add Exercise", Toast.LENGTH_SHORT).show(); //TODO remove when working
+
+                btnAddRow = mView.findViewById(R.id.btn_add_row);
+                btnAddRow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        exercise.newRow(0,0,0);
+                        Toast.makeText(getApplicationContext(), "Klickade AddRow", Toast.LENGTH_SHORT).show();
+                        rowAdapter.notifyDataSetChanged();
+                    }
+                });
+
              }
 
         });
@@ -179,6 +197,35 @@ public class TrainingActivity extends AppCompatActivity {
                 setsView.setText(workout.getExercise(i).getName());
  //               weightView.setText(workout.getExercise(i).getName());
             }
+
+            return view;
+        }
+    }
+
+    class RowAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return exercise.nbrOfRows();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            view = getLayoutInflater().inflate(R.layout.exercise_edit_layout, null);
+
+            TextView setsView = view.findViewById(R.id.set_set);
+            TextView repsView = view.findViewById(R.id.set_rep);
+            TextView weightView = view.findViewById(R.id.set_weight);
 
             return view;
         }
