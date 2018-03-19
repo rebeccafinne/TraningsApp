@@ -1,7 +1,7 @@
 package kandidat.trainingapp;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 /**
  * Created by Anna on 2018-03-13.
@@ -9,16 +9,33 @@ import java.util.HashMap;
 
 public class Exercise {
 
+    private static ArrayList<Exercise> allExercises = new ArrayList<>();
+
     private String name;
     private String description;
-
-    private ArrayList<Row> rows;
 
     public Exercise(String name){
         this.name = name;
         this.description = "no description available.";
+        allExercises.add(this);
+    }
+    public Exercise(String name, String description){
+        this(name);
+        this.description = description;
+        allExercises.add(this);
+    }
 
-        this.rows = new ArrayList<>();
+    public static Exercise getExercise(String name){
+        if(!allExercises.contains(name)) throw new NoSuchElementException("''" + name + "'' is not an existing exercise.");
+        else{
+            return allExercises.get(allExercises.indexOf(name));
+        }
+    }
+    public static Exercise getExercise(Exercise exercise){
+        if (!allExercises.contains(exercise)) throw new NoSuchElementException("''" + exercise + "'' is not an existing exercise.");
+        else{
+            return allExercises.get(allExercises.indexOf(exercise));
+        }
     }
 
     public String getName(){
@@ -35,71 +52,15 @@ public class Exercise {
         this.description = description;
     }
 
-    public void newRow(int set, int rep, int weight){
-        Row newRow = new Row(set, rep, weight);
-        rows.add(newRow);
+    public boolean equals(Exercise exercise){
+        return (this.getName() == exercise.getName() ) & (this.getDescription() == exercise.getDescription());
     }
-    public int nbrOfRows(){
-        if( rows == null || rows.isEmpty()) {
-            return 0;
-        }
-        return rows.size();
-    };
-
-    //TODO fix with different rows
-    public int getSets(int rownumber){
-        return rows.get(rownumber).getSets();
-    }
-    public int getReps(int rownumber){
-        return rows.get(rownumber).getReps();
-    }
-    public int getWeight(int rownumber){
-        return rows.get(rownumber).getReps();
+    public boolean equals(String name){
+        return this.getName() == name;
     }
 
-    class Row{
-        private int sets;
-        private int reps;
-        private int weight;
-
-        private Row(int set, int reps, int weigth){
-            this.sets = set;
-            this.reps = reps;
-            this.weight = weigth;
-        }
-
-
-        public void setRow(int set, int rep, int weight){
-            setSets(set); setReps(rep); setWeight(weight);
-        }
-        public HashMap<String, Integer> getRow(){
-            HashMap<String, Integer> map = new HashMap<>();
-            map.put("Sets", sets);
-            map.put("Reps", reps);
-            map.put("Weight", weight);
-            return map;
-
-        }
-
-        public int getSets(){
-            return sets;
-        }
-        public void setSets(int i){
-            sets = i;
-        }
-
-        public int getReps(){
-            return reps;
-        }
-        public void setReps(int i){
-            sets = i;
-        }
-
-        public int getWeight(){
-            return weight;
-        }
-        public void setWeight(int i){
-            weight = i;
-        }
+    public String toString(){
+        return this.getName();
     }
+
 }
