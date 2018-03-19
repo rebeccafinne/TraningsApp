@@ -14,6 +14,10 @@ public class Exercise {
     private String name;
     private String description;
 
+
+    public Exercise(){
+        this("NoName");
+    }
     public Exercise(String name){
         this.name = name;
         this.description = "no description available.";

@@ -4,6 +4,8 @@ import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Anna on 2018-03-13.
@@ -25,14 +27,14 @@ public class Workout {
     private static ArrayList<Workout> savedWorkouts = new ArrayList<>();
 
     private String name;
-    private HashMap<Exercise, ArrayList<Row>> exerciseList;
+    private LinkedHashMap<Exercise, ArrayList<Row>> exerciseList;
 
     //**********************************************************************************************
     //***************************** Constructors ***************************************************
     //**********************************************************************************************
     public Workout(){
         this.name = "No Name";
-        exerciseList = new HashMap<Exercise, ArrayList<Row>>();
+        exerciseList = new LinkedHashMap<Exercise, ArrayList<Row>>();
         unsavedWorkouts.add(this);
     }
 
@@ -43,22 +45,25 @@ public class Workout {
 
     public Workout(Workout workout){
         this(workout.getName());
-        this.exerciseList = new HashMap<>(workout.exerciseList);
+        this.exerciseList = new LinkedHashMap<>(workout.exerciseList);
     }
 
     //**********************************************************************************************
     //***************************** Methods, creating exercises ************************************
     //**********************************************************************************************
 
-    public void newExercise(){
-        addExercise("NoName");
+    public void addNewExercise(){
+        addNewExercise(new Exercise("NoName"));
     }
-    public void newExercise(String name){
+    public void addNewExercise(Exercise exercise){
+        exerciseList.put(exercise, new ArrayList<Row>());
+    }
+    public void AddNewExercise(String name){
         Exercise newEx = new Exercise(name);
         newRow(newEx,0, 0,0 );
         exerciseList.put(newEx, new ArrayList<Row>());
     }
-    public void newExercise(String name, String description){
+    public void AddNewExercise(String name, String description){
         Exercise newEx = new Exercise(name, description);
         newRow(newEx,0, 0,0 );
         exerciseList.put(newEx, new ArrayList<Row>());
@@ -78,9 +83,12 @@ public class Workout {
     //***************************** Methods, exercises *********************************************
     //**********************************************************************************************
 
-    public ArrayList<Row> getExercise(String exercise){
-        if(exerciseList.isEmpty()) return null;
-        else return exerciseList.get(exercise);
+    public ArrayList<Row> getRowsOfExercise(Exercise exercise){
+        return exerciseList.get(exercise);
+    }
+    public Exercise getExercise(int i){
+        ArrayList<Exercise> exercises = new ArrayList<>(exerciseList.keySet());
+        return exercises.get(i);
     }
     public int nbrOfExercises(){
         return exerciseList.size();
@@ -130,8 +138,8 @@ public class Workout {
         public void setRow(int set, int rep, int weight){
             setSets(set); setReps(rep); setWeight(weight);
         }
-        public HashMap<String, Integer> getRow(){
-            HashMap<String, Integer> map = new HashMap<>();
+        public LinkedHashMap<String, Integer> getRow(){
+            LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
             map.put("Sets", sets);
             map.put("Reps", reps);
             map.put("Weight", weight);
