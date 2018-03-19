@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kandidat.trainingapp.AddFavoritesActivity">
+    tools:context="kandidat.trainingapp.AddNewDailyActivity">
 
     <include layout="@layout/layout_activity_toolbar"/>
 
@@ -14,29 +14,39 @@
         android:orientation="vertical"
         android:layout_marginTop="?attr/actionBarSize">
 
-        <Button
-            android:id="@+id/add_gym"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="100dp"
-            android:background="@color/colorButtonCharts"
-            android:text="Gym"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Button
-            android:id="@+id/add_daily"
+            android:id="@+id/add_stairs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Daily"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="100dp"
+            android:text="@string/stairs"
+            android:background="@color/colorButtonCharts"/>
+
+        <Button
+            android:id="@+id/add_bus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@color/colorButtonCharts"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:text="@string/busstop"
+            android:background="@color/colorButtonCharts"/>
+
+        <Button
+            android:id="@+id/add_stand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/stand"
+            android:background="@color/colorButtonCharts"/>
     </LinearLayout>
 
 
