@@ -35,6 +35,13 @@ public class AddNewDailyActivity extends AppCompatActivity {
                 addBusClicked(view);
             }
         });
+        addStand = (Button) findViewById(R.id.add_stand);
+        addStand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addStandClicked(view);
+            }
+        });
     }
 
     private void addStairsClicked(View view){
@@ -44,6 +51,11 @@ public class AddNewDailyActivity extends AppCompatActivity {
 
     private void addBusClicked(View view){
         Intent intent = new Intent(this, FavoriteBusStopActivity.class);
+        startActivity(intent);
+    }
+
+    private void addStandClicked(View view){
+        Intent intent = new Intent(this, FavoriteTimeStandingActivity.class);
         startActivity(intent);
     }
 }

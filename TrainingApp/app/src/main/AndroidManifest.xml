@@ -65,7 +65,8 @@
         <activity android:name=".AddNewGymActiviy" />
         <activity android:name=".AddNewDailyActivity" />
         <activity android:name=".FavoriteStairsActivity" />
-        <activity android:name=".FavoriteBusStopActivity"></activity>
+        <activity android:name=".FavoriteBusStopActivity" />
+        <activity android:name=".FavoriteTimeStandingActivity"></activity>
     </application>
 
 </manifest>
