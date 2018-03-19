@@ -10,6 +10,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 
 import java.io.LineNumberReader;
@@ -17,49 +19,50 @@ import java.util.ArrayList;
 
 public class ChartActivity extends AppCompatActivity {
 
-    LineChart lineChart;
+    private static final String TAG = "ChartActivity";
+
+    private LineChart mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
 
-        lineChart = (LineChart) findViewById(R.id.lineChart);
+        mChart = (LineChart) findViewById(R.id.lineChart);
 
-        ArrayList<String> xAXES = new ArrayList<>();
-        ArrayList<Entry> yAXESsin = new ArrayList<>();
-        ArrayList<Entry> yAXEScos = new ArrayList<>();
-        double x = 0 ;
-        int numDataPoints = 1000;
-        for(int i=0;i<numDataPoints;i++){
-            float sinFunction = Float.parseFloat(String.valueOf(Math.sin(x)));
-            float cosFunction = Float.parseFloat(String.valueOf(Math.cos(x)));
-            x = x + 0.1;
-            yAXESsin.add(new Entry(sinFunction,i));
-            yAXEScos.add(new Entry(cosFunction,i));
-            xAXES.add(i, String.valueOf(x));
-        }
-        String[] xaxes = new String[xAXES.size()];
-        for(int i=0; i<xAXES.size();i++){
-            xaxes[i] = xAXES.get(i).toString();
-        }
+     //   mChart.setOnChartGestureListener(MainActivity.this);
+     // mChart.setOnChartValueSelectedListener(MainActivity.this);
 
-        ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(false);
 
-        LineDataSet lineDataSet1 = new LineDataSet(yAXEScos,"cos");
-        lineDataSet1.setDrawCircles(false);
-        lineDataSet1.setColor(Color.BLUE);
+        ArrayList<Entry> yValues = new ArrayList<>();
 
-        LineDataSet lineDataSet2 = new LineDataSet(yAXESsin,"sin");
-        lineDataSet2.setDrawCircles(false);
-        lineDataSet2.setColor(Color.RED);
+        yValues.add(new Entry(0, 50f));
+        yValues.add(new Entry(1, 60f));
+        yValues.add(new Entry(2, 70f));
+        yValues.add(new Entry(3, 30f));
+        yValues.add(new Entry(4, 70f));
+        yValues.add(new Entry(5, 50f));
 
-        lineDataSets.add(lineDataSet1);
-        lineDataSets.add(lineDataSet2);
+        LineDataSet set1 = new LineDataSet(yValues, "Data set 1");
 
-        lineChart.setData(new LineData(xaxes, lineDataSets));
+        set1.setFillAlpha(110);
 
-        lineChart.setVisibleXRangeMaximum(65f);
+        set1.setColor(Color.RED);
+        set1.setLineWidth(3f);
+        set1.setValueTextSize(10f);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData data = new LineData(dataSets);
+
+        mChart.setData(data);
+
+
+
+
 
 
     }

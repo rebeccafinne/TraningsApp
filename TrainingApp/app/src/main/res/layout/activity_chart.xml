@@ -22,10 +22,10 @@
         tools:layout_editor_absoluteX="112dp" />
 
 
-    <com.github.mikephil.charting.charts.BarChart
+    <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="56dp"></com.github.mikephil.charting.charts.BarChart>
+        tools:layout_editor_absoluteY="56dp"></com.github.mikephil.charting.charts.LineChart>
 </android.support.constraint.ConstraintLayout>
