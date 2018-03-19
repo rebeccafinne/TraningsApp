@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kandidat.trainingapp.FavoriteStairsActivity">
+    tools:context="kandidat.trainingapp.FavoriteBusStopActivity">
 
     <include layout="@layout/layout_activity_toolbar"/>
 
@@ -15,17 +15,17 @@
         android:layout_marginTop="?attr/actionBarSize">
 
         <TextView
-            android:id="@+id/add_stairs_text"
+            android:id="@+id/add_bus_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/addStairsText"
+            android:text="@string/busStopText"
             android:layout_marginTop="100dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             />
         <Spinner
-            android:id="@+id/stairs_spinner"
+            android:id="@+id/bus_stop_spinner"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -39,7 +39,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/save_stairs_button"
+                android:id="@+id/save_bus_stop_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -52,5 +52,6 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
