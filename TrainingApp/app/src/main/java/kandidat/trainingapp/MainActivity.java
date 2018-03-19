@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity{
                     mAuth.getCurrentUser().getEmail());
             userRef.child(mAuth.getCurrentUser().getUid()).setValue(theUser);
 
+
+
             startActivity(ProfileActivity.createIntent(this, response));
             finish();
 

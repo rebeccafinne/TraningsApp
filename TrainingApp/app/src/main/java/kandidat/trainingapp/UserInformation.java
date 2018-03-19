@@ -12,7 +12,7 @@ public class UserInformation {
     private String displayName;
     private String email;
     private int points;
-    public ArrayList<UserInformation> friends;
+
 
 
 
@@ -20,10 +20,12 @@ public class UserInformation {
     }
 
     public UserInformation(String userId, String displayName, String email){
+        this.userId = userId;
         this.displayName = displayName;
         this.email = email;
-        this.userId = userId;
         this.points = 0;
+
+
     }
 
     public String getDisplayName() {
