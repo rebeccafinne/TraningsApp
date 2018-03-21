@@ -1,5 +1,6 @@
 package kandidat.trainingapp;
 
+import android.app.Application;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,17 +20,20 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView toolText;
-    private List<Integer> busFavorites;
     private Button saveBus;
     private Spinner spinner;
     private DatabaseReference mDatabase;
     private Favorites favorites;
+    FavoriteData favoriteData;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_bus_stop);
+
+        favoriteData = (FavoriteData) getApplicationContext();
+
 
         favorites = Favorites.getInstance();
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
@@ -50,7 +54,6 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        busFavorites = new ArrayList<>();
         saveBus = (Button) findViewById(R.id.save_bus_stop_button);
         saveBus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,9 +67,9 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
 
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-        if(favorites.addNewFavorite(newValueInteger, busFavorites)){
-            busFavorites.add(newValueInteger);
-            //finnish();
+        if(favorites.addNewFavorite(newValueInteger, favoriteData.getBusList())){
+            favoriteData.addBusList(newValueInteger);
+            finish();
         }
 
 

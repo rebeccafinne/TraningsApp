@@ -1,5 +1,6 @@
 package kandidat.trainingapp;
 
+import android.app.Application;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,9 @@ import android.widget.TextView;
 
 import com.firebase.ui.auth.IdpResponse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by rebeccafinne on 2018-02-22.
  */
@@ -30,10 +34,21 @@ public class AppMainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView toolText;
     private ImageButton settingsButton, addFavoritesButton;
+   // private FavoriteData favoriteData;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_running);
+
+
+      /*  if(favoriteData == null){
+            favoriteData = new FavoriteData();
+        }*/
+      final FavoriteData favoriteData = (FavoriteData) getApplicationContext();
+
+
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
@@ -124,4 +139,11 @@ public class AppMainActivity extends AppCompatActivity {
         in.setClass(context, AppMainActivity.class);
         return in;
     }
+
+   /* public FavoriteData getFavoriteData(){
+        return this.favoriteData;
+    }*/
+
+
+
 }
