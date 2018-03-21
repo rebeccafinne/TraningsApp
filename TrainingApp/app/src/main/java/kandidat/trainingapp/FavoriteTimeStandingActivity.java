@@ -47,7 +47,10 @@ public class FavoriteTimeStandingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String newValueString = spinner.getSelectedItem().toString();
                 Integer newValueInteger = Integer.parseInt(newValueString);
-                favorites.addNewFavorite(newValueInteger, favoriteStanding);
+                if(favorites.addNewFavorite(newValueInteger, favoriteStanding)){
+                    favoriteStanding.add(newValueInteger);
+                    //finnish();
+                }
             }
         });
 

@@ -1,5 +1,6 @@
 package kandidat.trainingapp;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,14 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class FavoriteStairsActivity extends AppCompatActivity {
@@ -72,16 +75,15 @@ public class FavoriteStairsActivity extends AppCompatActivity {
     private void saveStairsClicked(View view){
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-        favorites.addNewFavorite(newValueInteger, stairsFavorites);
 
-        /*if(stairsFavorites.contains(newValueInteger)){
+        //stairsFavorites = favorites.addNewFavorite(newValueInteger, stairsFavorites);
+          if(favorites.addNewFavorite(newValueInteger, stairsFavorites)){
+              stairsFavorites.add(newValueInteger);
+              //ToDo finnish is destroying the local list, need to fix with database before it can be uncommented
+           //   finish();
+          }
 
-        }else{
-            stairsFavorites.add(newValueInteger);
-        }
 
-        System.out.println("New Favorite added: " + newValueInteger);
-        System.out.println("The list now: " + stairsFavorites);*/
     }
 
 

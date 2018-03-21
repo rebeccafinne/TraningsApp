@@ -64,7 +64,10 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
 
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-        favorites.addNewFavorite(newValueInteger, busFavorites);
+        if(favorites.addNewFavorite(newValueInteger, busFavorites)){
+            busFavorites.add(newValueInteger);
+            //finnish();
+        }
 
 
     }
