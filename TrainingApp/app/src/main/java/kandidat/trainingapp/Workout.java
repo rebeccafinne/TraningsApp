@@ -109,7 +109,10 @@ public class Workout {
     }
     public int nbrOfRows(Exercise exercise){
         return exerciseList.get(exercise).size();
-    };
+    }
+    public void setRow(Exercise exercise, int row, int set, int rep, int weight){
+        exerciseList.get(exercise).get(row).setRow(set, rep, weight);
+    }
 
     //**********************************************************************************************
     //***************************** Methods, editing rows ******************************************
@@ -121,7 +124,7 @@ public class Workout {
         return exerciseList.get(exercise).get(rownumber).getReps();
     }
     public int getWeight(Exercise exercise, int rownumber){
-        return exerciseList.get(exercise).get(rownumber).getReps();
+        return exerciseList.get(exercise).get(rownumber).getWeight();
     }
 
     public void setSet(Exercise exercise, int rownbr, int value){
@@ -163,7 +166,7 @@ public class Workout {
             return reps;
         }
         public void setReps(int i){
-            sets = i;
+            reps = i;
         }
 
         public int getWeight(){

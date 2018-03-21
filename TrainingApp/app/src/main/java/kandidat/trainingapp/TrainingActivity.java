@@ -132,6 +132,7 @@ public class TrainingActivity extends AppCompatActivity {
                 View mView = getLayoutInflater().inflate(R.layout.dialog_exercise, null);
                 final TextView mExerciseHeader = mView.findViewById(R.id.ex_name);
                 final ListView lstRows = mView.findViewById(R.id.lst_rows);
+                final TextView description = mView.findViewById(R.id.description_edit);
                 lstRows.setAdapter(rowAdapter);
 
                 rowAdapter.notifyDataSetChanged();
@@ -140,7 +141,6 @@ public class TrainingActivity extends AppCompatActivity {
                 final AlertDialog exerciseDialog = mBuilder.create();
                 exerciseDialog.show();
 
-                listAdapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Klickade Add Exercise", Toast.LENGTH_SHORT).show(); //TODO remove when working
 
                 btnAddRow = mView.findViewById(R.id.btn_add_row);
@@ -149,20 +149,33 @@ public class TrainingActivity extends AppCompatActivity {
                     public void onClick(View view) {
 
                         View temporaryView;
-                        EditText et;
+                        EditText setEt, repEt, weightEt;
                         for (int i = 0; i < rowAdapter.getCount(); i++) {
                             temporaryView = lstRows.getChildAt(i);
-//                            Toast.makeText(getApplicationContext(), ""+i, Toast.LENGTH_SHORT).show();
 
-                            et = (EditText) temporaryView.findViewById(R.id.set_set);
-                            workout.setSet(currentExercise,i, 44);
-                            Toast.makeText(getApplicationContext(), ""+ workout.getSets(currentExercise, i), Toast.LENGTH_SHORT).show();
+                            setEt = (EditText) temporaryView.findViewById(R.id.set_set);
+                            repEt = (EditText) temporaryView.findViewById(R.id.set_rep);
+                            weightEt = (EditText) temporaryView.findViewById(R.id.set_weight);
 
-                            // mannschaftsnamen.add(et.getText().toString());
+                            int setValue = 0;
+                            int repValue = 0;
+                            int weightValue = 0;
+
+                            if(setEt.getText().toString() != null && !setEt.getText().toString().matches("")){
+                                setValue = Integer.parseInt(setEt.getText().toString());
+                            }
+                            if(repEt.getText().toString() != null && !repEt.getText().toString().matches("")){
+                                repValue = Integer.parseInt(repEt.getText().toString());
+                            }
+                            if(weightEt.getText().toString() != null && !weightEt.getText().toString().matches("") ){
+                                weightValue = Integer.parseInt(weightEt.getText().toString());
+                            }
+
+                            workout.setRow(currentExercise,i, setValue, repValue, weightValue);
                         }
 
                         workout.newRow(currentExercise, 0,0,0);
-                        Toast.makeText(getApplicationContext(), "Klickade AddRow", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Klickade AddRow: " + workout.getWeight(currentExercise,0), Toast.LENGTH_SHORT).show();
                         rowAdapter.notifyDataSetChanged();
                     }
                 });
@@ -171,10 +184,14 @@ public class TrainingActivity extends AppCompatActivity {
                 btnDone.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getApplicationContext(), "Pressed Done", Toast.LENGTH_SHORT).show();
-                        String exName = mExerciseHeader.getText().toString();
-                        currentExercise.setName(exName);
+                        if(mExerciseHeader.getText().toString() != ""){
+                            currentExercise.setName(mExerciseHeader.getText().toString());
+                        }
+                        if(description.getText().toString() != null){
+                            currentExercise.setDescription(description.getText().toString());
+                        }
                         exerciseDialog.dismiss();
+                        listAdapter.notifyDataSetChanged();
                     }
                 });
              }
@@ -261,7 +278,9 @@ public class TrainingActivity extends AppCompatActivity {
             TextView weightView = view.findViewById(R.id.set_weight);
 
 
-            setsView.setText(""+ workout.getSets(currentExercise, i));
+            if(workout.getSets(currentExercise, i) != 0) setsView.setText(""+ workout.getSets(currentExercise, i));
+            if(workout.getReps(currentExercise, i) != 0) repsView.setText(""+ workout.getReps(currentExercise, i));
+            if(workout.getWeight(currentExercise, i) != 0) weightView.setText(""+ workout.getWeight(currentExercise, i));
 
             return view;
         }
