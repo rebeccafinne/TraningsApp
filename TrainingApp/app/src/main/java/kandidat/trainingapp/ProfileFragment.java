@@ -88,12 +88,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserInformation user = dataSnapshot.getValue(UserInformation.class);
 
-                /*if(user.getDisplayName() == null){
+                if(user.getDisplayName() == null){
                     profileText.setText("No user logged in");
                 }else{
                     String userDisplayCap = user.getDisplayName();
                     profileText.setText(userDisplayCap);
-                }*/
+                }
 
             }
 

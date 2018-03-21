@@ -25,6 +25,7 @@ public class UserInformation {
         this.displayName = displayName;
         this.email = email;
         this.points = 0;
+        //Used to sort users from highetst points to lowest
         this.negPoints = points * -1;
 
     }
