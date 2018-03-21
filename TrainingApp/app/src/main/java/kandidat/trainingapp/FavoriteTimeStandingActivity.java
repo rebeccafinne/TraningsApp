@@ -16,9 +16,9 @@ public class FavoriteTimeStandingActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView toolText;
-    private List<Integer> favoriteStanding;
     private Button saveButton;
     private Favorites favorites;
+    private FavoriteData favoriteData;
 
 
     @Override
@@ -26,6 +26,7 @@ public class FavoriteTimeStandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_time_standing);
 
+        favoriteData = (FavoriteData) getApplicationContext();
         favorites = Favorites.getInstance();
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
@@ -40,16 +41,15 @@ public class FavoriteTimeStandingActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        favoriteStanding = new ArrayList<>();
         saveButton = (Button) findViewById(R.id.save_standing_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String newValueString = spinner.getSelectedItem().toString();
                 Integer newValueInteger = Integer.parseInt(newValueString);
-                if(favorites.addNewFavorite(newValueInteger, favoriteStanding)){
-                    favoriteStanding.add(newValueInteger);
-                    //finnish();
+                if(favorites.addNewFavorite(newValueInteger, favoriteData.getStandingList())){
+                    favoriteData.addStandingList(newValueInteger);
+                    finish();
                 }
             }
         });

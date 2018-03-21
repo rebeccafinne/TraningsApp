@@ -26,10 +26,10 @@ public class FavoriteStairsActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView toolText;
     private DatabaseReference mDatabase;
-    private List<Integer> stairsFavorites;
     private Button saveStairs;
     private Spinner spinner;
     private Favorites favorites;
+    private FavoriteData favoriteData;
 
 
 
@@ -38,6 +38,7 @@ public class FavoriteStairsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_stairs);
 
+        favoriteData = (FavoriteData) getApplicationContext();
         //favorites = new Favorites();
         favorites = Favorites.getInstance();
         //Set toolbar and the text
@@ -61,7 +62,6 @@ public class FavoriteStairsActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        stairsFavorites = new ArrayList<>();
         saveStairs = (Button) findViewById(R.id.save_stairs_button);
         saveStairs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +77,9 @@ public class FavoriteStairsActivity extends AppCompatActivity {
         Integer newValueInteger = Integer.parseInt(newValueString);
 
         //stairsFavorites = favorites.addNewFavorite(newValueInteger, stairsFavorites);
-          if(favorites.addNewFavorite(newValueInteger, stairsFavorites)){
-              stairsFavorites.add(newValueInteger);
-              //ToDo finnish is destroying the local list, need to fix with database before it can be uncommented
-           //   finish();
+          if(favorites.addNewFavorite(newValueInteger, favoriteData.getStairsList())){
+              favoriteData.addStairsList(newValueInteger);
+              finish();
           }
 
 
