@@ -95,6 +95,7 @@
     <string name="add_row">Add Row</string>
     <string name="description_opt">Description (optional)</string>
     <string name="done">Done</string>
+    <string name="add_friend">Add Friend</string>
 
     <!-- Exercise names -->
     <string-array name="exercises">

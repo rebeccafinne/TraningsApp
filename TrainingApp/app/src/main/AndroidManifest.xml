@@ -31,14 +31,6 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProfileActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".CreateActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".AppMainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
@@ -66,7 +58,8 @@
         <activity android:name=".AddNewDailyActivity" />
         <activity android:name=".FavoriteStairsActivity" />
         <activity android:name=".FavoriteBusStopActivity" />
-        <activity android:name=".FavoriteTimeStandingActivity"></activity>
+        <activity android:name=".FavoriteTimeStandingActivity" />
+        <activity android:name=".HowChallenging"></activity>
     </application>
 
 </manifest>

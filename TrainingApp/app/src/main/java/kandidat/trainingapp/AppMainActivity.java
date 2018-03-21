@@ -1,6 +1,7 @@
 package kandidat.trainingapp;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.firebase.ui.auth.IdpResponse;
 
 /**
  * Created by rebeccafinne on 2018-02-22.
@@ -108,5 +111,17 @@ public class AppMainActivity extends AppCompatActivity {
     private void addFavorite(View view){
         Intent intent = new Intent(this, AddFavoritesActivity.class);
         startActivity(intent);
+    }
+
+    public static Intent createIntent(Context context, IdpResponse idpResponse) {
+        Intent in = IdpResponse.getIntent(idpResponse);
+        in.setClass(context, AppMainActivity.class);
+        return in;
+    }
+
+    public static Intent createIntent(Context context) {
+        Intent in = new Intent();
+        in.setClass(context, AppMainActivity.class);
+        return in;
     }
 }

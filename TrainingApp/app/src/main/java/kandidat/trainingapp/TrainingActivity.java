@@ -1,6 +1,7 @@
 package kandidat.trainingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.firebase.ui.auth.IdpResponse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -246,6 +249,18 @@ public class TrainingActivity extends AppCompatActivity {
 
             return view;
         }
+    }
+
+    public static Intent createIntent(Context context, IdpResponse idpResponse) {
+        Intent in = IdpResponse.getIntent(idpResponse);
+        in.setClass(context, TrainingActivity.class);
+        return in;
+    }
+
+    public static Intent createIntent(Context context) {
+        Intent in = new Intent();
+        in.setClass(context, TrainingActivity.class);
+        return in;
     }
 
     class RowAdapter extends BaseAdapter{

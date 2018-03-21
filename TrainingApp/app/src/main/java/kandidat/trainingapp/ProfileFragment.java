@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import kandidat.trainingapp.UserInformation;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +28,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private TextView profileText;
     private UserInformation usr;
     DatabaseReference rootRef, nameRef;
-    private Button chartButton, statsButton;
+    private Button chartButton, statsButton, signOutButton;
 
 
     public static ProfileFragment newInstance() {
@@ -41,7 +46,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private void startMainIntent() {
-        Intent intent = new Intent(getActivity(), ProfileActivity.class);
+        Intent intent = new Intent(getActivity(), ProfileFragment.class);
         startActivity(intent);
     }
 
@@ -56,6 +61,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         chartButton.setOnClickListener(this);
         statsButton = (Button) rootView.findViewById(R.id.statsButton);
         statsButton.setOnClickListener(this);
+        signOutButton = (Button) rootView.findViewById(R.id.logOut_btn);
+        signOutButton.setOnClickListener(this);
         //A reference to Authentication in Firebase
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -102,13 +109,35 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    public void signOut(){
+        AuthUI.getInstance().signOut(getActivity())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            startActivity(MainActivity.createIntent(getActivity()));
+                            getActivity().finish();
+                        } else {
+                            // Signout failed
+                        }
+                    }
+                });
+    }
+
     @Override
     public void onClick(View view) {
 
         Intent intent;
         if(view.getId() == R.id.chartButton){
             intent = new Intent(getActivity(), ChartActivity.class);
-        }else{
+        }else if(view.getId() == R.id.logOut_btn){
+            signOut();
+            intent = new Intent (getActivity(), MainActivity.class);
+
+        }
+
+
+        else{
             intent = new Intent(getActivity(), StatsActivity.class);
         }
 
