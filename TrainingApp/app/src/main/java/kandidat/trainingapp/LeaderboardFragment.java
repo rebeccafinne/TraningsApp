@@ -4,12 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,12 +33,21 @@ public class LeaderboardFragment extends Fragment {
     private DatabaseReference ref;
     private ListView leaderboardList;
     private List<String> users;
+    private List<String> uids;
+    private FirebaseAuth.AuthStateListener mauthListener;
+    private FirebaseAuth mauth;
+    private RecyclerView rec;
 
     public static LeaderboardFragment newInstance() {
         LeaderboardFragment fragment = new LeaderboardFragment();
         return fragment;
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        mauth.addAuthStateListener(mauthListener);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,38 +64,21 @@ public class LeaderboardFragment extends Fragment {
         ref = db.getReference();
 
         users = new ArrayList<String>();
+        uids = new ArrayList<String>();
         leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, users);
-        leaderboardList.setAdapter(arrayAdapter);
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if( dataSnapshot != null && dataSnapshot.getValue() != null) {
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+        //final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, users);
+        //leaderboardList.setAdapter(arrayAdapter);
 
 
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        ref.addChildEventListener(new ChildEventListener() {
+       /* ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                if( dataSnapshot != null && dataSnapshot.getValue() != null) {
                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
                        UserInformation user = ds.getValue(UserInformation.class);
-                       //String name = (String)ds.child("displayName").getValue();
-                       //String points = (String) ds.child("points").getValue().toString();
-                       //System.out.println("\n\n\n"+ds.getValue()+"\n\n\n");
-                       //users.add(name + "  " + points + " poäng");
                        users.add(user.getDisplayName() + "      " + user.getPoints()+" points");
+                       String userUid = user.getUserId();
+                       uids.add(userUid);
                        arrayAdapter.notifyDataSetChanged();
                    }
                }
@@ -91,7 +87,6 @@ public class LeaderboardFragment extends Fragment {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -108,8 +103,35 @@ public class LeaderboardFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
+        mauth = FirebaseAuth.getInstance();
+        mauthListener = (FirebaseAuth.AuthStateListener) (FirebaseAuth) ->{
+            if(FirebaseAuth.getCurrentUser() != null){
+
+            }
+
+        };
+
+        FirebaseListAdapter<UserInformation> fListAdapter = new FirebaseListAdapter<UserInformation>(
+                getActivity(),
+                UserInformation.class,
+                R.layout.leaderboard_representation,
+                ref.child("users").orderByChild("points")
+        ) {
+            TextView name;
+            TextView points;
+
+            @Override
+            protected void populateView(View v, UserInformation model, int position) {
+                name = v.findViewById(R.id.txt_name);
+                points = v.findViewById(R.id.txt_points);
+                name.setText(String.valueOf(model.getDisplayName()));
+                points.setText(String.valueOf(model.getPoints()));
+
+            }
+        };
+        leaderboardList.setAdapter(fListAdapter);
 
 
         return theView;

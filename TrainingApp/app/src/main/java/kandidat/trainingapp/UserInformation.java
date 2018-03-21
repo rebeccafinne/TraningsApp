@@ -12,6 +12,7 @@ public class UserInformation {
     private String displayName;
     private String email;
     private int points;
+    private int negPoints;
 
 
 
@@ -24,7 +25,7 @@ public class UserInformation {
         this.displayName = displayName;
         this.email = email;
         this.points = 0;
-
+        this.negPoints = points * -1;
 
     }
 
@@ -43,4 +44,6 @@ public class UserInformation {
     public int getPoints() {
         return points;
     }
+
+    public int getNegPoints() {return negPoints;}
 }
