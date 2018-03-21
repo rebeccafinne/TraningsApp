@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -130,7 +131,7 @@ public class TrainingActivity extends AppCompatActivity {
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(TrainingActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_exercise, null);
                 final TextView mExerciseHeader = mView.findViewById(R.id.ex_name);
-                ListView lstRows = mView.findViewById(R.id.lst_rows);
+                final ListView lstRows = mView.findViewById(R.id.lst_rows);
                 lstRows.setAdapter(rowAdapter);
 
                 rowAdapter.notifyDataSetChanged();
@@ -146,6 +147,20 @@ public class TrainingActivity extends AppCompatActivity {
                 btnAddRow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        View temporaryView;
+                        EditText et;
+                        for (int i = 0; i < rowAdapter.getCount(); i++) {
+                            temporaryView = lstRows.getChildAt(i);
+//                            Toast.makeText(getApplicationContext(), ""+i, Toast.LENGTH_SHORT).show();
+
+                            et = (EditText) temporaryView.findViewById(R.id.set_set);
+                            workout.setSet(currentExercise,i, 44);
+                            Toast.makeText(getApplicationContext(), ""+ workout.getSets(currentExercise, i), Toast.LENGTH_SHORT).show();
+
+                            // mannschaftsnamen.add(et.getText().toString());
+                        }
+
                         workout.newRow(currentExercise, 0,0,0);
                         Toast.makeText(getApplicationContext(), "Klickade AddRow", Toast.LENGTH_SHORT).show();
                         rowAdapter.notifyDataSetChanged();
@@ -197,7 +212,10 @@ public class TrainingActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.costum_layout, null);
+            // inflate the layout for each list row
+            if (view == null) {
+                view = getLayoutInflater().inflate(R.layout.costum_layout, null);
+            }
 
      //       TextView repsView = view.findViewById(R.id.text_reps);
             TextView setsView = view.findViewById(R.id.text_sets);
@@ -217,9 +235,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            if(workout.getRowsOfExercise(currentExercise) == null) return 0;
-            else if(workout.getRowsOfExercise(currentExercise).size() == 0) return 1; //want one by default
-            else return workout.getRowsOfExercise(currentExercise).size();
+            return workout.nbrOfRows(currentExercise);
         }
 
         @Override
@@ -232,6 +248,10 @@ public class TrainingActivity extends AppCompatActivity {
             return 0;
         }
 
+        public int getSets(int i){
+            return workout.getSets(currentExercise, i);
+        }
+
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.exercise_edit_layout, null);
@@ -239,6 +259,9 @@ public class TrainingActivity extends AppCompatActivity {
             TextView setsView = view.findViewById(R.id.set_set);
             TextView repsView = view.findViewById(R.id.set_rep);
             TextView weightView = view.findViewById(R.id.set_weight);
+
+
+            setsView.setText(""+ workout.getSets(currentExercise, i));
 
             return view;
         }

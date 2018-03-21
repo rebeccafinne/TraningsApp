@@ -57,16 +57,17 @@ public class Workout {
     }
     public void addNewExercise(Exercise exercise){
         exerciseList.put(exercise, new ArrayList<Row>());
+        newRow(exercise, 0,0,0);
     }
-    public void AddNewExercise(String name){
+    public void addNewExercise(String name){
         Exercise newEx = new Exercise(name);
-        newRow(newEx,0, 0,0 );
         exerciseList.put(newEx, new ArrayList<Row>());
+        newRow(newEx,0, 0,0 );
     }
-    public void AddNewExercise(String name, String description){
+    public void addNewExercise(String name, String description){
         Exercise newEx = new Exercise(name, description);
-        newRow(newEx,0, 0,0 );
         exerciseList.put(newEx, new ArrayList<Row>());
+        newRow(newEx,0, 0,0 );
     }
 
     public void addExercise(String name){
@@ -121,6 +122,10 @@ public class Workout {
     }
     public int getWeight(Exercise exercise, int rownumber){
         return exerciseList.get(exercise).get(rownumber).getReps();
+    }
+
+    public void setSet(Exercise exercise, int rownbr, int value){
+        exerciseList.get(exercise).get(rownbr).setSets(value);
     }
 
     class Row{
