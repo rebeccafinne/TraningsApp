@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity{
         mauth = FirebaseAuth.getInstance();
 
 
+
         /*mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {

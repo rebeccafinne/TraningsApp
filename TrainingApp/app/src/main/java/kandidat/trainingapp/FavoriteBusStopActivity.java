@@ -23,6 +23,7 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
     private Button saveBus;
     private Spinner spinner;
     private DatabaseReference mDatabase;
+    private Favorites favorites;
 
 
     @Override
@@ -30,6 +31,7 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_bus_stop);
 
+        favorites = Favorites.getInstance();
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
         toolText.setText("Bus Stops");
@@ -62,15 +64,7 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
 
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-        if(busFavorites.contains(newValueInteger)){
-            //Göra någon pupup om att den favoriten redan finns
-            System.out.println("New Favorite not added: " + newValueInteger);
-            System.out.println("The list now: " + busFavorites);
-        }else{
-            busFavorites.add(newValueInteger);
-            System.out.println("New Favorite added: " + newValueInteger);
-            System.out.println("The list now: " + busFavorites);
-        }
+        favorites.addNewFavorite(newValueInteger, busFavorites);
 
 
     }

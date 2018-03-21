@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+
 public class FavoriteStairsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -24,6 +26,7 @@ public class FavoriteStairsActivity extends AppCompatActivity {
     private List<Integer> stairsFavorites;
     private Button saveStairs;
     private Spinner spinner;
+    private Favorites favorites;
 
 
 
@@ -31,11 +34,16 @@ public class FavoriteStairsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_stairs);
+
+        //favorites = new Favorites();
+        favorites = Favorites.getInstance();
+        //Set toolbar and the text
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
         toolText.setText("Stairs");
 
 
+        //Initialize the spinner
         spinner = (Spinner) findViewById(R.id.stairs_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -64,14 +72,16 @@ public class FavoriteStairsActivity extends AppCompatActivity {
     private void saveStairsClicked(View view){
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-        if(stairsFavorites.contains(newValueInteger)){
+        favorites.addNewFavorite(newValueInteger, stairsFavorites);
+
+        /*if(stairsFavorites.contains(newValueInteger)){
 
         }else{
             stairsFavorites.add(newValueInteger);
         }
 
         System.out.println("New Favorite added: " + newValueInteger);
-        System.out.println("The list now: " + stairsFavorites);
+        System.out.println("The list now: " + stairsFavorites);*/
     }
 
 
