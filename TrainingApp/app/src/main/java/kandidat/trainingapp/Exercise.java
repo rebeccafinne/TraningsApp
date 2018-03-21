@@ -39,6 +39,12 @@ public class Exercise {
         Row newRow = new Row(set, rep, weight);
         rows.add(newRow);
     }
+    public int nbrOfRows(){
+        if( rows == null || rows.isEmpty()) {
+            return 0;
+        }
+        return rows.size();
+    };
 
     //TODO fix with different rows
     public int getSets(int rownumber){

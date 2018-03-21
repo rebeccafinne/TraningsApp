@@ -1,6 +1,8 @@
 package kandidat.trainingapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.firebase.ui.auth.IdpResponse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +45,9 @@ public class TrainingActivity extends AppCompatActivity {
     //******************************Stuff for the listview *****************************************
     //**********************************************************************************************
     private Workout workout;
+    private Exercise exercise;
     private Button btnAddExercise;
+    private Button btnAddRow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +109,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         ListView lstExercises = findViewById(R.id.list_view_gym_exercies);
         final CustomAdapter adapter = new CustomAdapter();
+        final RowAdapter rowAdapter = new RowAdapter();
 
         lstExercises.setAdapter(adapter);
 
@@ -119,10 +126,36 @@ public class TrainingActivity extends AppCompatActivity {
         btnAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                workout.addExercise();
+                workout.addExercise(); //TODO what if each exercise have their own textview from the beginning?
+                exercise = workout.getExercise(workout.nbrOfExercises()-1);
+
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(TrainingActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_exercise, null);
+                TextView mExerciseHeader = mView.findViewById(R.id.ex_name);
+                ListView lstRows = mView.findViewById(R.id.lst_rows);
+                lstRows.setAdapter(rowAdapter);
+
+                rowAdapter.notifyDataSetChanged();
+
+                mBuilder.setView(mView);
+                AlertDialog exerciseDialog = mBuilder.create();
+                exerciseDialog.show();
+
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Klickade Add Exercise", Toast.LENGTH_SHORT).show(); //TODO remove when working
-            }
+
+                btnAddRow = mView.findViewById(R.id.btn_add_row);
+                btnAddRow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        exercise.newRow(0,0,0);
+                        Toast.makeText(getApplicationContext(), "Klickade AddRow", Toast.LENGTH_SHORT).show();
+                        rowAdapter.notifyDataSetChanged();
+                    }
+                });
+
+             }
+
         });
 
     }
@@ -158,15 +191,56 @@ public class TrainingActivity extends AppCompatActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.costum_layout, null);
 
-            TextView repsView = view.findViewById(R.id.text_reps);
+     //       TextView repsView = view.findViewById(R.id.text_reps);
             TextView setsView = view.findViewById(R.id.text_sets);
-            TextView weightView = view.findViewById(R.id.text_weight);
+   //         TextView weightView = view.findViewById(R.id.text_weight);
 
             if ( workout.getExercise(i) != null) {
-                repsView.setText(workout.getExercise(i).getName());
+ //               repsView.setText(workout.getExercise(i).getName());
                 setsView.setText(workout.getExercise(i).getName());
-                weightView.setText(workout.getExercise(i).getName());
+ //               weightView.setText(workout.getExercise(i).getName());
             }
+
+            return view;
+        }
+    }
+
+    public static Intent createIntent(Context context, IdpResponse idpResponse) {
+        Intent in = IdpResponse.getIntent(idpResponse);
+        in.setClass(context, TrainingActivity.class);
+        return in;
+    }
+
+    public static Intent createIntent(Context context) {
+        Intent in = new Intent();
+        in.setClass(context, TrainingActivity.class);
+        return in;
+    }
+
+    class RowAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return exercise.nbrOfRows();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            view = getLayoutInflater().inflate(R.layout.exercise_edit_layout, null);
+
+            TextView setsView = view.findViewById(R.id.set_set);
+            TextView repsView = view.findViewById(R.id.set_rep);
+            TextView weightView = view.findViewById(R.id.set_weight);
 
             return view;
         }

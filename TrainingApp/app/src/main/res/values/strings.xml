@@ -86,6 +86,17 @@
     <string name="busStopText">How many bus stops do you want to add?</string>
     <string name="standFavoriteText">How many minutes did you stand?</string>
 
+    <string name="ex_name">Exercise name</string>
+    <string name="name_of_exercise">Name of Exercise</string>
+
+    <string name="sets">Sets</string>
+    <string name="reps">Reps</string>
+    <string name="weight">Weight</string>
+    <string name="add_row">Add Row</string>
+    <string name="description_opt">Description (optional)</string>
+    <string name="done">Done</string>
+    <string name="add_friend">Add Friend</string>
+
     <!-- Exercise names -->
     <string-array name="exercises">
         <item>Pull Ups</item>

@@ -1,5 +1,6 @@
 package kandidat.trainingapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.firebase.ui.auth.IdpResponse;
 
 
 public class TrainingFragment extends Fragment implements View.OnClickListener {
@@ -59,4 +62,8 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
         }
     }
+
+
+
+
 }
