@@ -105,7 +105,7 @@ public class FavoritesFragment extends Fragment {
 
         if(favoriteData.getStandingList() != null && favoriteData.getStandingList().size() != 0){
             String standingString = "Minutes standing up";
-            Integer[] standingFavoritesValues = new Integer[favoriteData.getStairsList().size()];
+            Integer[] standingFavoritesValues = new Integer[favoriteData.getStandingList().size()];
             for(int i = 0; i < favoriteData.getStandingList().size(); i++){
                 standingFavoritesValues[i] = favoriteData.getStandingList().get(i);
             }
