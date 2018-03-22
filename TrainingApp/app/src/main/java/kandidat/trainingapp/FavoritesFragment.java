@@ -125,13 +125,13 @@ public class FavoritesFragment extends Fragment {
         allFavoriteItems.addAll(bus);
         allFavoriteItems.addAll(floorsItems);
         allFavoriteItems.addAll(standingItems);
+        System.out.println("All favorites now: " + allFavoriteItems);
+        System.out.println("All bus favorites now: " + favoriteData.getBusList());
 
         FavoriteAdapter mAdapter = new FavoriteAdapter(getContext(), R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
 
-        //listView.getView();
         listView.setAdapter(mAdapter);
-        //listView.getListView();
-        //listView.setTextFilterEnabled(true);
+
         return rootView;
     }
 
