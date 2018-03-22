@@ -72,6 +72,9 @@ public class FavoritesFragment extends Fragment {
         ArrayList<FavoriteModel> bus = new ArrayList<FavoriteModel>();
         ArrayList<FavoriteModel> floorsItems = new ArrayList<FavoriteModel>();
         ArrayList<FavoriteModel> standingItems = new ArrayList<FavoriteModel>();
+        bus.clear();
+        floorsItems.clear();
+        standingItems.clear();
 
 
 
@@ -84,6 +87,7 @@ public class FavoritesFragment extends Fragment {
                 busFavoritesValues[i] = favoriteData.getBusList().get(i);
             }
             // construct the list of model object for your rows:
+
             for (int i = 0; i < busFavoritesValues.length; i++) {
                 bus.add(new FavoriteModel(busStops, busFavoritesValues[i]));// I guess the counter starts at 0
             }
@@ -117,16 +121,17 @@ public class FavoritesFragment extends Fragment {
 
 
         ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
+        allFavoriteItems.clear();
         allFavoriteItems.addAll(bus);
         allFavoriteItems.addAll(floorsItems);
         allFavoriteItems.addAll(standingItems);
+        System.out.println("All favorites now: " + allFavoriteItems);
+        System.out.println("All bus favorites now: " + favoriteData.getBusList());
 
         FavoriteAdapter mAdapter = new FavoriteAdapter(getContext(), R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
 
-        //listView.getView();
         listView.setAdapter(mAdapter);
-        //listView.getListView();
-        //listView.setTextFilterEnabled(true);
+
         return rootView;
     }
 
