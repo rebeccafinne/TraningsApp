@@ -103,6 +103,9 @@ public class Workout {
         this.name = name;
     }
 
+    public void newRow(Exercise exercise){
+        newRow(exercise, 0,0,0);
+    }
     public void newRow(Exercise exercise, int set, int rep, int weight){
         Row newRow = new Row(set, rep, weight);
         exerciseList.get(exercise).add(newRow);

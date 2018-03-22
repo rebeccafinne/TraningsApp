@@ -131,20 +131,18 @@ public class TrainingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 currentExercise = new Exercise();
                 workout.addNewExercise(currentExercise);
+
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(TrainingActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_exercise, null);
+
                 final TextView mExerciseHeader = mView.findViewById(R.id.ex_name);
                 final ListView lstRows = mView.findViewById(R.id.lst_rows);
-                final TextView description = mView.findViewById(R.id.description_edit);
                 lstRows.setAdapter(rowAdapter);
-
-                rowAdapter.notifyDataSetChanged();
+                final TextView description = mView.findViewById(R.id.description_edit);
 
                 mBuilder.setView(mView);
                 final AlertDialog exerciseDialog = mBuilder.create();
                 exerciseDialog.show();
-
-                Toast.makeText(getApplicationContext(), "Klickade Add Exercise", Toast.LENGTH_SHORT).show(); //TODO remove when working
 
                 btnAddRow = mView.findViewById(R.id.btn_add_row);
                 btnAddRow.setOnClickListener(new View.OnClickListener() {
@@ -177,8 +175,7 @@ public class TrainingActivity extends AppCompatActivity {
                             workout.setRow(currentExercise,i, setValue, repValue, weightValue);
                         }
 
-                        workout.newRow(currentExercise, 0,0,0);
-                        Toast.makeText(getApplicationContext(), "Klickade AddRow: " + workout.getWeight(currentExercise,0), Toast.LENGTH_SHORT).show();
+                        workout.newRow(currentExercise);
                         rowAdapter.notifyDataSetChanged();
                     }
                 });
@@ -187,6 +184,32 @@ public class TrainingActivity extends AppCompatActivity {
                 btnDone.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        View temporaryView;
+                        EditText setEt, repEt, weightEt;
+                        for (int i = 0; i < rowAdapter.getCount(); i++) {
+                            temporaryView = lstRows.getChildAt(i);
+
+                            setEt = (EditText) temporaryView.findViewById(R.id.set_set);
+                            repEt = (EditText) temporaryView.findViewById(R.id.set_rep);
+                            weightEt = (EditText) temporaryView.findViewById(R.id.set_weight);
+
+                            int setValue = 0;
+                            int repValue = 0;
+                            int weightValue = 0;
+
+                            if (setEt.getText().toString() != null && !setEt.getText().toString().matches("")) {
+                                setValue = Integer.parseInt(setEt.getText().toString());
+                            }
+                            if (repEt.getText().toString() != null && !repEt.getText().toString().matches("")) {
+                                repValue = Integer.parseInt(repEt.getText().toString());
+                            }
+                            if (weightEt.getText().toString() != null && !weightEt.getText().toString().matches("")) {
+                                weightValue = Integer.parseInt(weightEt.getText().toString());
+                            }
+
+                            workout.setRow(currentExercise, i, setValue, repValue, weightValue);
+                        }
+
                         if(mExerciseHeader.getText().toString() != ""){
                             currentExercise.setName(mExerciseHeader.getText().toString());
                         }
@@ -233,18 +256,21 @@ public class TrainingActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             // inflate the layout for each list row
+            currentExercise = workout.getExercise(i);
             if (view == null) {
                 view = getLayoutInflater().inflate(R.layout.costum_layout, null);
             }
 
-     //       TextView repsView = view.findViewById(R.id.text_reps);
-            TextView setsView = view.findViewById(R.id.text_sets);
-   //         TextView weightView = view.findViewById(R.id.text_weight);
+            TextView exName = view.findViewById(R.id.text_sets);
+
+            ListView rows = view.findViewById(R.id.lv_rows);
+            ShowRowAdapter adapter = new ShowRowAdapter();
+            rows.setAdapter(adapter);
+
+            adapter.notifyDataSetChanged();
 
             if ( workout.nbrOfExercises() != 0) {
- //               repsView.setText(workout.getExercise(i).getName());
-                setsView.setText(workout.getExercise(i).getName());
- //               weightView.setText(workout.getExercise(i).getName());
+                exName.setText(workout.getExercise(i).getName());
             }
 
             return view;
@@ -296,6 +322,39 @@ public class TrainingActivity extends AppCompatActivity {
             if(workout.getSets(currentExercise, i) != 0) setsView.setText(""+ workout.getSets(currentExercise, i));
             if(workout.getReps(currentExercise, i) != 0) repsView.setText(""+ workout.getReps(currentExercise, i));
             if(workout.getWeight(currentExercise, i) != 0) weightView.setText(""+ workout.getWeight(currentExercise, i));
+
+            return view;
+        }
+    }
+
+    class ShowRowAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return workout.nbrOfRows(currentExercise);
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            view = getLayoutInflater().inflate(R.layout.exercise_show_layout, null);
+
+            TextView setsView = view.findViewById(R.id.tv_set);
+            TextView repsView = view.findViewById(R.id.tv_reps);
+            TextView weightView = view.findViewById(R.id.tv_weight);
+
+            setsView.setText(""+ workout.getSets(currentExercise, i));
+            repsView.setText(""+ workout.getReps(currentExercise, i));
+            weightView.setText(""+ workout.getWeight(currentExercise, i));
 
             return view;
         }
