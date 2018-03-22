@@ -28,6 +28,7 @@ public class Workout {
 
     private String name;
     private LinkedHashMap<Exercise, ArrayList<Row>> exerciseList;
+    private int duration;
 
     //**********************************************************************************************
     //***************************** Constructors ***************************************************
@@ -56,18 +57,16 @@ public class Workout {
         addNewExercise(new Exercise("NoName"));
     }
     public void addNewExercise(Exercise exercise){
-        exerciseList.put(exercise, new ArrayList<Row>());
-        newRow(exercise, 0,0,0);
+        exerciseList.put(exercise, new ArrayList<>());
+        newRow(exercise);
     }
     public void addNewExercise(String name){
         Exercise newEx = new Exercise(name);
-        exerciseList.put(newEx, new ArrayList<Row>());
-        newRow(newEx,0, 0,0 );
+        addNewExercise(newEx);
     }
     public void addNewExercise(String name, String description){
         Exercise newEx = new Exercise(name, description);
-        exerciseList.put(newEx, new ArrayList<Row>());
-        newRow(newEx,0, 0,0 );
+        addNewExercise(newEx);
     }
 
     public void addExercise(String name){
@@ -178,5 +177,9 @@ public class Workout {
         public void setWeight(int i){
             weight = i;
         }
+    }
+
+    public void setDuration(int time){
+        duration = time;
     }
 }

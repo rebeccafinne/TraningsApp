@@ -42,8 +42,9 @@ public class Timer implements Runnable{
         }
     }
 
-    public void stopTimer(){
+    public int stopTimer(){
         isRunning = false;
+        return (int) (System.currentTimeMillis() - timerStartTime - totalTimePaused);
     }
 
     @Override

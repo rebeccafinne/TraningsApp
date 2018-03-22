@@ -87,10 +87,9 @@ public class TrainingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Clicked stop" , Toast.LENGTH_SHORT).show();
                 if(timer != null){
-                    timer.stopTimer();
+                    workout.setDuration(timer.stopTimer());
                     timerThread.interrupt();
                     timerThread = null;
-
                     timer = null;
                 }
             }
@@ -211,10 +210,10 @@ public class TrainingActivity extends AppCompatActivity {
                             workout.setRow(currentExercise, i, setValue, repValue, weightValue);
                         }
 
-                        if(mExerciseHeader.getText().toString() != ""){
+                        if(!mExerciseHeader.getText().toString().matches( "") ){
                             currentExercise.setName(mExerciseHeader.getText().toString());
                         }
-                        if(description.getText().toString() != null){
+                        if(!description.getText().toString().matches("")){
                             currentExercise.setDescription(description.getText().toString());
                         }
                         exerciseDialog.dismiss();
@@ -257,7 +256,7 @@ public class TrainingActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             // inflate the layout for each list row
-            currentExercise = workout.getExercise(i);
+            Exercise tmpExercise = workout.getExercise(i);
             if (view == null) {
                 view = getLayoutInflater().inflate(R.layout.costum_layout, null);
             }
@@ -265,31 +264,32 @@ public class TrainingActivity extends AppCompatActivity {
             TextView exName = view.findViewById(R.id.text_sets);
 
             LinearLayout rows = view.findViewById(R.id.ll_rows);
+            rows.removeAllViews();
 
             LinearLayout tmpLayout;
             TextView tv_set;
             TextView tv_reps;
             TextView tv_weight;
-            if (workout.nbrOfExercises()-1 == i) {
-                for (int j = 0; j < workout.nbrOfRows(currentExercise); j++) {
-                    tmpLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.exercise_show_layout, null);
+            for (int j = 0; j < workout.nbrOfRows(tmpExercise); j++) {
+                tmpLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.exercise_show_layout, null);
+                tmpLayout.setId(i);
 
-                    tv_set = tmpLayout.findViewById(R.id.tv_set);
-                    tv_set.setText("" + workout.getSets(currentExercise, j));
+                tv_set = tmpLayout.findViewById(R.id.tv_set);
+                tv_set.setText("" + workout.getSets(tmpExercise, j));
 
-                    tv_reps = tmpLayout.findViewById(R.id.tv_reps);
-                    tv_reps.setText("" + workout.getSets(currentExercise, j));
+                tv_reps = tmpLayout.findViewById(R.id.tv_reps);
+                tv_reps.setText("" + workout.getReps(tmpExercise, j));
 
-                    tv_weight = tmpLayout.findViewById(R.id.tv_weight);
-                    tv_weight.setText("" + workout.getWeight(currentExercise, j));
+                tv_weight = tmpLayout.findViewById(R.id.tv_weight);
+                tv_weight.setText("" + workout.getWeight(tmpExercise, j));
 
-                    rows.addView(tmpLayout);
-                }
-
-                if (workout.nbrOfExercises() != 0) {
-                    exName.setText(workout.getExercise(i).getName());
-                }
+                rows.addView(tmpLayout);
             }
+
+            if (workout.nbrOfExercises() != 0) {
+                exName.setText(workout.getExercise(i).getName());
+            }
+
             return view;
         }
     }
