@@ -34,7 +34,7 @@ public class AppMainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView toolText;
     private ImageButton settingsButton, addFavoritesButton;
-   // private FavoriteData favoriteData;
+    private FavoriteData favoriteData;
 
 
 
@@ -46,7 +46,7 @@ public class AppMainActivity extends AppCompatActivity {
       /*  if(favoriteData == null){
             favoriteData = new FavoriteData();
         }*/
-      final FavoriteData favoriteData = (FavoriteData) getApplicationContext();
+        favoriteData = (FavoriteData) getApplicationContext();
 
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
@@ -140,9 +140,9 @@ public class AppMainActivity extends AppCompatActivity {
         return in;
     }
 
-   /* public FavoriteData getFavoriteData(){
+    public FavoriteData getFavoriteData(){
         return this.favoriteData;
-    }*/
+    }
 
 
 
