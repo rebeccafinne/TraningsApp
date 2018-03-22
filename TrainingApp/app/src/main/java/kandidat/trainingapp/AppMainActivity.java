@@ -19,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class AppMainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView toolText;
     private ImageButton settingsButton, addFavoritesButton;
+    private FirebaseAuth mAuth;
    // private FavoriteData favoriteData;
 
 
@@ -41,6 +44,7 @@ public class AppMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_running);
+        mAuth = FirebaseAuth.getInstance();
 
 
       /*  if(favoriteData == null){
@@ -116,6 +120,18 @@ public class AppMainActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_layout, TrainingFragment.newInstance());
         transaction.commit();
 
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null){
+            Intent welcomeIntent = new Intent(AppMainActivity.this,MainActivity.class);
+            startActivity(welcomeIntent);
+            finish();
+        }
     }
 
 
