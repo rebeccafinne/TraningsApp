@@ -16,6 +16,8 @@ public class FavoriteData extends Application{
     private List<Integer> stairsList;
     private List<Integer> standingList;
 
+
+
     public FavoriteData(){
         busList = new ArrayList<>();
         stairsList = new ArrayList<>();
