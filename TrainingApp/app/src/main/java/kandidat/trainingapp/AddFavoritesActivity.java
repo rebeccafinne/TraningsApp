@@ -13,7 +13,7 @@ public class AddFavoritesActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView toolText;
-    Button gymButton, cardioButton, dailyButton;
+    Button gymButton, stairsButton, busButton, standingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +32,25 @@ public class AddFavoritesActivity extends AppCompatActivity {
             }
         });
 
-        dailyButton = (Button) findViewById(R.id.add_daily);
-        dailyButton.setOnClickListener(new View.OnClickListener() {
+        stairsButton = (Button) findViewById(R.id.add_stairs);
+        stairsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dailyClicked(view);
+                addStairsClicked(view);
+            }
+        });
+        busButton = (Button) findViewById(R.id.add_bus);
+        busButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addBusClicked(view);
+            }
+        });
+        standingButton = (Button) findViewById(R.id.add_stand);
+        standingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addStandClicked(view);
             }
         });
 
@@ -47,10 +61,18 @@ public class AddFavoritesActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void dailyClicked(View view){
-        Intent intent = new Intent(this, AddNewDailyActivity.class);
+    private void addStairsClicked(View view){
+        Intent intent = new Intent(this, FavoriteStairsActivity.class);
         startActivity(intent);
-
     }
 
+    private void addBusClicked(View view){
+        Intent intent = new Intent(this, FavoriteBusStopActivity.class);
+        startActivity(intent);
+    }
+
+    private void addStandClicked(View view){
+        Intent intent = new Intent(this, FavoriteTimeStandingActivity.class);
+        startActivity(intent);
+    }
 }

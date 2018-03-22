@@ -54,14 +54,27 @@
             android:name=".DailyActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".ProfileSettingsActivity" />
-        <activity android:name=".AddFavoritesActivity" />
-        <activity android:name=".AddNewGymActiviy" />
-        <activity android:name=".AddNewDailyActivity" />
-        <activity android:name=".FavoriteStairsActivity" />
-        <activity android:name=".FavoriteBusStopActivity" />
-        <activity android:name=".FavoriteTimeStandingActivity" />
-        <activity android:name=".HowChallenging"></activity>
+        <activity android:name=".ProfileSettingsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddFavoritesActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddNewGymActiviy"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FavoriteStairsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FavoriteBusStopActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FavoriteTimeStandingActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HowChallenging"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
