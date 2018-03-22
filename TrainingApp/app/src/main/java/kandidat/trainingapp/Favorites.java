@@ -44,7 +44,6 @@ public class Favorites {
                 return false;
 
             }else{
-                list.add(newValue);
                 CharSequence text = "New favorite is added!";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);

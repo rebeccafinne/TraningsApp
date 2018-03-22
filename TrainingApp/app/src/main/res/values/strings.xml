@@ -96,6 +96,8 @@
     <string name="description_opt">Description (optional)</string>
     <string name="done">Done</string>
     <string name="add_friend">Add Friend</string>
+    <string name="activityToAdd">Choose which acitivty you want to add</string>
+    <string name="addGymFavorite">Gym</string>
 
     <!-- Exercise names -->
     <string-array name="exercises">

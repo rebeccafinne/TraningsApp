@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:choiceMode="multipleChoice"
         android:divider="@color/colorPrimary"
-        android:dividerHeight="2dp" />
+        android:dividerHeight="3dp" />
 
 
 </FrameLayout>

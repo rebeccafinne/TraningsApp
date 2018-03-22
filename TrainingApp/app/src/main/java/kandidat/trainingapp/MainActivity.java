@@ -13,6 +13,7 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,31 +24,15 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity{
     private static final int RC_SIGN_IN = 100;
     EditText editEmail, editPassword;
-    private FirebaseAuth mauth;
+    private FirebaseAuth mAuth;
     //private  FirebaseAuth.AuthStateListener mAuthListener;
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mauth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-
-
-        /*mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(mauth.getCurrentUser() != null){
-                    //startMain();
-                    finish();
-                }
-            }
-        };*/
 
         findViewById(R.id.sign_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,19 +53,7 @@ public class MainActivity extends AppCompatActivity{
         editPassword = findViewById(R.id.editPassword);
     }
 
-    /*@Override
-    protected void onStart(){
-        super.onStart();
-        mauth.addAuthStateListener(mAuthListener);
-    }
 
-    @Override
-    protected void onStop(){
-        super.onStop();
-        if(mauth.getCurrentUser() != null){
-            mauth.removeAuthStateListener(mAuthListener);
-        }
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -102,12 +75,12 @@ public class MainActivity extends AppCompatActivity{
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             final DatabaseReference myRef = database.getReference("users");
             UserInformation userSigningIn = new UserInformation(
-                    mauth.getCurrentUser().getUid(),
-                    mauth.getCurrentUser().getDisplayName(),
-                    mauth.getCurrentUser().getEmail()
+                    mAuth.getCurrentUser().getUid(),
+                    mAuth.getCurrentUser().getDisplayName(),
+                    mAuth.getCurrentUser().getEmail()
             );
 
-            myRef.child(mauth.getUid()).setValue(userSigningIn);
+            myRef.child(mAuth.getUid()).setValue(userSigningIn);
             startActivity(AppMainActivity.createIntent(this, response));
             finish();
             return;
@@ -144,14 +117,5 @@ public class MainActivity extends AppCompatActivity{
         return in;
     }
 
-
-
-
-
-    public void startMain() {
-        startActivity(AppMainActivity.createIntent(this));
-        finish();
-        return;
-    }
  }
 
