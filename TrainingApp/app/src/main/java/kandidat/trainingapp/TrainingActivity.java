@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -263,16 +264,32 @@ public class TrainingActivity extends AppCompatActivity {
 
             TextView exName = view.findViewById(R.id.text_sets);
 
-            ListView rows = view.findViewById(R.id.lv_rows);
-            ShowRowAdapter adapter = new ShowRowAdapter();
-            rows.setAdapter(adapter);
+            LinearLayout rows = view.findViewById(R.id.ll_rows);
 
-            adapter.notifyDataSetChanged();
+            LinearLayout tmpLayout;
+            TextView tv_set;
+            TextView tv_reps;
+            TextView tv_weight;
+            if (workout.nbrOfExercises()-1 == i) {
+                for (int j = 0; j < workout.nbrOfRows(currentExercise); j++) {
+                    tmpLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.exercise_show_layout, null);
 
-            if ( workout.nbrOfExercises() != 0) {
-                exName.setText(workout.getExercise(i).getName());
+                    tv_set = tmpLayout.findViewById(R.id.tv_set);
+                    tv_set.setText("" + workout.getSets(currentExercise, j));
+
+                    tv_reps = tmpLayout.findViewById(R.id.tv_reps);
+                    tv_reps.setText("" + workout.getSets(currentExercise, j));
+
+                    tv_weight = tmpLayout.findViewById(R.id.tv_weight);
+                    tv_weight.setText("" + workout.getWeight(currentExercise, j));
+
+                    rows.addView(tmpLayout);
+                }
+
+                if (workout.nbrOfExercises() != 0) {
+                    exName.setText(workout.getExercise(i).getName());
+                }
             }
-
             return view;
         }
     }
@@ -327,36 +344,4 @@ public class TrainingActivity extends AppCompatActivity {
         }
     }
 
-    class ShowRowAdapter extends BaseAdapter{
-
-        @Override
-        public int getCount() {
-            return workout.nbrOfRows(currentExercise);
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.exercise_show_layout, null);
-
-            TextView setsView = view.findViewById(R.id.tv_set);
-            TextView repsView = view.findViewById(R.id.tv_reps);
-            TextView weightView = view.findViewById(R.id.tv_weight);
-
-            setsView.setText(""+ workout.getSets(currentExercise, i));
-            repsView.setText(""+ workout.getReps(currentExercise, i));
-            weightView.setText(""+ workout.getWeight(currentExercise, i));
-
-            return view;
-        }
-    }
 }
