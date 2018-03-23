@@ -1,6 +1,5 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Activities;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,47 +8,41 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import kandidat.trainingapp.FavoriteData;
+import kandidat.trainingapp.Models.Favorites;
+import kandidat.trainingapp.R;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
+public class FavoriteBusStopActivity extends AppCompatActivity {
 
-
-public class FavoriteStairsActivity extends AppCompatActivity {
-
-    private Toolbar toolbar;
-    private TextView toolText;
-    private DatabaseReference mDatabase;
-    private Button saveStairs;
+    Toolbar toolbar;
+    TextView toolText;
+    private Button saveBus;
     private Spinner spinner;
+    private DatabaseReference mDatabase;
     private Favorites favorites;
-    private FavoriteData favoriteData;
-
+    FavoriteData favoriteData;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite_stairs);
+        setContentView(R.layout.activity_favorite_bus_stop);
 
         favoriteData = (FavoriteData) getApplicationContext();
-        //favorites = new Favorites();
+
+
         favorites = Favorites.getInstance();
-        //Set toolbar and the text
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
-        toolText.setText("Stairs");
+        toolText.setText("Bus Stops");
 
-
-        //Initialize the spinner
-        spinner = (Spinner) findViewById(R.id.stairs_spinner);
+         spinner = (Spinner) findViewById(R.id.bus_stop_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
+        //Using amount of stairs since it contains the same values.
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.amount_of_stairs, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
@@ -57,33 +50,28 @@ public class FavoriteStairsActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-
         //Vill ha att övningen är key och sen en lista med ints för antal våningar
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        saveStairs = (Button) findViewById(R.id.save_stairs_button);
-        saveStairs.setOnClickListener(new View.OnClickListener() {
+        saveBus = (Button) findViewById(R.id.save_bus_stop_button);
+        saveBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveStairsClicked(view);
+                saveBusClicked(view);
             }
         });
-
     }
 
-    private void saveStairsClicked(View view){
+    private void saveBusClicked(View view){
+
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-
-        //stairsFavorites = favorites.addNewFavorite(newValueInteger, stairsFavorites);
-          if(favorites.addNewFavorite(newValueInteger, favoriteData.getStairsList())){
-              favoriteData.addStairsList(newValueInteger);
-              finish();
-          }
+        if(favorites.addNewFavorite(newValueInteger, favoriteData.getBusList())){
+            favoriteData.addBusList(newValueInteger);
+            finish();
+        }
 
 
     }
-
-
 }

@@ -1,7 +1,5 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Activities;
 
-import android.app.Application;
-import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.app.TabActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
@@ -23,8 +19,12 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
-import java.util.List;
+import kandidat.trainingapp.FavoriteData;
+import kandidat.trainingapp.Fragments.FavoritesFragment;
+import kandidat.trainingapp.Fragments.LeaderboardFragment;
+import kandidat.trainingapp.Fragments.ProfileFragment;
+import kandidat.trainingapp.R;
+import kandidat.trainingapp.Fragments.TrainingFragment;
 
 /**
  * Created by rebeccafinne on 2018-02-22.

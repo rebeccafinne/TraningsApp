@@ -1,4 +1,4 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Models;
 
 /**
  * Created by rebeccafinne on 2018-03-22.
@@ -17,5 +17,13 @@ public class FavoriteModel {
     @Override
     public String toString(){
         return activity;
+    }
+
+    public String getActivity(){
+        return this.activity;
+    }
+
+    public Integer getValue(){
+        return this.value;
     }
 }

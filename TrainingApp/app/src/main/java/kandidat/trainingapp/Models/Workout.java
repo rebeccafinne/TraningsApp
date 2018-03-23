@@ -1,10 +1,6 @@
-package kandidat.trainingapp;
-
-import android.widget.ArrayAdapter;
+package kandidat.trainingapp.Models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 /**

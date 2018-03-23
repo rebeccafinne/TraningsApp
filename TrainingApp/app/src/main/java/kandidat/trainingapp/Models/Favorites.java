@@ -1,6 +1,5 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Models;
 
-import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -9,6 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
