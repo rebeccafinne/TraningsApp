@@ -1,4 +1,4 @@
-package kandidat.trainingapp.Models;
+package kandidat.trainingapp.Repositories;
 
 import java.util.ArrayList;
 

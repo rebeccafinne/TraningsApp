@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import kandidat.trainingapp.FavoriteData;
+import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Models.Favorites;
 import kandidat.trainingapp.R;
 

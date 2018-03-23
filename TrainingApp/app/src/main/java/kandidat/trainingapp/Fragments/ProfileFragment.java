@@ -13,7 +13,7 @@ import android.widget.TextView;
 import kandidat.trainingapp.Activities.ChartActivity;
 import kandidat.trainingapp.Activities.StatsActivity;
 import kandidat.trainingapp.Activities.MainActivity;
-import kandidat.trainingapp.Models.UserInformation;
+import kandidat.trainingapp.Repositories.UserInformation;
 import kandidat.trainingapp.R;
 
 import com.firebase.ui.auth.AuthUI;
