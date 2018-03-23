@@ -1,6 +1,8 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Models;
 
 import android.content.Context;
+
+import kandidat.trainingapp.Activities.TrainingActivity;
 
 /**
  * Created by Anna on 2018-02-22.

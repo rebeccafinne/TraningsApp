@@ -1,10 +1,8 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Models;
 
-import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
