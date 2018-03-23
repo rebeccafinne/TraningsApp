@@ -3,6 +3,9 @@ package kandidat.trainingapp;
 import android.app.Application;
 import android.content.Intent;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,10 @@ public class FavoriteData extends Application{
     private List<Integer> busList;
     private List<Integer> stairsList;
     private List<Integer> standingList;
+
+   // FirebaseDatabase db = FirebaseDatabase.getInstance();
+
+   // DatabaseReference ref = db.getReference();
 
 
 
