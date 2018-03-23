@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import kandidat.trainingapp.Activities.AppMainActivity;
 import kandidat.trainingapp.Adapter.FavoriteAdapter;
-import kandidat.trainingapp.FavoriteData;
+import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Models.FavoriteModel;
 import kandidat.trainingapp.R;
 

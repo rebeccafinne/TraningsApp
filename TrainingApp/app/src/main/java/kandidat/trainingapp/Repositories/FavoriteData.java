@@ -1,4 +1,4 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Repositories;
 
 import android.app.Application;
 import android.content.Intent;

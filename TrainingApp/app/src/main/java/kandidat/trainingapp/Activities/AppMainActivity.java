@@ -18,7 +18,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import kandidat.trainingapp.FavoriteData;
+import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Fragments.FavoritesFragment;
 import kandidat.trainingapp.Fragments.LeaderboardFragment;
 import kandidat.trainingapp.Fragments.ProfileFragment;

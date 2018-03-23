@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import kandidat.trainingapp.FavoriteData;
+import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Models.Favorites;
 import kandidat.trainingapp.R;
 

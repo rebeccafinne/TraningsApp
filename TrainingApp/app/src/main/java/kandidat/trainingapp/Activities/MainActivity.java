@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import kandidat.trainingapp.Models.UserInformation;
+import kandidat.trainingapp.Repositories.UserInformation;
 import kandidat.trainingapp.R;
 
 //testing git again
