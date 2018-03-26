@@ -1,6 +1,8 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Models;
 
 import android.content.Context;
+
+import kandidat.trainingapp.Activities.TrainingActivity;
 
 /**
  * Created by Anna on 2018-02-22.
@@ -42,8 +44,9 @@ public class Timer implements Runnable{
         }
     }
 
-    public void stopTimer(){
+    public int stopTimer(){
         isRunning = false;
+        return (int) (System.currentTimeMillis() - timerStartTime - totalTimePaused);
     }
 
     @Override

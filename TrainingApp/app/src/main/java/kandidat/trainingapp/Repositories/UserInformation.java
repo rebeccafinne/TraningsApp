@@ -1,6 +1,10 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Repositories;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by rasti on 2018-02-12.
@@ -13,6 +17,9 @@ public class UserInformation {
     private String email;
     private int points;
     private int negPoints;
+    private FavoriteData favoriteData;
+    private HashMap<String, String> favorites;
+
 
 
 
@@ -27,6 +34,13 @@ public class UserInformation {
         this.points = 0;
         //Used to sort users from highetst points to lowest
         this.negPoints = points * -1;
+        this.favorites = new HashMap<>();
+
+        this.favoriteData = (FavoriteData) getApplicationContext();
+
+
+
+
 
     }
 
@@ -47,4 +61,10 @@ public class UserInformation {
     }
 
     public int getNegPoints() {return negPoints;}
+
+    public HashMap<String, String> getFavorites(){
+        return this.favorites;
+    }
+
+
 }

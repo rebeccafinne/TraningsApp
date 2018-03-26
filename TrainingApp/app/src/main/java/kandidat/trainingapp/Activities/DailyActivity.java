@@ -1,7 +1,9 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import kandidat.trainingapp.R;
 
 public class DailyActivity extends AppCompatActivity {
 

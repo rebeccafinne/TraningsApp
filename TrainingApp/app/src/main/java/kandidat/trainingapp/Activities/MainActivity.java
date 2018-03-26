@@ -1,8 +1,7 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kandidat.trainingapp.Repositories.UserInformation;
+import kandidat.trainingapp.R;
 
 //testing git again
 public class MainActivity extends AppCompatActivity{

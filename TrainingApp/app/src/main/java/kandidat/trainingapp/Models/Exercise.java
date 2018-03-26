@@ -1,4 +1,4 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Models;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;

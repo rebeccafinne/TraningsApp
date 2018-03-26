@@ -1,4 +1,4 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,20 +8,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.IdpResponse;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import kandidat.trainingapp.Models.Exercise;
+import kandidat.trainingapp.Models.Timer;
+import kandidat.trainingapp.Models.Workout;
+import kandidat.trainingapp.R;
 
 public class TrainingActivity extends AppCompatActivity {
 
@@ -86,10 +86,9 @@ public class TrainingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Clicked stop" , Toast.LENGTH_SHORT).show();
                 if(timer != null){
-                    timer.stopTimer();
+                    workout.setDuration(timer.stopTimer());
                     timerThread.interrupt();
                     timerThread = null;
-
                     timer = null;
                 }
             }
@@ -131,20 +130,18 @@ public class TrainingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 currentExercise = new Exercise();
                 workout.addNewExercise(currentExercise);
+
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(TrainingActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_exercise, null);
+
                 final TextView mExerciseHeader = mView.findViewById(R.id.ex_name);
                 final ListView lstRows = mView.findViewById(R.id.lst_rows);
-                final TextView description = mView.findViewById(R.id.description_edit);
                 lstRows.setAdapter(rowAdapter);
-
-                rowAdapter.notifyDataSetChanged();
+                final TextView description = mView.findViewById(R.id.description_edit);
 
                 mBuilder.setView(mView);
                 final AlertDialog exerciseDialog = mBuilder.create();
                 exerciseDialog.show();
-
-                Toast.makeText(getApplicationContext(), "Klickade Add Exercise", Toast.LENGTH_SHORT).show(); //TODO remove when working
 
                 btnAddRow = mView.findViewById(R.id.btn_add_row);
                 btnAddRow.setOnClickListener(new View.OnClickListener() {
@@ -177,8 +174,7 @@ public class TrainingActivity extends AppCompatActivity {
                             workout.setRow(currentExercise,i, setValue, repValue, weightValue);
                         }
 
-                        workout.newRow(currentExercise, 0,0,0);
-                        Toast.makeText(getApplicationContext(), "Klickade AddRow: " + workout.getWeight(currentExercise,0), Toast.LENGTH_SHORT).show();
+                        workout.newRow(currentExercise);
                         rowAdapter.notifyDataSetChanged();
                     }
                 });
@@ -187,10 +183,36 @@ public class TrainingActivity extends AppCompatActivity {
                 btnDone.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(mExerciseHeader.getText().toString() != ""){
+                        View temporaryView;
+                        EditText setEt, repEt, weightEt;
+                        for (int i = 0; i < rowAdapter.getCount(); i++) {
+                            temporaryView = lstRows.getChildAt(i);
+
+                            setEt = (EditText) temporaryView.findViewById(R.id.set_set);
+                            repEt = (EditText) temporaryView.findViewById(R.id.set_rep);
+                            weightEt = (EditText) temporaryView.findViewById(R.id.set_weight);
+
+                            int setValue = 0;
+                            int repValue = 0;
+                            int weightValue = 0;
+
+                            if (setEt.getText().toString() != null && !setEt.getText().toString().matches("")) {
+                                setValue = Integer.parseInt(setEt.getText().toString());
+                            }
+                            if (repEt.getText().toString() != null && !repEt.getText().toString().matches("")) {
+                                repValue = Integer.parseInt(repEt.getText().toString());
+                            }
+                            if (weightEt.getText().toString() != null && !weightEt.getText().toString().matches("")) {
+                                weightValue = Integer.parseInt(weightEt.getText().toString());
+                            }
+
+                            workout.setRow(currentExercise, i, setValue, repValue, weightValue);
+                        }
+
+                        if(!mExerciseHeader.getText().toString().matches( "") ){
                             currentExercise.setName(mExerciseHeader.getText().toString());
                         }
-                        if(description.getText().toString() != null){
+                        if(!description.getText().toString().matches("")){
                             currentExercise.setDescription(description.getText().toString());
                         }
                         exerciseDialog.dismiss();
@@ -233,18 +255,38 @@ public class TrainingActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             // inflate the layout for each list row
+            Exercise tmpExercise = workout.getExercise(i);
             if (view == null) {
                 view = getLayoutInflater().inflate(R.layout.costum_layout, null);
             }
 
-     //       TextView repsView = view.findViewById(R.id.text_reps);
-            TextView setsView = view.findViewById(R.id.text_sets);
-   //         TextView weightView = view.findViewById(R.id.text_weight);
+            TextView exName = view.findViewById(R.id.text_sets);
 
-            if ( workout.nbrOfExercises() != 0) {
- //               repsView.setText(workout.getExercise(i).getName());
-                setsView.setText(workout.getExercise(i).getName());
- //               weightView.setText(workout.getExercise(i).getName());
+            LinearLayout rows = view.findViewById(R.id.ll_rows);
+            rows.removeAllViews();
+
+            LinearLayout tmpLayout;
+            TextView tv_set;
+            TextView tv_reps;
+            TextView tv_weight;
+            for (int j = 0; j < workout.nbrOfRows(tmpExercise); j++) {
+                tmpLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.exercise_show_layout, null);
+                tmpLayout.setId(i);
+
+                tv_set = tmpLayout.findViewById(R.id.tv_set);
+                tv_set.setText("" + workout.getSets(tmpExercise, j));
+
+                tv_reps = tmpLayout.findViewById(R.id.tv_reps);
+                tv_reps.setText("" + workout.getReps(tmpExercise, j));
+
+                tv_weight = tmpLayout.findViewById(R.id.tv_weight);
+                tv_weight.setText("" + workout.getWeight(tmpExercise, j));
+
+                rows.addView(tmpLayout);
+            }
+
+            if (workout.nbrOfExercises() != 0) {
+                exName.setText(workout.getExercise(i).getName());
             }
 
             return view;
@@ -300,4 +342,5 @@ public class TrainingActivity extends AppCompatActivity {
             return view;
         }
     }
+
 }

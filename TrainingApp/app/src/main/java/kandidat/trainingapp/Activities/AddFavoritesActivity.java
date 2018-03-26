@@ -1,54 +1,66 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class AddNewDailyActivity extends AppCompatActivity {
+import kandidat.trainingapp.R;
+
+public class AddFavoritesActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView toolText;
-    Button addStairs, addBus, addStand;
-    private View rootView;
-
-
+    Button gymButton, stairsButton, busButton, standingButton;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_daily);
+        setContentView(R.layout.activity_add_favorites);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
-        toolText.setText("Favorite daily exercise");
-        addStairs = (Button) findViewById(R.id.add_stairs);
-        addStairs.setOnClickListener(new View.OnClickListener() {
+        toolText.setText("Favorite Workouts");
+        gymButton = (Button) findViewById(R.id.add_gym);
+        gymButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gymClicked(view);
+
+            }
+        });
+
+        stairsButton = (Button) findViewById(R.id.add_stairs);
+        stairsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addStairsClicked(view);
             }
         });
-        addBus = (Button) findViewById(R.id.add_bus);
-        addBus.setOnClickListener(new View.OnClickListener() {
+        busButton = (Button) findViewById(R.id.add_bus);
+        busButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addBusClicked(view);
             }
         });
-        addStand = (Button) findViewById(R.id.add_stand);
-        addStand.setOnClickListener(new View.OnClickListener() {
+        standingButton = (Button) findViewById(R.id.add_stand);
+        standingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addStandClicked(view);
             }
         });
+
     }
 
+    private void gymClicked(View view){
+        Intent intent = new Intent(this, AddNewGymActiviy.class);
+        startActivity(intent);
+    }
 
     private void addStairsClicked(View view){
         Intent intent = new Intent(this, FavoriteStairsActivity.class);

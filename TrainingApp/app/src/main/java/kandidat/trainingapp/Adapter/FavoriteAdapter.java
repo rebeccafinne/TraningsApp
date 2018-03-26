@@ -1,4 +1,4 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import kandidat.trainingapp.Models.FavoriteModel;
+import kandidat.trainingapp.R;
 
 /**
  * Created by rebeccafinne on 2018-03-22.
@@ -46,8 +49,8 @@ public class FavoriteAdapter extends ArrayAdapter<FavoriteModel>{
         TextView tvName = (TextView) convertView.findViewById(R.id.activity_name);
         TextView tvHome = (TextView) convertView.findViewById(R.id.value);
         // Populate the data into the template view using the data object
-        tvName.setText(fav.activity);
-        tvHome.setText(fav.value.toString());
+        tvName.setText(fav.getActivity());
+        tvHome.setText(fav.getValue().toString());
         // Return the completed view to render on screen
         return convertView;
     }
