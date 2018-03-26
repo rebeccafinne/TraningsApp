@@ -1,4 +1,4 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import kandidat.trainingapp.Activities.CardioActivity;
+import kandidat.trainingapp.Activities.DailyActivity;
+import kandidat.trainingapp.Activities.TrainingActivity;
+import kandidat.trainingapp.R;
 
 
 public class TrainingFragment extends Fragment implements View.OnClickListener {
@@ -59,4 +64,8 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
         }
     }
+
+
+
+
 }

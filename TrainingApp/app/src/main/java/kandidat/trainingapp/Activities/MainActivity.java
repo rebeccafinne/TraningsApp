@@ -1,8 +1,7 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,45 +18,35 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import kandidat.trainingapp.Repositories.UserInformation;
+import kandidat.trainingapp.R;
+
 //testing git again
 public class MainActivity extends AppCompatActivity{
     private static final int RC_SIGN_IN = 100;
     EditText editEmail, editPassword;
-    private FirebaseAuth mauth;
-    private  FirebaseAuth.AuthStateListener mAuthListener;
-
-
-
+    private FirebaseAuth mAuth;
+    //private  FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mAuth = FirebaseAuth.getInstance();
 
-        mauth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(mauth.getCurrentUser() != null){
-
-                    startProfileIntent();
-                   finish();
-                }
-            }
-        };
 
         findViewById(R.id.sign_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<AuthUI.IdpConfig> selectedProviders = new ArrayList<>();
-                selectedProviders.add(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
-                selectedProviders.add(new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
+                List<AuthUI.IdpConfig> providers = new ArrayList<>();
+                providers.add(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
+                providers.add(new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
                 startActivityForResult(
                         AuthUI.getInstance().createSignInIntentBuilder()
-                                .setProviders(selectedProviders)
-                                .setIsSmartLockEnabled(true)
+                                .setProviders(providers)
+                                .setIsSmartLockEnabled(false)
                                 .build(),
-                        RC_SIGN_IN);
+                                 RC_SIGN_IN);
             }
         });
 
@@ -65,49 +54,36 @@ public class MainActivity extends AppCompatActivity{
         editPassword = findViewById(R.id.editPassword);
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-        mauth.addAuthStateListener(mAuthListener);
-    }
 
-    @Override
-    protected void onStop(){
-        super.onStop();
-        if(mauth.getCurrentUser() != null){
-            mauth.removeAuthStateListener(mAuthListener);
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RC_SIGN_IN){
-            getSignInResponse(resultCode, data);
+            handleResponse(resultCode, data);
             return;
         }
     }
 
 
     @MainThread
-    private void getSignInResponse(int resultCode, Intent data) {
+    private void handleResponse(int resultCode, Intent data) {
         IdpResponse response = IdpResponse.fromResultIntent(data);
         Toast toast;
 
         // Successfully signed in
         if (resultCode == ResultCodes.OK) {
-            final FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            final DatabaseReference userRef = database.getReference("users");
-            UserInformation theUser = new UserInformation(
+            final DatabaseReference myRef = database.getReference("users");
+            UserInformation userSigningIn = new UserInformation(
                     mAuth.getCurrentUser().getUid(),
                     mAuth.getCurrentUser().getDisplayName(),
-                    mAuth.getCurrentUser().getEmail());
-            userRef.child(mAuth.getCurrentUser().getUid()).setValue(theUser);
+                    mAuth.getCurrentUser().getEmail()
+            );
 
-            startActivity(ProfileActivity.createIntent(this, response));
+            myRef.child(mAuth.getUid()).setValue(userSigningIn);
+            startActivity(AppMainActivity.createIntent(this, response));
             finish();
-
             return;
 
         } else {
@@ -142,12 +118,5 @@ public class MainActivity extends AppCompatActivity{
         return in;
     }
 
-
-
-    public void startProfileIntent() {
-        startActivity(ProfileActivity.createIntent(this));
-        finish();
-        return;
-    }
  }
 

@@ -46,6 +46,63 @@
     <string name="gym">Log Gym Exercise</string>
     <string name="cardio">Log Cardio Exercise</string>
     <string name="daily">Log Daily Activity</string>
+    <string name="stairs">Stairs</string>
+    <string name="busstop">Bus Stops</string>
+    <string name="stand">Stand up</string>
+    <string name="addStairsText">How many stairs do you want to add?</string>
+    <string name="save">Save</string>
 
+    <!-- String array for spinner when adding daily favorites -->
+    <string-array name="amount_of_stairs">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <!-- String array for spinner when adding daily favorites time standing up -->
+    <string-array name="amount_of_time_standing">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+    </string-array>
+
+
+    <!-- String to GYM -->
+    <string name="start_pause_timer">Start</string>
+    <string name="stop_timer">Stop</string>
+    <string name="paus_timer">Paus</string>
+    <string name="add_ex">Add exercise</string>
+    <string name="add_wrkout">Add Workout</string>
+    <string name="busStopText">How many bus stops do you want to add?</string>
+    <string name="standFavoriteText">How many minutes did you stand?</string>
+
+    <string name="ex_name">Exercise name</string>
+    <string name="name_of_exercise">Name of Exercise</string>
+
+    <string name="sets">Sets</string>
+    <string name="reps">Reps</string>
+    <string name="weight">Weight</string>
+    <string name="add_row">Add Row</string>
+    <string name="description_opt">Description (optional)</string>
+    <string name="done">Done</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="activityToAdd">Choose which acitivty you want to add</string>
+    <string name="addGymFavorite">Gym</string>
+
+    <!-- Exercise names -->
+    <string-array name="exercises">
+        <item>Pull Ups</item>
+        <item>Biceps Curl</item>
+    </string-array>
 
 </resources>

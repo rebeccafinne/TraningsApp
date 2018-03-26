@@ -1,4 +1,4 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Repositories;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,8 @@ public class UserInformation {
     private String displayName;
     private String email;
     private int points;
-    public ArrayList<UserInformation> friends;
+    private int negPoints;
+
 
 
 
@@ -20,10 +21,13 @@ public class UserInformation {
     }
 
     public UserInformation(String userId, String displayName, String email){
+        this.userId = userId;
         this.displayName = displayName;
         this.email = email;
-        this.userId = userId;
         this.points = 0;
+        //Used to sort users from highetst points to lowest
+        this.negPoints = points * -1;
+
     }
 
     public String getDisplayName() {
@@ -41,4 +45,6 @@ public class UserInformation {
     public int getPoints() {
         return points;
     }
+
+    public int getNegPoints() {return negPoints;}
 }

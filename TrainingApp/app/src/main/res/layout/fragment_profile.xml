@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kandidat.trainingapp.ProfileFragment">
+    tools:context="kandidat.trainingapp.Fragments.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -68,6 +68,26 @@
                 android:layout_weight="1"
                 android:background="@color/colorButtonStats"
                 android:text="@string/stats" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/logOut_btn"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_weight="1"
+                android:background="@color/colorButtonStats"
+                android:text="@string/log_out" />
         </LinearLayout>
 
     </LinearLayout>
