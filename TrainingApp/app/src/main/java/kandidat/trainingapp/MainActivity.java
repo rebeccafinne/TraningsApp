@@ -5,15 +5,17 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,14 +26,24 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity{
     private static final int RC_SIGN_IN = 100;
     EditText editEmail, editPassword;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mauth;
+    private android.support.v7.widget.Toolbar mToolbar;
+
     //private  FirebaseAuth.AuthStateListener mAuthListener;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth = FirebaseAuth.getInstance();
+        mauth = FirebaseAuth.getInstance();
+        mToolbar = findViewById(R.id.the_main_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Better Together");
 
 
         findViewById(R.id.sign_button).setOnClickListener(new View.OnClickListener() {
@@ -53,8 +65,14 @@ public class MainActivity extends AppCompatActivity{
         editPassword = findViewById(R.id.editPassword);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.the_main_menu, menu);
 
 
+        return true;
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -72,15 +90,8 @@ public class MainActivity extends AppCompatActivity{
 
         // Successfully signed in
         if (resultCode == ResultCodes.OK) {
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            final DatabaseReference myRef = database.getReference("users");
-            UserInformation userSigningIn = new UserInformation(
-                    mAuth.getCurrentUser().getUid(),
-                    mAuth.getCurrentUser().getDisplayName(),
-                    mAuth.getCurrentUser().getEmail()
-            );
 
-            myRef.child(mAuth.getUid()).setValue(userSigningIn);
+
             startActivity(AppMainActivity.createIntent(this, response));
             finish();
             return;
@@ -117,5 +128,14 @@ public class MainActivity extends AppCompatActivity{
         return in;
     }
 
+
+
+
+
+    public void startMain() {
+        startActivity(AppMainActivity.createIntent(this));
+        finish();
+        return;
+    }
  }
 

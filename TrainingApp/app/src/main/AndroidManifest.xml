@@ -21,15 +21,17 @@
             android:name=".MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".TrainingActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".AppMainActivity"
+
+        <activity  android:name=".AppMainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
+
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

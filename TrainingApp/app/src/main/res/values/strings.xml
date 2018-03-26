@@ -96,6 +96,7 @@
     <string name="description_opt">Description (optional)</string>
     <string name="done">Done</string>
     <string name="add_friend">Add Friend</string>
+    <string name="account_Setting">Account Settings</string>
 
     <!-- Exercise names -->
     <string-array name="exercises">
