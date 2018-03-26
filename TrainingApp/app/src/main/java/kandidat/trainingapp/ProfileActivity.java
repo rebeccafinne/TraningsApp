@@ -22,6 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import kandidat.trainingapp.Activities.AppMainActivity;
+import kandidat.trainingapp.Activities.MainActivity;
+import kandidat.trainingapp.Repositories.UserInformation;
+
 public class ProfileActivity extends AppCompatActivity{
     private final String TAG = "FB_PROFILE";
 

@@ -15,6 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import kandidat.trainingapp.Activities.MainActivity;
+import kandidat.trainingapp.Repositories.UserInformation;
+
 //This class isn't used at the moment and don't think it will be
 
 public class CreateActivity extends AppCompatActivity{
