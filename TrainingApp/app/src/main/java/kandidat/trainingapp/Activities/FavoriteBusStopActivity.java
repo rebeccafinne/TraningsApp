@@ -9,12 +9,14 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Models.Favorites;
 import kandidat.trainingapp.R;
+import kandidat.trainingapp.Repositories.UserInformation;
 
 public class FavoriteBusStopActivity extends AppCompatActivity {
 
@@ -25,6 +27,9 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private Favorites favorites;
     FavoriteData favoriteData;
+    UserInformation usr;
+    private FirebaseDatabase db;
+    private DatabaseReference ref;
 
 
     @Override
@@ -51,7 +56,13 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         //Vill ha att övningen är key och sen en lista med ints för antal våningar
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+       // mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        db = FirebaseDatabase.getInstance();
+
+        ref = db.getReference("user");
+
+
 
 
         saveBus = (Button) findViewById(R.id.save_bus_stop_button);
@@ -67,8 +78,9 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
 
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-        if(favorites.addNewFavorite(newValueInteger, favoriteData.getBusList())){
+        if(favorites.addNewFavorite(newValueInteger, favoriteData.getBusList(), "BusStop")){
             favoriteData.addBusList(newValueInteger);
+//            ref.child(usr.getUserId()).child("bus").setValue(newValueString);
             finish();
         }
 

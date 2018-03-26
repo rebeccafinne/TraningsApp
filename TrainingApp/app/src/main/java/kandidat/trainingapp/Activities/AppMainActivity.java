@@ -18,6 +18,8 @@ import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Fragments.FavoritesFragment;
@@ -25,6 +27,8 @@ import kandidat.trainingapp.Fragments.LeaderboardFragment;
 import kandidat.trainingapp.Fragments.ProfileFragment;
 import kandidat.trainingapp.R;
 import kandidat.trainingapp.Fragments.TrainingFragment;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by rebeccafinne on 2018-02-22.
@@ -38,7 +42,9 @@ public class AppMainActivity extends AppCompatActivity {
     private TextView toolText;
     private ImageButton settingsButton, addFavoritesButton;
     private FirebaseAuth mAuth;
-   // private FavoriteData favoriteData;
+    private FavoriteData favoriteData;
+    private FirebaseDatabase db;
+    private DatabaseReference ref;
 
 
 
@@ -48,10 +54,24 @@ public class AppMainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
+        favoriteData = (FavoriteData) getApplicationContext();
+        db = FirebaseDatabase.getInstance();
+
+       // ref.child(mAuth.getUid()).child("favorites").setValue(favoriteData.getTotalFavorites());
+
+
+        //ref.child(mAuth.getUid()).child("favorites").push(favoriteData.getTotalFavorites());
+
+
       /*  if(favoriteData == null){
             favoriteData = new FavoriteData();
         }*/
       final FavoriteData favoriteData = (FavoriteData) getApplicationContext();
+        ref = db.getReference("users");
+
+
+
+
 
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
@@ -157,9 +177,6 @@ public class AppMainActivity extends AppCompatActivity {
         return in;
     }
 
-   /* public FavoriteData getFavoriteData(){
-        return this.favoriteData;
-    }*/
 
 
 

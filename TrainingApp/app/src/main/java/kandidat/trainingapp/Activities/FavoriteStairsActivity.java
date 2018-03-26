@@ -73,7 +73,7 @@ public class FavoriteStairsActivity extends AppCompatActivity {
         Integer newValueInteger = Integer.parseInt(newValueString);
 
         //stairsFavorites = favorites.addNewFavorite(newValueInteger, stairsFavorites);
-          if(favorites.addNewFavorite(newValueInteger, favoriteData.getStairsList())){
+        if(favorites.addNewFavorite(newValueInteger, favoriteData.getStairsList(), "Stairs")){
               favoriteData.addStairsList(newValueInteger);
               finish();
           }
