@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:maxHeight="?attr/actionBarSize"
 
-    tools:context="kandidat.trainingapp.TrainingActivity">
+    tools:context="kandidat.trainingapp.Activities.TrainingActivity">
 
     <include layout="@layout/layout_activity_toolbar"/>
 

@@ -1,20 +1,29 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Activities;
 
-import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.app.TabActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import kandidat.trainingapp.Repositories.FavoriteData;
+import kandidat.trainingapp.Fragments.FavoritesFragment;
+import kandidat.trainingapp.Fragments.LeaderboardFragment;
+import kandidat.trainingapp.Fragments.ProfileFragment;
+import kandidat.trainingapp.R;
+import kandidat.trainingapp.Fragments.TrainingFragment;
 
 /**
  * Created by rebeccafinne on 2018-02-22.
@@ -27,10 +36,23 @@ public class AppMainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView toolText;
     private ImageButton settingsButton, addFavoritesButton;
+    private FirebaseAuth mAuth;
+   // private FavoriteData favoriteData;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_running);
+        mAuth = FirebaseAuth.getInstance();
+
+
+      /*  if(favoriteData == null){
+            favoriteData = new FavoriteData();
+        }*/
+      final FavoriteData favoriteData = (FavoriteData) getApplicationContext();
+
+
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
@@ -100,6 +122,18 @@ public class AppMainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null){
+            Intent welcomeIntent = new Intent(AppMainActivity.this,MainActivity.class);
+            startActivity(welcomeIntent);
+            finish();
+        }
+    }
+
 
     private void settings(View view){
         Intent intent = new Intent(this, ProfileSettingsActivity.class);
@@ -109,4 +143,23 @@ public class AppMainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddFavoritesActivity.class);
         startActivity(intent);
     }
+
+    public static Intent createIntent(Context context, IdpResponse idpResponse) {
+        Intent in = IdpResponse.getIntent(idpResponse);
+        in.setClass(context, AppMainActivity.class);
+        return in;
+    }
+
+    public static Intent createIntent(Context context) {
+        Intent in = new Intent();
+        in.setClass(context, AppMainActivity.class);
+        return in;
+    }
+
+   /* public FavoriteData getFavoriteData(){
+        return this.favoriteData;
+    }*/
+
+
+
 }

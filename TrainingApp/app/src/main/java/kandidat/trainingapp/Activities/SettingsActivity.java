@@ -1,13 +1,15 @@
-package kandidat.trainingapp;
+package kandidat.trainingapp.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ChartActivity extends AppCompatActivity {
+import kandidat.trainingapp.R;
+
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chart);
+        setContentView(R.layout.activity_settings);
     }
 }
