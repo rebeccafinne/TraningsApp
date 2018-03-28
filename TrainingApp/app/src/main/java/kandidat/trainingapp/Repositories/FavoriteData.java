@@ -2,6 +2,7 @@ package kandidat.trainingapp.Repositories;
 
 import android.app.Application;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -13,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -87,4 +89,11 @@ public class FavoriteData extends Application{
 
         this.totalFavorites.put(thing, value);
     }
+
+  /*  public void recreateFavoriteWords(){
+        HashSet<String> bus = new HashSet<>();
+        SharedPreferences settings = getSharedPreferences("favoriteBus", 0);
+        bus = (HashSet<String>) settings.getStringSet("favoriteBus", bus);
+        favoriteWordRepository.addSetToFavorites(set);
+    }*/
 }

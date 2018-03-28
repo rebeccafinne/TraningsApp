@@ -58,9 +58,9 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         //Vill ha att övningen är key och sen en lista med ints för antal våningar
        // mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        db = FirebaseDatabase.getInstance();
+//        db = FirebaseDatabase.getInstance();
 
-        ref = db.getReference("user");
+ //       ref = db.getReference("user");
 
 
 

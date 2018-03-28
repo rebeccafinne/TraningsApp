@@ -1,5 +1,11 @@
 package kandidat.trainingapp.Repositories;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +25,8 @@ public class UserInformation {
     private int negPoints;
     private FavoriteData favoriteData;
     private HashMap<String, String> favorites;
+    private FirebaseDatabase db;
+    private DatabaseReference ref, favRef;
 
 
 
@@ -34,9 +42,65 @@ public class UserInformation {
         this.points = 0;
         //Used to sort users from highetst points to lowest
         this.negPoints = points * -1;
-        this.favorites = new HashMap<>();
+        //this.favorites = new HashMap<>();
+        db = FirebaseDatabase.getInstance();
+        ref = db.getReference().child("users");
+        favRef = db.getReference().child("users");
 
-        this.favoriteData = (FavoriteData) getApplicationContext();
+        //this.favoriteData = (FavoriteData) getApplicationContext();
+        ref.orderByChild("points").equalTo(10).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                System.out.println(dataSnapshot.child("points").getValue());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        favRef.child(getUserId()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
 

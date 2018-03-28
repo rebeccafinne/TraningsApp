@@ -89,7 +89,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                UserInformation user = dataSnapshot.getValue(UserInformation.class);
+                UserInformation user;
+                try{
+                     user = dataSnapshot.getValue(UserInformation.class);
+                }catch(Exception e){
+                  user = new UserInformation();
+                    // user = new UserInformation(dataSnapshot.getValue("userId"),dataSnapshot.getValue("displayName"),dataSnapshot.getValue("email"));
+
+                }
+
 
                 if(user.getDisplayName() == null){
                     profileText.setText("No user logged in");
