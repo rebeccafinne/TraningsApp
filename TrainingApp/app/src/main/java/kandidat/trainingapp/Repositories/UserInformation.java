@@ -48,7 +48,7 @@ public class UserInformation {
         favRef = db.getReference().child("users");
 
         //this.favoriteData = (FavoriteData) getApplicationContext();
-        ref.orderByChild("points").equalTo(10).addChildEventListener(new ChildEventListener() {
+      /*  ref.orderByChild("points").equalTo(10).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 System.out.println(dataSnapshot.child("points").getValue());
@@ -74,33 +74,7 @@ public class UserInformation {
 
             }
         });
-
-        favRef.child(getUserId()).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+*/
 
 
 

@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.ui.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,17 +56,59 @@ public class Favorites {
     public boolean addNewFavorite(Integer newValue, List<Integer> list, String key){
 
         Context context = getApplicationContext();
-        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         ref = db.getReference("users");
-        DatabaseReference myRef = ref.child(mAuth.getUid()).child("favorites").child(key).push();
+        DatabaseReference myRef = ref.child(user.getUid()).child("favorites").child(key).push();
+        DatabaseReference favoriteRef = ref.child(user.getUid()).child("favorites");
+
+
+
+        favoriteRef.addChildEventListener(new ChildEventListener() {
+
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                   // Integer dsVal = Integer.valueOf(ds.getValue().toString());
+                    Integer dsVal = (int) (long) ds.getValue();
+                    System.out.println(dsVal == newValue);
+                    if(dsVal == newValue){
+                        dataSnapshot.getRef().child(ds.getKey()).removeValue();
+
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         //Denna rad lägger till värdet på databasen, behöver check om värdet redan finns.
         myRef.setValue(newValue);
 
 
-
         //Väldigt oklart hur detta funkar
-        ChildEventListener eventListener = new ChildEventListener() {
+  /*      ChildEventListener eventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (!dataSnapshot.exists()) {
@@ -100,8 +143,8 @@ public class Favorites {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         };
-
-        myRef.addChildEventListener(eventListener);
+*/
+        //myRef.addChildEventListener(eventListener);
 
 
         //Gammal kod som funkade när jag hade det lokalt och listorna blev tomma efter varje körning.
