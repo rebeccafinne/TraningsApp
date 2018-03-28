@@ -26,4 +26,36 @@ public class FavoriteModel {
     public Integer getValue(){
         return this.value;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if(o == this){
+            return true;
+        }
+       if(!(o instanceof FavoriteModel)){
+            return false;
+        }
+        FavoriteModel fav = (FavoriteModel) o;
+
+        if(fav.getValue().equals(this.getValue()) && fav.getActivity().equals(this.getActivity())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode(){
+        return 7*this.getActivity().hashCode()+this.getValue();
+    }
+
+  /*  @Override
+    public boolean equals(FavoriteModel fav){
+        if(fav.getValue().equals(this.getValue()) && fav.getActivity().equals(this.getActivity())){
+            return true;
+        }else{
+            return false;
+        }
+    }*/
 }
