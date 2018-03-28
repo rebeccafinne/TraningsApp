@@ -36,7 +36,7 @@ public class FavoriteStairsActivity extends AppCompatActivity {
 
         favoriteData = (FavoriteData) getApplicationContext();
         //favorites = new Favorites();
-        favorites = Favorites.getInstance();
+        favorites = new Favorites();
         //Set toolbar and the text
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);

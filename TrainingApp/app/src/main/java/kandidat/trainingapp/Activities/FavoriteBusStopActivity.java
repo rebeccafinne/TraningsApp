@@ -40,7 +40,7 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         favoriteData = (FavoriteData) getApplicationContext();
 
 
-        favorites = Favorites.getInstance();
+        favorites = new Favorites();
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
         toolText.setText("Bus Stops");

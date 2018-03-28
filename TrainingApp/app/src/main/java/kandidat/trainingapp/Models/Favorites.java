@@ -16,7 +16,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Repositories.UserInformation;
@@ -37,9 +40,9 @@ public class Favorites {
     private FavoriteData favoriteData;
     //Singleton class right now, might want to change that? 
 
-    private static volatile  Favorites fav = new Favorites();
+//    private static volatile  Favorites fav = new Favorites();
 
-    private Favorites(){
+    public  Favorites(){
 
         db = FirebaseDatabase.getInstance();
 
@@ -48,9 +51,9 @@ public class Favorites {
        // userInformation = UserInformation.class;
     }
 
-    public static Favorites getInstance(){
+   /* public static Favorites getInstance(){
         return fav;
-    }
+    }*/
 
     //Add the new value depending to the list
     public boolean addNewFavorite(Integer newValue, List<Integer> list, String key){
@@ -59,30 +62,42 @@ public class Favorites {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         ref = db.getReference("users");
         DatabaseReference myRef = ref.child(user.getUid()).child("favorites").child(key).push();
-        DatabaseReference favoriteRef = ref.child(user.getUid()).child("favorites");
+        DatabaseReference parentRef = ref.child(user.getUid()).child("favorites");
 
 
-
-        favoriteRef.child(key).equalTo(newValue).addChildEventListener(new ChildEventListener() {
-
+        parentRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                //  System.out.println(s);
 
-                if(dataSnapshot.exists()){
+           /*     if(dataSnapshot.exists()){
                     System.out.println(dataSnapshot.getValue());
-                }
+                }*/
+                String currentKey = null;
 
-        /*        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                /*Map<String, Object> map = (Map<String, Object>) dataSnapshot.child(key).getValue();
+                if(map.containsValue(newValue)){
+                    dataSnapshot.getRef().removeValue();
+                }
+                */
+
+           for(DataSnapshot ds : dataSnapshot.getChildren()){
+               Integer dsVal = (int) (long) ds.getValue();
+               if(dsVal.equals(newValue))
+                   currentKey = ds.getKey();
+                    break;
+           }
+
+               for(DataSnapshot ds : dataSnapshot.getChildren()){
                    // Integer dsVal = Integer.valueOf(ds.getValue().toString());
                     Integer dsVal = (int) (long) ds.getValue();
                     System.out.println(dsVal == newValue);
-                    if(dsVal == newValue){
+                    if(dsVal.equals(newValue) && !currentKey.equals(ds.getKey())){
                         dataSnapshot.getRef().child(ds.getKey()).removeValue();
 
 
                     }
-                }*/
-
+                }
             }
 
             @Override
@@ -106,10 +121,37 @@ public class Favorites {
             }
         });
 
+     /*   parentRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //  System.out.println(s);
+
+                if(dataSnapshot.exists()){
+                    System.out.println(dataSnapshot.getValue());
+                }
+
+           /*     for(DataSnapshot ds : dataSnapshot.getChildren()){
+                   // Integer dsVal = Integer.valueOf(ds.getValue().toString());
+                    Integer dsVal = (int) (long) ds.getValue();
+                    System.out.println(dsVal == newValue);
+                    if(dsVal == newValue){
+                        dataSnapshot.getRef().child(ds.getKey()).removeValue();
+
+
+                    }
+                }*/
+         /*   }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
 
 
         //Denna rad lägger till värdet på databasen, behöver check om värdet redan finns.
-       // myRef.setValue(newValue);
+        myRef.setValue(newValue);
 
 
         //Väldigt oklart hur detta funkar

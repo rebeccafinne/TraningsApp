@@ -28,7 +28,7 @@ public class FavoriteTimeStandingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorite_time_standing);
 
         favoriteData = (FavoriteData) getApplicationContext();
-        favorites = Favorites.getInstance();
+        favorites = new Favorites();
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
         toolText.setText("Time standing");
