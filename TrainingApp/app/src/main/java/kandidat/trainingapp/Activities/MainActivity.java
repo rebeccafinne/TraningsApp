@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mauth = FirebaseAuth.getInstance();
-        mToolbar = findViewById(R.id.the_main_toolbar);
+       // mToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Better Together");
 
