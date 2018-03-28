@@ -30,11 +30,11 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class Favorites {
 
 
-    FirebaseDatabase db;
+    private FirebaseDatabase db;
 
-    DatabaseReference ref;
-    UserInformation userInformation;
-    FavoriteData favoriteData;
+    private DatabaseReference ref;
+    private UserInformation userInformation;
+    private FavoriteData favoriteData;
     //Singleton class right now, might want to change that? 
 
     private static volatile  Favorites fav = new Favorites();
@@ -63,12 +63,16 @@ public class Favorites {
 
 
 
-        favoriteRef.addChildEventListener(new ChildEventListener() {
+        favoriteRef.child(key).equalTo(newValue).addChildEventListener(new ChildEventListener() {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                if(dataSnapshot.exists()){
+                    System.out.println(dataSnapshot.getValue());
+                }
+
+        /*        for(DataSnapshot ds : dataSnapshot.getChildren()){
                    // Integer dsVal = Integer.valueOf(ds.getValue().toString());
                     Integer dsVal = (int) (long) ds.getValue();
                     System.out.println(dsVal == newValue);
@@ -77,7 +81,7 @@ public class Favorites {
 
 
                     }
-                }
+                }*/
 
             }
 
@@ -103,8 +107,9 @@ public class Favorites {
         });
 
 
+
         //Denna rad lägger till värdet på databasen, behöver check om värdet redan finns.
-        myRef.setValue(newValue);
+       // myRef.setValue(newValue);
 
 
         //Väldigt oklart hur detta funkar

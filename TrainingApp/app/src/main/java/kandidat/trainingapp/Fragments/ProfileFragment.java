@@ -94,7 +94,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                      user = dataSnapshot.getValue(UserInformation.class);
                 }catch(Exception e){
                   user = new UserInformation();
-                    // user = new UserInformation(dataSnapshot.getValue("userId"),dataSnapshot.getValue("displayName"),dataSnapshot.getValue("email"));
+                 //    user = new UserInformation(dataSnapshot.getValue("userId"),dataSnapshot.getValue("displayName"),dataSnapshot.getValue("email"));
 
                 }
 

@@ -43,9 +43,9 @@ public class UserInformation {
         //Used to sort users from highetst points to lowest
         this.negPoints = points * -1;
         //this.favorites = new HashMap<>();
-        db = FirebaseDatabase.getInstance();
+      /*  db = FirebaseDatabase.getInstance();
         ref = db.getReference().child("users");
-        favRef = db.getReference().child("users");
+        favRef = db.getReference().child("users");*/
 
         //this.favoriteData = (FavoriteData) getApplicationContext();
       /*  ref.orderByChild("points").equalTo(10).addChildEventListener(new ChildEventListener() {
