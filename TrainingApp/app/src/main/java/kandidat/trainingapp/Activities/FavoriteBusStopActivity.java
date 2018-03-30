@@ -24,12 +24,8 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
     TextView toolText;
     private Button saveBus;
     private Spinner spinner;
-    private DatabaseReference mDatabase;
     private Favorites favorites;
     FavoriteData favoriteData;
-    UserInformation usr;
-    private FirebaseDatabase db;
-    private DatabaseReference ref;
 
 
     @Override
@@ -55,15 +51,6 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        //Vill ha att övningen är key och sen en lista med ints för antal våningar
-       // mDatabase = FirebaseDatabase.getInstance().getReference();
-
-//        db = FirebaseDatabase.getInstance();
-
- //       ref = db.getReference("user");
-
-
-
 
         saveBus = (Button) findViewById(R.id.save_bus_stop_button);
         saveBus.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +67,6 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         Integer newValueInteger = Integer.parseInt(newValueString);
         if(favorites.addNewFavorite(newValueInteger, favoriteData.getBusList(), "BusStop")){
             favoriteData.addBusList(newValueInteger);
-//            ref.child(usr.getUserId()).child("bus").setValue(newValueString);
             finish();
         }
 

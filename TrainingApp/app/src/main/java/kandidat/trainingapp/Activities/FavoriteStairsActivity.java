@@ -21,7 +21,6 @@ public class FavoriteStairsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView toolText;
-    private DatabaseReference mDatabase;
     private Button saveStairs;
     private Spinner spinner;
     private Favorites favorites;
@@ -53,11 +52,6 @@ public class FavoriteStairsActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-
-        //Vill ha att övningen är key och sen en lista med ints för antal våningar
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
         saveStairs = (Button) findViewById(R.id.save_stairs_button);
         saveStairs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +65,6 @@ public class FavoriteStairsActivity extends AppCompatActivity {
     private void saveStairsClicked(View view){
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-
-        //stairsFavorites = favorites.addNewFavorite(newValueInteger, stairsFavorites);
         if(favorites.addNewFavorite(newValueInteger, favoriteData.getStairsList(), "Stairs")){
               favoriteData.addStairsList(newValueInteger);
               finish();
