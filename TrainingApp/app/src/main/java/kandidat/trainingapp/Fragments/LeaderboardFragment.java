@@ -1,5 +1,6 @@
 package kandidat.trainingapp.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import kandidat.trainingapp.Activities.AnotherUserActivity;
 import kandidat.trainingapp.Repositories.UserInformation;
 import kandidat.trainingapp.R;
 
@@ -58,7 +60,7 @@ public class LeaderboardFragment extends Fragment {
         // Inflate the layout for this fragment
         View theView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         db = FirebaseDatabase.getInstance();
-        ref = db.getReference().child("users");
+        ref = db.getReference();
 
         users = new ArrayList<String>();
 
@@ -67,44 +69,7 @@ public class LeaderboardFragment extends Fragment {
 
         uids = new ArrayList<String>();
         leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
-        //final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, users);
-        //leaderboardList.setAdapter(arrayAdapter);
 
-
-       /* ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-               if( dataSnapshot != null && dataSnapshot.getValue() != null) {
-                   for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                       UserInformation user = ds.getValue(UserInformation.class);
-                       users.add(user.getDisplayName() + "      " + user.getPoints()+" points");
-                       String userUid = user.getUserId();
-                       uids.add(userUid);
-                       arrayAdapter.notifyDataSetChanged();
-                   }
-               }
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
 
         mauth = FirebaseAuth.getInstance();
         mauthListener = (FirebaseAuth.AuthStateListener) (FirebaseAuth) ->{
@@ -118,7 +83,7 @@ public class LeaderboardFragment extends Fragment {
                 getActivity(),
                 UserInformation.class,
                 R.layout.leaderboard_representation,
-                ref.child("users").orderByChild("points")
+                ref.child("users")
         ) {
             TextView name;
             TextView points;
@@ -129,6 +94,17 @@ public class LeaderboardFragment extends Fragment {
                 points = v.findViewById(R.id.txt_points);
                 name.setText(String.valueOf(model.getDisplayName()));
                 points.setText(String.valueOf(model.getPoints()));
+
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent profileIntent = new Intent(getActivity(),AnotherUserActivity.class);
+                        String userId = getRef(position).getKey();
+                        profileIntent.putExtra("userId", userId);
+                        startActivity(profileIntent);
+
+                    }
+                });
 
             }
         };

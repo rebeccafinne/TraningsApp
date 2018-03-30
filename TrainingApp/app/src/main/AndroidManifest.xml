@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="kandidat.trainingapp.Repositories.FavoriteData"
+        android:name=".Repositories.FavoriteData"
         android:allowBackup="true"
         android:gravity="center"
         android:icon="@drawable/settings"
@@ -20,8 +20,7 @@
         <activity
             android:name=".Activities.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.TrainingActivity"
             android:configChanges="orientation"
@@ -30,11 +29,11 @@
             android:name=".Activities.AppMainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.CardioActivity"
@@ -54,27 +53,38 @@
             android:name=".Activities.DailyActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.ProfileSettingsActivity"
+        <activity
+            android:name=".Activities.ProfileSettingsActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activities.AddFavoritesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.AddFavoritesActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activities.AddNewGymActiviy"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.AddNewGymActiviy"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activities.FavoriteStairsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.FavoriteStairsActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activities.FavoriteBusStopActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.FavoriteBusStopActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activities.FavoriteTimeStandingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.FavoriteTimeStandingActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".HowChallenging"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HowChallenging"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.AnotherUserActivity"
+            android:label="@string/title_activity_another_user"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

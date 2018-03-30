@@ -8,13 +8,18 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -54,6 +59,7 @@ public class AppMainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
+
         favoriteData = (FavoriteData) getApplicationContext();
         db = FirebaseDatabase.getInstance();
 
@@ -82,9 +88,29 @@ public class AppMainActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                settings(view);
+                PopupMenu popup = new PopupMenu(AppMainActivity.this, settingsButton);
+                popup.getMenuInflater()
+                        .inflate(R.menu.the_main_menu, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                       switch (item.getTitle().toString()){
+                           case "Log Out":
+                               signOut();
+                               break;
+                           case "Account Settings":
+                               settings(view);
+                               break;
+                       }
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
             }
-        });
+        }); //closing the setOnClickListener method
+
+
         addFavoritesButton = (ImageButton) toolbar.findViewById(R.id.add_favorites_button);
         addFavoritesButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -176,6 +202,22 @@ public class AppMainActivity extends AppCompatActivity {
         in.setClass(context, AppMainActivity.class);
         return in;
     }
+
+    public void signOut(){
+        AuthUI.getInstance().signOut(AppMainActivity.this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            startActivity(MainActivity.createIntent(AppMainActivity.this));
+                            finish();
+                        } else {
+                            // Signout failed
+                        }
+                    }
+                });
+    }
+
 
 
 

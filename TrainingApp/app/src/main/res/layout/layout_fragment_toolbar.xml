@@ -19,16 +19,16 @@
         android:weightSum="1">
 
         <ImageButton
-            android:id="@+id/settings_button"
+            android:id="@+id/add_favorites_button"
             android:layout_width="54dp"
             android:layout_height="54dp"
-            android:layout_gravity="start"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
             android:background="@color/colorPrimary"
             android:clickable="true"
-            android:gravity="start"
             android:maxHeight="?attr/actionBarSize"
-            android:scaleType="fitStart"
-            android:src="@drawable/settings_small" />
+            android:maxWidth="54dp"
+            app:srcCompat="@drawable/plus_sign" />
 
         <TextView
             android:id="@+id/toolbar_text"
@@ -44,16 +44,16 @@
             android:visibility="visible" />
 
         <ImageButton
-            android:id="@+id/add_favorites_button"
+            android:id="@+id/settings_button"
             android:layout_width="54dp"
             android:layout_height="54dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
-            android:clickable="true"
+            android:layout_gravity="start"
             android:background="@color/colorPrimary"
+            android:clickable="true"
+            android:gravity="start"
             android:maxHeight="?attr/actionBarSize"
-            android:maxWidth="54dp"
-            app:srcCompat="@drawable/plus_sign" />
+            android:scaleType="fitStart"
+            android:src="@drawable/settings_small" />
 
 
     </LinearLayout>

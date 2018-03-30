@@ -23,7 +23,7 @@ public class AddFavoritesActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
-        toolText.setText("Favorite Workouts");
+        toolText.setText("Add Favorite Workouts");
         gymButton = (Button) findViewById(R.id.add_gym);
         gymButton.setOnClickListener(new View.OnClickListener() {
             @Override

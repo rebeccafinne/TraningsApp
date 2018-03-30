@@ -30,7 +30,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private TextView profileText;
     private UserInformation usr;
-    DatabaseReference rootRef, nameRef;
     private Button chartButton, statsButton, signOutButton;
 
 
@@ -64,9 +63,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         chartButton.setOnClickListener(this);
         statsButton = (Button) rootView.findViewById(R.id.statsButton);
         statsButton.setOnClickListener(this);
-        signOutButton = (Button) rootView.findViewById(R.id.logOut_btn);
-        signOutButton.setOnClickListener(this);
-        //A reference to Authentication in Firebase
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -120,35 +116,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void signOut(){
-        AuthUI.getInstance().signOut(getActivity())
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            startActivity(MainActivity.createIntent(getActivity()));
-                            getActivity().finish();
-                        } else {
-                            // Signout failed
-                        }
-                    }
-                });
-    }
-
     @Override
     public void onClick(View view) {
 
         Intent intent;
-        if(view.getId() == R.id.chartButton){
+        if(view.getId() == R.id.chartButton) {
             intent = new Intent(getActivity(), ChartActivity.class);
-        }else if(view.getId() == R.id.logOut_btn){
-            signOut();
-            intent = new Intent (getActivity(), MainActivity.class);
 
-        }
-
-
-        else{
+        }else{
             intent = new Intent(getActivity(), StatsActivity.class);
         }
 

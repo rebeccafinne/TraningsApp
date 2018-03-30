@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/authui_colorPrimary"
     tools:context="kandidat.trainingapp.Fragments.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilePicture"
             android:layout_width="match_parent"
             android:layout_height="130dp"
@@ -24,9 +25,11 @@
             android:id="@+id/nameInProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:capitalize="words"
             android:gravity="center"
             android:text=""
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/authui_inputTextColor" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -53,9 +56,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
-            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <Button
@@ -70,25 +73,7 @@
                 android:text="@string/stats" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/logOut_btn"
-                android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="80dp"
-                android:layout_weight="1"
-                android:background="@color/colorButtonStats"
-                android:text="@string/log_out" />
-        </LinearLayout>
 
     </LinearLayout>
 
