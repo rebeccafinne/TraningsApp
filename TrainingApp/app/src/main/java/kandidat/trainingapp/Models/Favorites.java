@@ -79,6 +79,8 @@ public class Favorites {
 
                     }
                 }
+
+
             }
 
             @Override
@@ -103,6 +105,12 @@ public class Favorites {
         });
 
         myRef.setValue(newValue);
+
+        CharSequence text = "New favorite added!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
 
 
         return true;
