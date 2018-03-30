@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,25 +22,17 @@ import kandidat.trainingapp.R;
 public class FavoriteAdapter extends ArrayAdapter<FavoriteModel>{
 
     private ArrayList<FavoriteModel> data;
+  //  private ArrayList<Integer> selectedFavorites;
 
     public FavoriteAdapter(@NonNull Context context, int resource, int textViewResourceId, @NonNull ArrayList<FavoriteModel> objects) {
         super(context, resource, textViewResourceId, objects);
         data = objects;
+        //   selectedFavorites = new ArrayList<Integer>();
+
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // let the adapter bind the name to the list
-     /*   View v = super.getView(position, convertView, parent);
-        // find the counter TextView so we can update it's value
-        TextView counterTv = (TextView) v.findViewById(R.id.value);
-        //get the data from the list for this row.
-        FavoriteModel obj = data.get(position);
-        //set the counter value for this row
-        counterTv.setText(String.valueOf(obj.value));
-        return v;
-*/
-
         // Get the data item for this position
         FavoriteModel fav = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -52,6 +46,29 @@ public class FavoriteAdapter extends ArrayAdapter<FavoriteModel>{
         tvName.setText(fav.getActivity());
         tvHome.setText(fav.getValue().toString());
         // Return the completed view to render on screen
+
+       /* CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox);
+
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    selectedFavorites.add(Integer.parseInt(tvHome.getText().toString()));
+                }else{
+                    selectedFavorites.remove(Integer.parseInt(tvHome.getText().toString()));
+                }
+
+            }
+        });*/
         return convertView;
+    }
+
+  /*  public ArrayList<Integer> getSelectedFavorites(){
+        return selectedFavorites;
+    }*/
+
+    public FavoriteModel getItem(int position){
+        return data.get(position);
     }
 }
