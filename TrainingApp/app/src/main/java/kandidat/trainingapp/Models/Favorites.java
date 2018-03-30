@@ -60,9 +60,9 @@ public class Favorites {
 
         Context context = getApplicationContext();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ref = db.getReference("users");
-        DatabaseReference myRef = ref.child(user.getUid()).child("favorites").child(key).push();
-        DatabaseReference parentRef = ref.child(user.getUid()).child("favorites");
+        ref = db.getReference("favorites");
+        DatabaseReference myRef = ref.child(user.getUid()).child(key).push();
+        DatabaseReference parentRef = ref.child("favorites");
 
 
         parentRef.addChildEventListener(new ChildEventListener() {
@@ -80,15 +80,17 @@ public class Favorites {
                     dataSnapshot.getRef().removeValue();
                 }
                 */
+                if(dataSnapshot.hasChild(user.getUid())){
+                    for(DataSnapshot ds : dataSnapshot.child(user.getUid()).getChildren()){
+                        Integer dsVal = (int) (long) ds.getValue();
+                        if(dsVal.equals(newValue))
+                            currentKey = ds.getKey();
+                        break;
+                    }
+                }
 
-           for(DataSnapshot ds : dataSnapshot.getChildren()){
-               Integer dsVal = (int) (long) ds.getValue();
-               if(dsVal.equals(newValue))
-                   currentKey = ds.getKey();
-                    break;
-           }
 
-               for(DataSnapshot ds : dataSnapshot.getChildren()){
+               for(DataSnapshot ds : dataSnapshot.child(user.getUid()).getChildren()){
                    // Integer dsVal = Integer.valueOf(ds.getValue().toString());
                     Integer dsVal = (int) (long) ds.getValue();
                     System.out.println(dsVal == newValue);

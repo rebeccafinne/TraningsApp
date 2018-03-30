@@ -61,8 +61,8 @@ public class FavoritesFragment extends Fragment {
         favoriteData = (FavoriteData) getActivity().getApplicationContext();
         db = FirebaseDatabase.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ref = db.getReference("users");
-        DatabaseReference myRef = ref.child(user.getUid()).child("favorites");
+        ref = db.getReference("favorites");
+        DatabaseReference myRef = ref.child(user.getUid());
 
         ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
 

@@ -23,13 +23,6 @@ public class UserInformation {
     private String email;
     private int points;
     private int negPoints;
-    private FavoriteData favoriteData;
-    private HashMap<String, String> favorites;
-    private FirebaseDatabase db;
-    private DatabaseReference ref, favRef;
-
-
-
 
 
     public UserInformation() {
@@ -42,43 +35,6 @@ public class UserInformation {
         this.points = 0;
         //Used to sort users from highetst points to lowest
         this.negPoints = points * -1;
-        //this.favorites = new HashMap<>();
-      /*  db = FirebaseDatabase.getInstance();
-        ref = db.getReference().child("users");
-        favRef = db.getReference().child("users");*/
-
-        //this.favoriteData = (FavoriteData) getApplicationContext();
-      /*  ref.orderByChild("points").equalTo(10).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                System.out.println(dataSnapshot.child("points").getValue());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-*/
-
-
-
-
 
     }
 
@@ -100,9 +56,7 @@ public class UserInformation {
 
     public int getNegPoints() {return negPoints;}
 
-    public HashMap<String, String> getFavorites(){
-        return this.favorites;
-    }
+
 
 
 }
