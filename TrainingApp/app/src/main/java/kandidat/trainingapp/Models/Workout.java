@@ -3,11 +3,14 @@ package kandidat.trainingapp.Models;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import kandidat.trainingapp.Models.BasicWorkout;
+import kandidat.trainingapp.Models.Exercise;
+
 /**
  * Created by Anna on 2018-03-13.
  */
 
-public class Workout {
+public class Workout extends BasicWorkout {
 
     //**********************************************************************************************
     //***************************** Variables ******************************************************
@@ -24,25 +27,22 @@ public class Workout {
 
     private String name;
     private LinkedHashMap<Exercise, ArrayList<Row>> exerciseList;
-    private int duration;
 
     //**********************************************************************************************
     //***************************** Constructors ***************************************************
     //**********************************************************************************************
     public Workout(){
-        this.name = "No Name";
+        super();
         exerciseList = new LinkedHashMap<Exercise, ArrayList<Row>>();
         unsavedWorkouts.add(this);
     }
-
     public Workout(String name){
-        this();
-        this.name = name;
+        super(name);
     }
-
     public Workout(Workout workout){
-        this(workout.getName());
+        super(workout.getName());
         this.exerciseList = new LinkedHashMap<>(workout.exerciseList);
+        // there already exist one with the same name -> not saved in any list.
     }
 
     //**********************************************************************************************
@@ -78,10 +78,6 @@ public class Workout {
     //**********************************************************************************************
     //***************************** Methods, exercises *********************************************
     //**********************************************************************************************
-
-    public ArrayList<Row> getRowsOfExercise(Exercise exercise){
-        return exerciseList.get(exercise);
-    }
     public Exercise getExercise(int i){
         ArrayList<Exercise> exercises = new ArrayList<>(exerciseList.keySet());
         return exercises.get(i);
@@ -91,12 +87,9 @@ public class Workout {
     }
 
 
-    public String getName(){
-        return name;
-    }
-    public void setName(String name){
-        this.name = name;
-    }
+    //**********************************************************************************************
+    //***************************** Methods, rows **************************************************
+    //**********************************************************************************************
 
     public void newRow(Exercise exercise){
         newRow(exercise, 0,0,0);
@@ -113,7 +106,7 @@ public class Workout {
     }
 
     //**********************************************************************************************
-    //***************************** Methods, editing rows ******************************************
+    //***************************** Methods, getting row-values ************************************
     //**********************************************************************************************
     public int getSets(Exercise exercise, int rownumber){
         return exerciseList.get(exercise).get(rownumber).getSets();
@@ -123,10 +116,6 @@ public class Workout {
     }
     public int getWeight(Exercise exercise, int rownumber){
         return exerciseList.get(exercise).get(rownumber).getWeight();
-    }
-
-    public void setSet(Exercise exercise, int rownbr, int value){
-        exerciseList.get(exercise).get(rownbr).setSets(value);
     }
 
     class Row{
@@ -173,9 +162,5 @@ public class Workout {
         public void setWeight(int i){
             weight = i;
         }
-    }
-
-    public void setDuration(int time){
-        duration = time;
     }
 }

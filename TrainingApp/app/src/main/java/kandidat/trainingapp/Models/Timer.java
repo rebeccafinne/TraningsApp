@@ -2,6 +2,7 @@ package kandidat.trainingapp.Models;
 
 import android.content.Context;
 
+import kandidat.trainingapp.Activities.CardioActivity;
 import kandidat.trainingapp.Activities.TrainingActivity;
 
 /**
@@ -59,7 +60,9 @@ public class Timer implements Runnable{
                 int minutes = (int) (since / MILLIS_TO_MINUTES) % 60;
                 int hours = (int) (since / MILLIS_TO_HOURS) % 24;
 
-                ((TrainingActivity) timerContext).updateTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+                if(timerContext instanceof TrainingActivity) {
+                    ((TrainingActivity) timerContext).updateTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+                }else ((CardioActivity) timerContext).updateTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
 
             }else{
                 timePaused = System.currentTimeMillis() - timeWhenPaused;
@@ -72,6 +75,8 @@ public class Timer implements Runnable{
             }
         }
         //When stoped running, reset text.
-        ((TrainingActivity) timerContext).updateTimerText("00:00:00"); //TODO något annat än att nollställa
+        if(timerContext instanceof TrainingActivity) {
+            ((TrainingActivity) timerContext).updateTimerText("00:00:00"); //TODO något annat än att nollställa
+        }else ((CardioActivity) timerContext).updateTimerText("00:00:00");
     }
 }
