@@ -101,6 +101,9 @@ public class AppMainActivity extends AppCompatActivity {
                            case "Account Settings":
                                settings(view);
                                break;
+                           case "Add New Favorite":
+                               addFavorite(view);
+                               break;
                        }
                         return true;
                     }
@@ -111,13 +114,13 @@ public class AppMainActivity extends AppCompatActivity {
         }); //closing the setOnClickListener method
 
 
-        addFavoritesButton = (ImageButton) toolbar.findViewById(R.id.add_favorites_button);
+      /*  addFavoritesButton = (ImageButton) toolbar.findViewById(R.id.add_favorites_button);
         addFavoritesButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 addFavorite(view);
             }
-        });
+        });*/
 
 
         toolText.setText("Workout");

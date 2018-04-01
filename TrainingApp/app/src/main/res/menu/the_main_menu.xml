@@ -5,6 +5,10 @@
     <item
         android:id="@+id/menu_account"
         android:title="@string/account_Setting" />
+
+    <item
+        android:id="@+id/menu_favorite"
+        android:title="@string/add_new_favorite" />
     <item
         android:id="@+id/menu_logout"
         android:title="@string/log_out" />

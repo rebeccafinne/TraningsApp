@@ -18,7 +18,7 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <ImageButton
+     <!--   <ImageButton
             android:id="@+id/add_favorites_button"
             android:layout_width="54dp"
             android:layout_height="54dp"
@@ -29,10 +29,21 @@
             android:maxHeight="?attr/actionBarSize"
             android:maxWidth="54dp"
             app:srcCompat="@drawable/plus_sign" />
+            -->
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            app:srcCompat="@color/colorPrimary"
+            android:maxHeight="?attr/actionBarSize"
+            android:maxWidth="54dp"/>
 
         <TextView
             android:id="@+id/toolbar_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
