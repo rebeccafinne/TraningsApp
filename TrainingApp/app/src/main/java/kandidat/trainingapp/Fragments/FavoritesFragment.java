@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import kandidat.trainingapp.Activities.AppMainActivity;
 import kandidat.trainingapp.Adapter.FavoriteAdapter;
@@ -84,11 +85,11 @@ public class FavoritesFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String busStops = "Walked bus stops";
-                Set<FavoriteModel> bus = new HashSet<>();
+                Set<FavoriteModel> bus = new TreeSet<>();
                 String stairs = "Walked flight of stairs";
-                Set<FavoriteModel> stairsList = new HashSet<>();
+                Set<FavoriteModel> stairsList = new TreeSet<>();
                 String stand = "Minutes standing up";
-                Set<FavoriteModel> standList = new HashSet<>();
+                Set<FavoriteModel> standList = new TreeSet<>();
 
                 for(DataSnapshot ds : dataSnapshot.child("BusStop").getChildren()){
                     Integer dsVal = (int) (long) ds.getValue();
