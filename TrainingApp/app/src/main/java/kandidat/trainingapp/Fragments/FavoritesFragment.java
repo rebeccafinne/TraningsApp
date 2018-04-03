@@ -43,8 +43,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class FavoritesFragment extends Fragment {
 
     private ListView listView;
-    private FavoriteData favoriteData;
-    private CheckBox checkBox;
+    private Context context;
 
 
     public static FavoritesFragment newInstance() {
@@ -57,6 +56,7 @@ public class FavoritesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getContext();
 
 
     }
@@ -67,9 +67,7 @@ public class FavoritesFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
         listView = (ListView) rootView.findViewById(R.id.favorite_list);
-        checkBox = (CheckBox) rootView.findViewById(R.id.checkBox);
 
-        favoriteData = (FavoriteData) getActivity().getApplicationContext();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference ref = db.getReference("favorites");
@@ -114,7 +112,7 @@ public class FavoritesFragment extends Fragment {
 
 
 
-                FavoriteAdapter mAdapter = new FavoriteAdapter(getContext(),
+                FavoriteAdapter mAdapter = new FavoriteAdapter(context,
                         R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
 
                 listView.setAdapter(mAdapter);
