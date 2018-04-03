@@ -63,8 +63,9 @@
             android:clickable="true"
             android:gravity="start"
             android:maxHeight="?attr/actionBarSize"
+            android:maxWidth="54dp"
             android:scaleType="fitStart"
-            android:src="@drawable/settings_small" />
+            android:src="@drawable/dot_menu" />
 
 
     </LinearLayout>

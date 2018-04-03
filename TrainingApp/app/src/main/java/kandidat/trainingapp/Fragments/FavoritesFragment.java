@@ -156,7 +156,7 @@ public class FavoritesFragment extends Fragment {
                 });
                 Context context = getApplicationContext();
 
-                CharSequence text = "New favorite added!";
+                CharSequence text = "Favorite complete registered!";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
