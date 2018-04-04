@@ -45,11 +45,9 @@ public class AppMainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView toolText;
-    private ImageButton settingsButton, addFavoritesButton;
+    private ImageButton settingsButton;
     private FirebaseAuth mAuth;
-    private FavoriteData favoriteData;
-    private FirebaseDatabase db;
-    private DatabaseReference ref;
+
 
 
 
@@ -57,28 +55,6 @@ public class AppMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_running);
         mAuth = FirebaseAuth.getInstance();
-
-
-
-        favoriteData = (FavoriteData) getApplicationContext();
-        db = FirebaseDatabase.getInstance();
-
-       // ref.child(mAuth.getUid()).child("favorites").setValue(favoriteData.getTotalFavorites());
-
-
-        //ref.child(mAuth.getUid()).child("favorites").push(favoriteData.getTotalFavorites());
-
-
-      /*  if(favoriteData == null){
-            favoriteData = new FavoriteData();
-        }*/
-      final FavoriteData favoriteData = (FavoriteData) getApplicationContext();
-        ref = db.getReference("users");
-
-
-
-
-
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
 
@@ -114,18 +90,11 @@ public class AppMainActivity extends AppCompatActivity {
         }); //closing the setOnClickListener method
 
 
-      /*  addFavoritesButton = (ImageButton) toolbar.findViewById(R.id.add_favorites_button);
-        addFavoritesButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                addFavorite(view);
-            }
-        });*/
+
 
 
         toolText.setText("Workout");
-        settingsButton.setImageResource(R.drawable.settings_small);
-        
+
         mBottomNav.setSelectedItemId(R.id.action_workout);
 
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

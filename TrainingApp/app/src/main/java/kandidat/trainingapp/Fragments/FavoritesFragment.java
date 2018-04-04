@@ -44,6 +44,7 @@ public class FavoritesFragment extends Fragment {
 
     private ListView listView;
     private Context context;
+    private View rootView;
 
 
     public static FavoritesFragment newInstance() {
@@ -64,9 +65,7 @@ public class FavoritesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
-        listView = (ListView) rootView.findViewById(R.id.favorite_list);
+
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -74,94 +73,107 @@ public class FavoritesFragment extends Fragment {
         DatabaseReference myRef = ref.child(user.getUid());
 
         DatabaseReference pointRef = db.getReference("users").child(user.getUid()).child("points");
-        DatabaseReference userRef = db.getReference("users");
+
+        // Inflate the layout for this fragment
+        rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
+        listView = (ListView) rootView.findViewById(R.id.favorite_list);
 
 
-        ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
+            ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
 
-        myRef.orderByChild("favorites").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String busStops = "Walked bus stops";
-                Set<FavoriteModel> bus = new TreeSet<>();
-                String stairs = "Walked flight of stairs";
-                Set<FavoriteModel> stairsList = new TreeSet<>();
-                String stand = "Minutes standing up";
-                Set<FavoriteModel> standList = new TreeSet<>();
+            myRef.orderByChild("favorites").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot ds : dataSnapshot.child("BusStop").getChildren()){
-                    Integer dsVal = (int) (long) ds.getValue();
-                    bus.add(new FavoriteModel(busStops, dsVal));
+
+
+                    String busStops = "Walked bus stops";
+                    Set<FavoriteModel> bus = new TreeSet<>();
+                    String stairs = "Walked flight of stairs";
+                    Set<FavoriteModel> stairsList = new TreeSet<>();
+                    String stand = "Minutes standing up";
+                    Set<FavoriteModel> standList = new TreeSet<>();
+
+                    for (DataSnapshot ds : dataSnapshot.child("BusStop").getChildren()) {
+                        Integer dsVal = (int) (long) ds.getValue();
+                        bus.add(new FavoriteModel(busStops, dsVal));
+
+                    }
+                    for (DataSnapshot ds : dataSnapshot.child("Stairs").getChildren()) {
+                        Integer dsVal = (int) (long) ds.getValue();
+                        stairsList.add(new FavoriteModel(stairs, dsVal));
+
+                    }
+                    for (DataSnapshot ds : dataSnapshot.child("standing").getChildren()) {
+                        Integer dsVal = (int) (long) ds.getValue();
+                        standList.add(new FavoriteModel(stand, dsVal));
+
+                    }
+
+                    allFavoriteItems.clear();
+                    allFavoriteItems.addAll(bus);
+                    allFavoriteItems.addAll(stairsList);
+                    allFavoriteItems.addAll(standList);
+
+
+                    FavoriteAdapter mAdapter = new FavoriteAdapter(context,
+                            R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
+
+                    listView.setAdapter(mAdapter);
+
+
+                    if(allFavoriteItems.isEmpty()){
+                        rootView = inflater.inflate(R.layout.fragment_empty_favorites, container, false);
+                    }
+
+
 
                 }
-                for(DataSnapshot ds : dataSnapshot.child("Stairs").getChildren()){
-                    Integer dsVal = (int) (long) ds.getValue();
-                    stairsList.add(new FavoriteModel(stairs, dsVal));
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
                 }
-                for(DataSnapshot ds : dataSnapshot.child("standing").getChildren()){
-                    Integer dsVal = (int) (long) ds.getValue();
-                    standList.add(new FavoriteModel(stand, dsVal));
-
-                }
-
-                allFavoriteItems.clear();
-                allFavoriteItems.addAll(bus);
-                allFavoriteItems.addAll(stairsList);
-                allFavoriteItems.addAll(standList);
+            });
 
 
 
-                FavoriteAdapter mAdapter = new FavoriteAdapter(context,
-                        R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Object item = adapterView.getItemAtPosition(i);
+                    FavoriteModel itemClicked = (FavoriteModel) item;
 
-                listView.setAdapter(mAdapter);
+                    pointRef.runTransaction(new Transaction.Handler() {
+                        @Override
+                        public Transaction.Result doTransaction(MutableData mutableData) {
+                            Integer currentData = mutableData.getValue(Integer.class);
+                            if (currentData == 0) {
+                                pointRef.setValue(itemClicked.getValue());
 
-
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Object item = adapterView.getItemAtPosition(i);
-                FavoriteModel itemClicked = (FavoriteModel) item;
-
-                pointRef.runTransaction(new Transaction.Handler() {
-                    @Override
-                    public Transaction.Result doTransaction(MutableData mutableData) {
-                        Integer currentData = mutableData.getValue(Integer.class);
-                        if(currentData == 0){
-                            pointRef.setValue(itemClicked.getValue());
-
-                        }else{
-                            currentData = currentData + itemClicked.getValue();
-                            pointRef.setValue(currentData);
+                            } else {
+                                currentData = currentData + itemClicked.getValue();
+                                pointRef.setValue(currentData);
+                            }
+                            return null;
                         }
-                        return null;
-                    }
 
-                    @Override
-                    public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
 
-                    }
-                });
-                Context context = getApplicationContext();
+                        }
+                    });
+                    Context context = getApplicationContext();
 
-                CharSequence text = "Favorite complete registered!";
-                int duration = Toast.LENGTH_SHORT;
+                    CharSequence text = "Favorite complete registered!";
+                    int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        });
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            });
+
+
 
 
 
