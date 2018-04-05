@@ -15,6 +15,7 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,9 +30,7 @@ public class MainActivity extends AppCompatActivity{
     private static final int RC_SIGN_IN = 100;
     EditText editEmail, editPassword;
     private FirebaseAuth mauth;
-    private android.support.v7.widget.Toolbar mToolbar;
 
-    //private  FirebaseAuth.AuthStateListener mAuthListener;
 
 
 
@@ -43,9 +42,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mauth = FirebaseAuth.getInstance();
-       // mToolbar = findViewById(R.id.main_toolbar);
-       // setSupportActionBar(mToolbar);
-      //  getSupportActionBar().setTitle("Better Together");
 
 
         findViewById(R.id.sign_button).setOnClickListener(new View.OnClickListener() {
@@ -92,7 +88,18 @@ public class MainActivity extends AppCompatActivity{
 
         // Successfully signed in
         if (resultCode == ResultCodes.OK) {
+            FirebaseDatabase db = FirebaseDatabase.getInstance();
+            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            DatabaseReference userRef = db.getReference("users").child(user.getUid());
 
+            //Create and add the user to database.
+            String UID = user.getUid();
+            String email = user.getEmail();
+            String displayName = user.getDisplayName();
+
+
+            UserInformation theUser = new UserInformation(UID,displayName,email);
+            userRef.setValue(theUser);
 
             startActivity(AppMainActivity.createIntent(this, response));
             finish();

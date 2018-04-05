@@ -73,6 +73,7 @@ public class FavoritesFragment extends Fragment {
         DatabaseReference myRef = ref.child(user.getUid());
 
         DatabaseReference pointRef = db.getReference("users").child(user.getUid()).child("points");
+        DatabaseReference negPointRef = db.getReference("users").child(user.getUid()).child("negPoints");
 
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
@@ -150,10 +151,12 @@ public class FavoritesFragment extends Fragment {
                             Integer currentData = mutableData.getValue(Integer.class);
                             if (currentData == 0) {
                                 pointRef.setValue(itemClicked.getValue());
+                                negPointRef.setValue(itemClicked.getValue()*-1);
 
                             } else {
                                 currentData = currentData + itemClicked.getValue();
                                 pointRef.setValue(currentData);
+                                negPointRef.setValue(currentData*-1);
                             }
                             return null;
                         }

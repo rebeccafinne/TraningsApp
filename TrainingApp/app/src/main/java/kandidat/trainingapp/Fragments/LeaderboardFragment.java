@@ -31,11 +31,9 @@ public class LeaderboardFragment extends Fragment {
     private FirebaseDatabase db;
     private DatabaseReference ref;
     private ListView leaderboardList;
-    private List<String> users;
-    private List<String> uids;
     private FirebaseAuth.AuthStateListener mauthListener;
     private FirebaseAuth mauth;
-    private RecyclerView rec;
+
 
     public static LeaderboardFragment newInstance() {
         LeaderboardFragment fragment = new LeaderboardFragment();
@@ -61,14 +59,10 @@ public class LeaderboardFragment extends Fragment {
         View theView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
-
-        users = new ArrayList<String>();
-
-
-
-
-        uids = new ArrayList<String>();
         leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
+
+
+
 
 
         mauth = FirebaseAuth.getInstance();
@@ -83,7 +77,7 @@ public class LeaderboardFragment extends Fragment {
                 getActivity(),
                 UserInformation.class,
                 R.layout.leaderboard_representation,
-                ref.child("users")
+                ref.child("users").orderByChild("negPoints")
         ) {
             TextView name;
             TextView points;
@@ -108,6 +102,7 @@ public class LeaderboardFragment extends Fragment {
 
             }
         };
+
         leaderboardList.setAdapter(fListAdapter);
 
 
