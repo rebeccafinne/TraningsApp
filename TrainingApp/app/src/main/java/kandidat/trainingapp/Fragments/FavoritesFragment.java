@@ -150,6 +150,7 @@ public class FavoritesFragment extends Fragment {
                     Object item = adapterView.getItemAtPosition(i);
                     FavoriteModel itemClicked = (FavoriteModel) item;
 
+
                     pointRef.runTransaction(new Transaction.Handler() {
                         @Override
                         public Transaction.Result doTransaction(MutableData mutableData) {
