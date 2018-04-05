@@ -7,13 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,17 +22,10 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import kandidat.trainingapp.Activities.AppMainActivity;
 import kandidat.trainingapp.Adapter.FavoriteAdapter;
-import kandidat.trainingapp.Models.Favorites;
-import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Models.FavoriteModel;
 import kandidat.trainingapp.R;
 
@@ -44,7 +36,7 @@ public class FavoritesFragment extends Fragment {
 
     private ListView listView;
     private Context context;
-    private View rootView;
+    private TextView emptyText;
 
 
     public static FavoritesFragment newInstance() {
@@ -66,6 +58,7 @@ public class FavoritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View rootView;
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -79,8 +72,13 @@ public class FavoritesFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
         listView = (ListView) rootView.findViewById(R.id.favorite_list);
 
+        LayoutInflater inflateheader = getLayoutInflater();
+        ViewGroup header = (ViewGroup)inflateheader.inflate(R.layout.layout_favorites_header, listView,false);
 
-            ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
+
+        listView.addHeaderView(header);
+
+        ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
 
             myRef.orderByChild("favorites").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -117,17 +115,24 @@ public class FavoritesFragment extends Fragment {
                     allFavoriteItems.addAll(standList);
 
 
+
+
                     FavoriteAdapter mAdapter = new FavoriteAdapter(context,
                             R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
-
-                    listView.setAdapter(mAdapter);
-
-
                     if(allFavoriteItems.isEmpty()){
-                        rootView = inflater.inflate(R.layout.fragment_empty_favorites, container, false);
+                        if(isAdded()) {
+                            emptyText = (TextView) header.findViewById(R.id.empty_favorites);
+                            emptyText.setText(getString(R.string.empty_favorites_string));
+                        }
+                    }else{
+                        if(isAdded()) {
+                            emptyText = (TextView) header.findViewById(R.id.empty_favorites);
+                            emptyText.setText(getString(R.string.explain_favorites));
+                        }
+
                     }
 
-
+                    listView.setAdapter(mAdapter);
 
                 }
 
@@ -144,6 +149,7 @@ public class FavoritesFragment extends Fragment {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Object item = adapterView.getItemAtPosition(i);
                     FavoriteModel itemClicked = (FavoriteModel) item;
+
 
                     pointRef.runTransaction(new Transaction.Handler() {
                         @Override

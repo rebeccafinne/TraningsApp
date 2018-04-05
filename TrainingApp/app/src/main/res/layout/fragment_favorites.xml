@@ -6,13 +6,17 @@
 
 
 
-    <ListView
-        android:id="@+id/favorite_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:choiceMode="multipleChoice"
-        android:divider="@color/colorPrimary"
-        android:dividerHeight="3dp" />
+
+        <ListView
+                android:id="@+id/favorite_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/colorPrimary"
+                android:dividerHeight="3dp"
+
+                android:layout_marginBottom="@dimen/navigation_bar_height"
+
+        />
 
 
 </FrameLayout>

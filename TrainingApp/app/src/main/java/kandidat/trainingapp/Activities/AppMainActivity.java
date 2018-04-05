@@ -20,20 +20,15 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Fragments.FavoritesFragment;
 import kandidat.trainingapp.Fragments.LeaderboardFragment;
 import kandidat.trainingapp.Fragments.ProfileFragment;
 import kandidat.trainingapp.R;
 import kandidat.trainingapp.Fragments.TrainingFragment;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by rebeccafinne on 2018-02-22.
@@ -41,9 +36,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class AppMainActivity extends AppCompatActivity {
 
-    private BottomNavigationView mBottomNav;
 
-    private Toolbar toolbar;
     private TextView toolText;
     private ImageButton settingsButton;
     private FirebaseAuth mAuth;
@@ -56,9 +49,9 @@ public class AppMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_app_running);
         mAuth = FirebaseAuth.getInstance();
 
-        mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
         toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
         settingsButton = (ImageButton) toolbar.findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(new View.OnClickListener() {

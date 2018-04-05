@@ -111,5 +111,5 @@
     <string name="display_name">Display Name</string>
     <string name="add_new_favorite">Add New Favorite</string>
     <string name="empty_favorites_string">You have no favorites yet, add favorites by pressing the menu in the right upper corner</string>
-
+    <string name="explain_favorites">Click on your favorite, when activity is done, to earn points</string>
 </resources>

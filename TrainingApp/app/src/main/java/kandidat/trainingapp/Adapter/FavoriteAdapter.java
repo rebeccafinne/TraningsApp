@@ -47,26 +47,11 @@ public class FavoriteAdapter extends ArrayAdapter<FavoriteModel>{
         tvHome.setText(fav.getValue().toString());
         // Return the completed view to render on screen
 
-       /* CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox);
 
-        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    selectedFavorites.add(Integer.parseInt(tvHome.getText().toString()));
-                }else{
-                    selectedFavorites.remove(Integer.parseInt(tvHome.getText().toString()));
-                }
-
-            }
-        });*/
         return convertView;
     }
 
-  /*  public ArrayList<Integer> getSelectedFavorites(){
-        return selectedFavorites;
-    }*/
+
 
     public FavoriteModel getItem(int position){
         return data.get(position);

@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".Repositories.FavoriteData"
         android:allowBackup="true"
         android:gravity="center"
         android:icon="@drawable/settings"
