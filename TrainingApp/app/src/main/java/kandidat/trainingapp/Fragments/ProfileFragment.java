@@ -2,6 +2,7 @@ package kandidat.trainingapp.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.TestLooperManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private TextView profileText;
-    private UserInformation usr;
+    private TextView pointsDisplay;
     private Button chartButton, statsButton, signOutButton;
 
 
@@ -41,10 +42,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
     }
 
     private void startMainIntent() {
@@ -58,6 +55,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        pointsDisplay = (TextView) rootView.findViewById(R.id.points_display);
         profileText = (TextView) rootView.findViewById(R.id.nameInProfile);
         chartButton = (Button) rootView.findViewById(R.id.chartButton);
         chartButton.setOnClickListener(this);
@@ -72,14 +70,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         }
         else {
-            createName(FirebaseDatabase.getInstance().getReference("users").child(mAuth.getUid()), mAuth);
+            createNameAndPoints(FirebaseDatabase.getInstance().getReference("users").child(mAuth.getUid()), mAuth);
         }
 
         return rootView;
     }
 
-
-    public void createName(DatabaseReference userRef, final FirebaseAuth mAuth){
+    public void createNameAndPoints(DatabaseReference userRef, final FirebaseAuth mAuth){
 
 
         userRef.addValueEventListener(new ValueEventListener() {
@@ -90,30 +87,24 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                      user = dataSnapshot.getValue(UserInformation.class);
                 }catch(Exception e){
                   user = new UserInformation();
-                 //    user = new UserInformation(dataSnapshot.getValue("userId"),dataSnapshot.getValue("displayName"),dataSnapshot.getValue("email"));
-
                 }
-
 
                 if(user.getDisplayName() == null){
                     profileText.setText("No user logged in");
                 }else{
                     String userDisplayCap = user.getDisplayName();
+                    int points =  user.getPoints();
                     profileText.setText(userDisplayCap);
+                    pointsDisplay.setText("You have collected " + points + " points!" );
                 }
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
                 System.out.println("The read failed: " + databaseError.getMessage());
-
-
             }
         });
-
-
     }
 
     @Override
@@ -128,7 +119,5 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
 
         startActivity(intent);
-
-
     }
 }
