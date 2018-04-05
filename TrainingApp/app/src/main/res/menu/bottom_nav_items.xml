@@ -4,13 +4,6 @@
     >
 
     <item
-        android:id="@+id/action_me"
-        android:enabled="true"
-        android:icon="@drawable/me_grey"
-        android:title="@string/me"
-        app:showAsAction="" />
-
-    <item
         android:id="@+id/action_workout"
         android:enabled="true"
         android:icon="@drawable/log_workout_grey"
@@ -29,6 +22,13 @@
         android:enabled="true"
         android:icon="@drawable/friends_grey"
         android:title="@string/leaderboard"
+        app:showAsAction="" />
+
+    <item
+        android:id="@+id/action_me"
+        android:enabled="true"
+        android:icon="@drawable/me_grey"
+        android:title="@string/me"
         app:showAsAction="" />
 
 </menu>
