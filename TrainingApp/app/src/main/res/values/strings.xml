@@ -100,6 +100,11 @@
     <string name="activityToAdd">Choose which acitivty you want to add</string>
     <string name="addGymFavorite">Gym</string>
 
+    <!-- How Challenging -->
+    <string name="easy">Easy</string>
+    <string name="medium">MEDIUM</string>
+    <string name="hard">HARD</string>
+
     <!-- Exercise names -->
     <string-array name="exercises">
         <item>Pull Ups</item>
@@ -111,5 +116,6 @@
     <string name="display_name">Display Name</string>
     <string name="add_new_favorite">Add New Favorite</string>
     <string name="empty_favorites_string">You have no favorites yet, add favorites by pressing the menu in the right upper corner</string>
+    <string name="how_challenging_was_it">How challenging was it?</string>
 
 </resources>
