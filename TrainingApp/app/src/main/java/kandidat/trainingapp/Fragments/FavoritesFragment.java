@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +46,7 @@ public class FavoritesFragment extends Fragment {
     private ListView listView;
     private Context context;
     private View rootView;
+    private TextView emptyText;
 
 
     public static FavoritesFragment newInstance() {
@@ -123,7 +125,11 @@ public class FavoritesFragment extends Fragment {
 
 
                     if(allFavoriteItems.isEmpty()){
-                        rootView = inflater.inflate(R.layout.fragment_empty_favorites, container, false);
+                        emptyText = (TextView) rootView.findViewById(R.id.empty_favorites);
+                        emptyText.setText(getString(R.string.empty_favorites_string));
+                    }else{
+                        emptyText = (TextView) rootView.findViewById(R.id.empty_favorites);
+                        emptyText.setText(null);
                     }
 
 

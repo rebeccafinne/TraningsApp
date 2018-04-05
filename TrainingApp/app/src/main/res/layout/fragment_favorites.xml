@@ -5,6 +5,15 @@
     tools:context="kandidat.trainingapp.Fragments.FavoritesFragment">
 
 
+    <TextView
+        android:id="@+id/empty_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+
+        />
 
     <ListView
         android:id="@+id/favorite_list"
