@@ -9,17 +9,13 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Models.Favorites;
 import kandidat.trainingapp.R;
 
 public class FavoriteTimeStandingActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private TextView toolText;
-    private Button saveButton;
+
     private Favorites favorites;
-    private FavoriteData favoriteData;
 
 
     @Override
@@ -27,10 +23,9 @@ public class FavoriteTimeStandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_time_standing);
 
-        favoriteData = (FavoriteData) getApplicationContext();
         favorites = new Favorites();
-        toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
-        toolText = (TextView) toolbar.findViewById(R.id.activity_text);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
+        TextView toolText = (TextView) toolbar.findViewById(R.id.activity_text);
         toolText.setText("Time standing");
 
         Spinner spinner = (Spinner) findViewById(R.id.stairs_spinner);
@@ -42,14 +37,13 @@ public class FavoriteTimeStandingActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        saveButton = (Button) findViewById(R.id.save_standing_button);
+        Button saveButton = (Button) findViewById(R.id.save_standing_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String newValueString = spinner.getSelectedItem().toString();
                 Integer newValueInteger = Integer.parseInt(newValueString);
-                if(favorites.addNewFavorite(newValueInteger, favoriteData.getStandingList(), "standing")){
-                    favoriteData.addStandingList(newValueInteger);
+                if(favorites.addNewFavorite(newValueInteger, "standing")){
                     finish();
                 }
             }

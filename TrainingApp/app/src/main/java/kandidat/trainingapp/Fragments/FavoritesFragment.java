@@ -7,14 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,17 +22,10 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import kandidat.trainingapp.Activities.AppMainActivity;
 import kandidat.trainingapp.Adapter.FavoriteAdapter;
-import kandidat.trainingapp.Models.Favorites;
-import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Models.FavoriteModel;
 import kandidat.trainingapp.R;
 
@@ -45,7 +36,6 @@ public class FavoritesFragment extends Fragment {
 
     private ListView listView;
     private Context context;
-    private View rootView;
     private TextView emptyText;
 
 
@@ -68,6 +58,7 @@ public class FavoritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View rootView;
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -140,14 +131,7 @@ public class FavoritesFragment extends Fragment {
 
                     }
 
-
-
                     listView.setAdapter(mAdapter);
-
-
-
-
-
 
                 }
 

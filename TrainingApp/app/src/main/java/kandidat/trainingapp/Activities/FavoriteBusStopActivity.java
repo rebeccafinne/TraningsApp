@@ -9,23 +9,13 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.firebase.auth.UserInfo;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import kandidat.trainingapp.Repositories.FavoriteData;
 import kandidat.trainingapp.Models.Favorites;
 import kandidat.trainingapp.R;
-import kandidat.trainingapp.Repositories.UserInformation;
 
 public class FavoriteBusStopActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
-    TextView toolText;
-    private Button saveBus;
     private Spinner spinner;
     private Favorites favorites;
-    FavoriteData favoriteData;
 
 
     @Override
@@ -33,12 +23,11 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_bus_stop);
 
-        favoriteData = (FavoriteData) getApplicationContext();
 
 
         favorites = new Favorites();
-        toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
-        toolText = (TextView) toolbar.findViewById(R.id.activity_text);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
+        TextView toolText = (TextView) toolbar.findViewById(R.id.activity_text);
         toolText.setText("Bus Stops");
 
          spinner = (Spinner) findViewById(R.id.bus_stop_spinner);
@@ -52,7 +41,7 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
 
-        saveBus = (Button) findViewById(R.id.save_bus_stop_button);
+        Button saveBus = (Button) findViewById(R.id.save_bus_stop_button);
         saveBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,8 +54,7 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
 
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-        if(favorites.addNewFavorite(newValueInteger, favoriteData.getBusList(), "BusStop")){
-            favoriteData.addBusList(newValueInteger);
+        if(favorites.addNewFavorite(newValueInteger, "BusStop")){
             finish();
         }
 
