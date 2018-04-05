@@ -23,6 +23,8 @@ import java.util.List;
 
 public class FavoriteData extends Application{
 
+    //Do not think this class is needed anymore
+
     private List<Integer> busList;
     private List<Integer> stairsList;
     private List<Integer> standingList;
@@ -39,21 +41,6 @@ public class FavoriteData extends Application{
         stairsList = new ArrayList<>();
         standingList = new ArrayList<>();
         totalFavorites = new HashMap<>();
-
-      /* final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        ref = db.getReference("users");
-        DatabaseReference myRef = ref.child(mAuth.getUid()).child("favorites").child("BusStop");
-
-*/
-
-
-
-
-     /*   final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        ref = db.getReference("users");
-        DatabaseReference myRef = ref.child(mAuth.getUid()).child("favorites");
-
-*/
 
     }
 
@@ -90,10 +77,4 @@ public class FavoriteData extends Application{
         this.totalFavorites.put(thing, value);
     }
 
-  /*  public void recreateFavoriteWords(){
-        HashSet<String> bus = new HashSet<>();
-        SharedPreferences settings = getSharedPreferences("favoriteBus", 0);
-        bus = (HashSet<String>) settings.getStringSet("favoriteBus", bus);
-        favoriteWordRepository.addSetToFavorites(set);
-    }*/
 }

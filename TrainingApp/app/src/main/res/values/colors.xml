@@ -11,11 +11,7 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBottomNavBar">#DCE0D9</color>
-
-
-
-
-
+    <color name="colorBlack">#000000</color>
 
 
 </resources>
