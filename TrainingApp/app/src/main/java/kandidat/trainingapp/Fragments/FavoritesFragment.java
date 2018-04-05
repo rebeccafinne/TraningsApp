@@ -86,7 +86,6 @@ public class FavoritesFragment extends Fragment {
 
         listView.addHeaderView(header);
 
-
         ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
 
             myRef.orderByChild("favorites").addValueEventListener(new ValueEventListener() {
@@ -129,11 +128,16 @@ public class FavoritesFragment extends Fragment {
                     FavoriteAdapter mAdapter = new FavoriteAdapter(context,
                             R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
                     if(allFavoriteItems.isEmpty()){
-                        emptyText = (TextView) header.findViewById(R.id.empty_favorites);
-                        emptyText.setText(getString(R.string.empty_favorites_string));
+                        if(isAdded()) {
+                            emptyText = (TextView) header.findViewById(R.id.empty_favorites);
+                            emptyText.setText(getString(R.string.empty_favorites_string));
+                        }
                     }else{
-                        emptyText = (TextView) header.findViewById(R.id.empty_favorites);
-                        emptyText.setText(getString(R.string.explain_favorites));
+                        if(isAdded()) {
+                            emptyText = (TextView) header.findViewById(R.id.empty_favorites);
+                            emptyText.setText(getString(R.string.explain_favorites));
+                        }
+
                     }
 
 
