@@ -80,8 +80,14 @@ public class FavoritesFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
         listView = (ListView) rootView.findViewById(R.id.favorite_list);
 
+        LayoutInflater inflateheader = getLayoutInflater();
+        ViewGroup header = (ViewGroup)inflateheader.inflate(R.layout.layout_favorites_header, listView,false);
 
-            ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
+
+        listView.addHeaderView(header);
+
+
+        ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
 
             myRef.orderByChild("favorites").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -118,19 +124,24 @@ public class FavoritesFragment extends Fragment {
                     allFavoriteItems.addAll(standList);
 
 
+
+
                     FavoriteAdapter mAdapter = new FavoriteAdapter(context,
                             R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
+                    if(allFavoriteItems.isEmpty()){
+                        emptyText = (TextView) header.findViewById(R.id.empty_favorites);
+                        emptyText.setText(getString(R.string.empty_favorites_string));
+                    }else{
+                        emptyText = (TextView) header.findViewById(R.id.empty_favorites);
+                        emptyText.setText(getString(R.string.explain_favorites));
+                    }
+
+
 
                     listView.setAdapter(mAdapter);
 
 
-                    if(allFavoriteItems.isEmpty()){
-                        emptyText = (TextView) rootView.findViewById(R.id.empty_favorites);
-                        emptyText.setText(getString(R.string.empty_favorites_string));
-                    }else{
-                        emptyText = (TextView) rootView.findViewById(R.id.empty_favorites);
-                        emptyText.setText(null);
-                    }
+
 
 
 
