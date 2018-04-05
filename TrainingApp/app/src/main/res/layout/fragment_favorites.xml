@@ -5,20 +5,18 @@
     tools:context="kandidat.trainingapp.Fragments.FavoritesFragment">
 
 
-   <!-- <include layout="@layout/layout_favorites_header"/> -->
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <ListView
                 android:id="@+id/favorite_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@color/colorPrimary"
-                android:dividerHeight="3dp" />
-    </RelativeLayout>
+                android:dividerHeight="3dp"
+
+                android:layout_marginBottom="@dimen/navigation_bar_height"
+
+        />
 
 
 </FrameLayout>
