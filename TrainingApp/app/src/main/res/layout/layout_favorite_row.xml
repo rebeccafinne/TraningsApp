@@ -20,12 +20,12 @@
             android:paddingLeft="10dp"
             android:paddingTop="20dp"
             android:layout_weight="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/authui_colorPrimary"
             android:textSize="24sp"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/value"/>
 
         <TextView
             android:id="@+id/value"
@@ -39,12 +39,14 @@
             android:paddingTop="20dp"
             android:textSize="24sp"
             android:layout_weight="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.029"
-             />
+            app:layout_constraintStart_toEndOf="@+id/activity_name"
+
+
+            />
 
 
     </LinearLayout>

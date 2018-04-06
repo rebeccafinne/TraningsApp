@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="26sp"
         android:textColor="@color/com_facebook_blue"
 
 
