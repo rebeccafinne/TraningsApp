@@ -12,6 +12,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
+
+import org.w3c.dom.Text;
 
 import kandidat.trainingapp.HowChallenging;
 import kandidat.trainingapp.Models.BasicWorkout;
@@ -50,6 +53,11 @@ public class CardioActivity extends AppCompatActivity {
 
         workout = new BasicWorkout();
         context = this;
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
+        TextView toolText = (TextView) toolbar.findViewById(R.id.activity_text);
+        toolText.setText("Cardio");
+        setSupportActionBar(toolbar);
+
 
         //******************************************************************************************
         //**************************For the timer **************************************************

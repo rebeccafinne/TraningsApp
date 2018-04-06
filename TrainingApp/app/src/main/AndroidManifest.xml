@@ -39,7 +39,7 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_cardio"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".Activities.StatsActivity"
             android:configChanges="orientation"
