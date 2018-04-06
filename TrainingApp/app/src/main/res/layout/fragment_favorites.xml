@@ -2,19 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="kandidat.trainingapp.Fragments.FavoritesFragment">
 
 
 
 
         <ListView
-                android:id="@+id/favorite_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@color/colorPrimary"
-                android:dividerHeight="3dp"
+            android:id="@+id/favorite_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
-                android:layout_marginBottom="@dimen/navigation_bar_height"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:layout_marginBottom="@dimen/navigation_bar_height"
 
         />
 
