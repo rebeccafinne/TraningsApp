@@ -10,6 +10,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -21,6 +22,8 @@ public class Favorites {
 
 
     private FirebaseDatabase db;
+    private CharSequence text = null;
+    private Integer val;
 
 
     public  Favorites(){
@@ -38,7 +41,8 @@ public class Favorites {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference ref = db.getReference("favorites");
         DatabaseReference myRef = ref.child(user.getUid()).child(key).push();
-        DatabaseReference parentRef = ref.child("favorites");
+        DatabaseReference parentRef = ref.child(user.getUid());
+
 
 
         parentRef.addChildEventListener(new ChildEventListener() {
@@ -48,23 +52,35 @@ public class Favorites {
                 String currentKey = null;
 
 
-                if(dataSnapshot.hasChild(user.getUid())){
-                    for(DataSnapshot ds : dataSnapshot.child(user.getUid()).getChildren()){
+                if(dataSnapshot.getKey().equals(key)) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Integer dsVal = (int) (long) ds.getValue();
-                        if(dsVal.equals(newValue))
+                        if (dsVal.equals(newValue)) {
                             currentKey = ds.getKey();
-                        break;
-                    }
-                }
-
-
-               for(DataSnapshot ds : dataSnapshot.child(user.getUid()).getChildren()){
-                    Integer dsVal = (int) (long) ds.getValue();
-                    if(dsVal.equals(newValue) && !currentKey.equals(ds.getKey())){
-                        dataSnapshot.getRef().child(ds.getKey()).removeValue();
-
+                            break;
+                        }
 
                     }
+
+
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        Integer dsVal = (int) (long) ds.getValue();
+                        if (dsVal.equals(newValue) && !currentKey.equals(ds.getKey())) {
+                            text = "Favorite already added!";
+
+                            dataSnapshot.getRef().child(ds.getKey()).removeValue();
+                        }
+                    }
+
+                    if(text == null){
+                        text = "New favorite added!";
+                    }
+
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
                 }
 
 
@@ -91,13 +107,13 @@ public class Favorites {
             }
         });
 
+
         myRef.setValue(newValue);
 
-        CharSequence text = "New favorite added!";
-        int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+
+
+
 
 
         return true;
