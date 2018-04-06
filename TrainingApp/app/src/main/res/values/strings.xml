@@ -77,6 +77,14 @@
     </string-array>
 
 
+    <!-- String array for spinner when adding daily favorites -->
+    <string-array name="type_of_daily">
+        <item>Bus Stops</item>
+        <item>Stairs</item>
+        <item>Standing up</item>
+    </string-array>
+
+
     <!-- String to GYM -->
     <string name="start_pause_timer">Start</string>
     <string name="stop_timer">Stop</string>
@@ -118,5 +126,7 @@
     <string name="empty_favorites_string">You have no favorites yet, add favorites by pressing the menu in the right upper corner</string>
     <string name="explain_favorites">Click on your favorite, when activity is done, to earn points</string>
     <string name="how_challenging_was_it">How challenging was it?</string>
+    <string name="which_daily_log">Which type of activity do you want to log?</string>
+    <string name="how_much_did_you_do">How much did you do?</string>
 
 </resources>

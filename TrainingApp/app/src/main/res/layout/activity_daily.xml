@@ -6,6 +6,75 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.Activities.DailyActivity">
 
-    <include layout="@layout/layout_activity_toolbar"/>
+    <include
+
+        layout="@layout/layout_activity_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/which_daily_log"
+            android:textSize="22sp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/choose_daily_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/how_many_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/how_much_did_you_do"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="100dp"
+            android:textSize="22sp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Spinner
+            android:id="@+id/how_many_spinner"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+
+
+            />
+
+        <Button
+            android:id="@+id/save_daily_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+
+            android:background="@color/colorButtonCharts"
+            android:text="@string/save"
+            android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
