@@ -27,6 +27,7 @@ import java.util.TreeSet;
 
 import kandidat.trainingapp.Adapter.FavoriteAdapter;
 import kandidat.trainingapp.Models.FavoriteModel;
+import kandidat.trainingapp.Models.Points;
 import kandidat.trainingapp.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -37,6 +38,7 @@ public class FavoritesFragment extends Fragment {
     private ListView listView;
     private Context context;
     private TextView emptyText;
+    private Points points;
 
 
     public static FavoritesFragment newInstance() {
@@ -59,6 +61,8 @@ public class FavoritesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView;
+
+        points = new Points();
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -149,9 +153,10 @@ public class FavoritesFragment extends Fragment {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Object item = adapterView.getItemAtPosition(i);
                     FavoriteModel itemClicked = (FavoriteModel) item;
+                    points.calcualtePoints(itemClicked.getValue());
 
 
-                    pointRef.runTransaction(new Transaction.Handler() {
+      /*              pointRef.runTransaction(new Transaction.Handler() {
                         @Override
                         public Transaction.Result doTransaction(MutableData mutableData) {
                             Integer currentData = mutableData.getValue(Integer.class);
@@ -171,7 +176,7 @@ public class FavoritesFragment extends Fragment {
                         public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
 
                         }
-                    });
+                    });*/
                     Context context = getApplicationContext();
 
                     CharSequence text = "Favorite complete registered!";

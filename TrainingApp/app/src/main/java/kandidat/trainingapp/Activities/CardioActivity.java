@@ -14,10 +14,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
+
 import org.w3c.dom.Text;
 
 import kandidat.trainingapp.HowChallenging;
 import kandidat.trainingapp.Models.BasicWorkout;
+import kandidat.trainingapp.Models.Points;
 import kandidat.trainingapp.Models.Timer;
 import kandidat.trainingapp.R;
 
@@ -32,6 +42,7 @@ public class CardioActivity extends AppCompatActivity {
     private final String TAG = "FB_TRAINING";
     private BasicWorkout workout;
 
+    private Points points;
     //**********************************************************************************************
     //******************************Timer and stuff for that****************************************
     //********************************************************************************************
@@ -51,6 +62,12 @@ public class CardioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cardio);
 
 
+       /* FirebaseDatabase db = FirebaseDatabase.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference pointRef = db.getReference("users").child(user.getUid()).child("points");
+        DatabaseReference negPointRef = db.getReference("users").child(user.getUid()).child("negPoints");*/
+
+        points = new Points();
         workout = new BasicWorkout();
         context = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
@@ -141,6 +158,31 @@ public class CardioActivity extends AppCompatActivity {
                             timerThread = null;
                             timer = null;
                         }
+
+                        points.calcualtePoints(workout.getPoints());
+
+
+               /*         pointRef.runTransaction(new Transaction.Handler() {
+                            @Override
+                            public Transaction.Result doTransaction(MutableData mutableData) {
+                                Integer currentData = mutableData.getValue(Integer.class);
+                                if (currentData == 0) {
+                                    pointRef.setValue(workout.getPoints());
+                                    negPointRef.setValue(workout.getPoints()*-1);
+
+                                } else {
+                                    currentData = currentData + workout.getPoints();
+                                    pointRef.setValue(currentData);
+                                    negPointRef.setValue(currentData*-1);
+                                }
+                                return null;
+                            }
+
+                            @Override
+                            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
+                            }
+                        });*/
 
                         Toast.makeText(getApplicationContext(), "You just earned " + workout.getPoints()
                                 + " points!", Toast.LENGTH_SHORT).show();
