@@ -162,6 +162,7 @@ public class CardioActivity extends AppCompatActivity {
                         points.calcualtePoints(workout.getPoints());
 
 
+
                /*         pointRef.runTransaction(new Transaction.Handler() {
                             @Override
                             public Transaction.Result doTransaction(MutableData mutableData) {
@@ -186,6 +187,8 @@ public class CardioActivity extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "You just earned " + workout.getPoints()
                                 + " points!", Toast.LENGTH_SHORT).show();
+
+                        finish();
                     }
                 });
 
