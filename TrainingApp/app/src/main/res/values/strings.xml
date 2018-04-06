@@ -112,4 +112,6 @@
     <string name="add_new_favorite">Add New Favorite</string>
     <string name="empty_favorites_string">You have no favorites yet, add favorites by pressing the menu in the right upper corner</string>
     <string name="explain_favorites">Click on your favorite, when activity is done, to earn points</string>
+    <string name="send_request">Send Friend Request</string>
+    <string name="decline">Decline Friend Request</string>
 </resources>
