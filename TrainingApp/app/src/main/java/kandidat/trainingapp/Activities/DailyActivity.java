@@ -16,9 +16,7 @@ import kandidat.trainingapp.R;
 
 public class DailyActivity extends AppCompatActivity {
 
-    private Button stairsButton, busButton, standingButton, saveButton;
     private Spinner spinnerType, spinnerHowMany;
-    private TextView howManyText;
     private Points points;
 
     @Override
@@ -75,7 +73,7 @@ public class DailyActivity extends AppCompatActivity {
         });
 
 
-        saveButton = (Button) findViewById(R.id.save_daily_button);
+        Button saveButton = (Button) findViewById(R.id.save_daily_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
