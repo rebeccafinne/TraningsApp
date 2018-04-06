@@ -10,6 +10,8 @@
         android:text=""
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/com_facebook_blue"
+
 
         />
 
