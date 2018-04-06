@@ -20,6 +20,7 @@ public class BasicWorkout {
     private String name;
     private int points;
     private Difficulty difficulty;
+    private String comment;
 
     final double easyFactor = 0.8;
     final double mediumFactor = 1;
@@ -36,6 +37,7 @@ public class BasicWorkout {
         duration = 0;
         points = 0;
         difficulty = Difficulty.MEDIUM;
+        comment = "";
     }
     public BasicWorkout(String name){
         this(name, 0);
@@ -49,6 +51,14 @@ public class BasicWorkout {
         this(dur);
         this.name = name;
     }
+    public BasicWorkout(String name, int dur, int points, Difficulty diff){
+        this(name, dur);
+        this.points = points;
+        this.difficulty = diff;
+    }
+    public BasicWorkout(BasicWorkout workout){
+        this(workout.getName(), workout.getDuration(), workout.getPoints(), workout.getDifficulty());
+    }
 
     //**********************************************************************************************
     //***************************** Get - Methods **************************************************
@@ -61,6 +71,10 @@ public class BasicWorkout {
         return duration;
     }
     public int getPoints(){ return points; }
+    public Difficulty getDifficulty(){
+        return difficulty;
+    }
+    public String getComment(){return comment; }
 
     //**********************************************************************************************
     //***************************** Set - Methods **************************************************
@@ -71,15 +85,19 @@ public class BasicWorkout {
     }
     public void setDuration(int time) {
         this.duration = time;
+        setPoints();
     }
     public void setPoints(){
         switch (difficulty){
             case EASY:
-                points = (int) (getDuration()*easyFactor);
+                points = (int) (getDuration() *easyFactor);
+                break;
             case MEDIUM:
-                points = (int) (getDuration()*easyFactor);
+                points = (int) (getDuration()*mediumFactor);
+                break;
             case HARD:
-                points = (int) (getDuration()*easyFactor);
+                points = (int) (getDuration()*hardFactor);
+                break;
         }
     }
     public void setPoints(int n){
@@ -94,9 +112,13 @@ public class BasicWorkout {
             case "easy":
                 setDifficulty(Difficulty.EASY);
         }
+        setPoints();
     }
     public void setDifficulty(Difficulty diff){
         this.difficulty = diff;
+    }
+    public void setComment(String comment){
+        this.comment = comment;
     }
 
     public enum Difficulty {

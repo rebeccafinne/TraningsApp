@@ -75,15 +75,13 @@ public class CardioActivity extends AppCompatActivity {
         btnTimerStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked stop" , Toast.LENGTH_SHORT).show();
-                if(timer != null){
-                    workout.setDuration(timer.stopTimer());
-                    timerThread.interrupt();
-                    timerThread = null;
-                    timer = null;
+
+                if(timer == null){
+                    Toast.makeText(getApplicationContext(), "No workout started", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
-                BasicWorkout.Difficulty difficulty;
+                if(timer != null) timer.pausTimer(); //Pause timer, should be able to go back.
 
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(CardioActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.activity_how_challenging, null);
@@ -91,13 +89,13 @@ public class CardioActivity extends AppCompatActivity {
                 CheckBox btnEasy = mView.findViewById(R.id.btn_easy);
                 CheckBox btnMed = mView.findViewById(R.id.btn_med);
                 CheckBox btnHard = mView.findViewById(R.id.btn_hard);
-                TextView tvHow = mView.findViewById(R.id.howChallenging);
-
+                Button btnDone = mView.findViewById(R.id.btn_done);
                 btnEasy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (btnEasy.isChecked()){
                             btnMed.setChecked(false); btnHard.setChecked(false);
+                            workout.setDifficulty(BasicWorkout.Difficulty.EASY);
                         }
                     }
                 });
@@ -106,6 +104,7 @@ public class CardioActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         if (btnMed.isChecked()){
                             btnEasy.setChecked(false); btnHard.setChecked(false);
+                            workout.setDifficulty(BasicWorkout.Difficulty.MEDIUM);
                         }
                     }
                 });
@@ -114,6 +113,7 @@ public class CardioActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         if (btnHard.isChecked()){
                             btnEasy.setChecked(false); btnMed.setChecked(false);
+                            workout.setDifficulty(BasicWorkout.Difficulty.HARD);
                         }
                     }
                 });
@@ -121,6 +121,23 @@ public class CardioActivity extends AppCompatActivity {
                 mBuilder.setView(mView);
                 final AlertDialog howHardDialog = mBuilder.create();
                 howHardDialog.show();
+
+                btnDone.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        howHardDialog.dismiss();
+
+                        if(timer != null){
+                            workout.setDuration(timer.stopTimer());
+                            timerThread.interrupt();
+                            timerThread = null;
+                            timer = null;
+                        }
+
+                        Toast.makeText(getApplicationContext(), "You just earned " + workout.getPoints()
+                                + " points!", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         });
@@ -135,11 +152,6 @@ public class CardioActivity extends AppCompatActivity {
         });
 
 
-    }
-
-    public void openHowChallenging(){
-        Intent intent = new Intent(this, HowChallenging.class);
-        startActivity(intent);
     }
 
     public void updateTimerText(final String time){

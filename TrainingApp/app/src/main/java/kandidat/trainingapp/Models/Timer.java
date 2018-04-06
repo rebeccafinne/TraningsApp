@@ -46,8 +46,13 @@ public class Timer implements Runnable{
     }
 
     public int stopTimer(){
+        if(paused == true){
+            totalTimePaused += timePaused;
+        }
+        long since = System.currentTimeMillis() - timerStartTime - totalTimePaused;
+        int time = (int) (since / 1000) % 60;
         isRunning = false;
-        return (int) (System.currentTimeMillis() - timerStartTime - totalTimePaused);
+        return time;
     }
 
     @Override
