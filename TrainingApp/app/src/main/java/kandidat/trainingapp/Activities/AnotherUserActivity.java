@@ -57,11 +57,6 @@ public class AnotherUserActivity extends AppCompatActivity {
         declineRequest = (Button) findViewById(R.id.declineRequestBtn);
         String userId = getIntent().getStringExtra("userId");
 
-        /*
-        * 0 = not friends (This will be 0 everytime I open a new profile)
-        */
-
-
 
         //Hide decline button
         declineRequest.setVisibility(View.GONE);
@@ -91,72 +86,43 @@ public class AnotherUserActivity extends AppCompatActivity {
 
             }
         });
-        friendsRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(currentUser.getUid()).hasChild(userId)){
-                    friendRequest.setBackgroundColor(Color.RED);
-                    friendRequest.setText("Remove Friend");
-                    declineRequest.setVisibility(View.GONE);
-                    currentFriendState = 3;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         requestRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.child(userId).hasChild("friend state")){
+                if(!dataSnapshot.child(currentUser.getUid()).child(userId).hasChild("friend state")){
+                    friendRequest.setBackgroundColor(Color.GREEN);
                     currentFriendState = 0;
                 }else{
-                    currentFriendState = dataSnapshot.child(userId).child("friend state").getValue(Integer.class);
+                    currentFriendState = dataSnapshot.child(currentUser.getUid()).child(userId).child("friend state").getValue(Integer.class);
                     switch(currentFriendState){
                         //Not friends
                         case 0:
+                            declineRequest.setVisibility(View.GONE);
                             friendRequest.setText("Send Friend Request");
                             friendRequest.setBackgroundColor(Color.GREEN);
+                            friendRequest.setEnabled(true);
                             break;
                         // Friend Request Pending
                         case 1:
+                            declineRequest.setVisibility(View.GONE);
                             friendRequest.setText("Cancel The Request");
                             friendRequest.setBackgroundColor(Color.RED);
+                            friendRequest.setEnabled(true);
                              break;
                         // Friend Request Received
                         case 2:
-                            friendRequest.setText("Accept Friend Request");
                             declineRequest.setVisibility(View.VISIBLE);
+                            friendRequest.setText("Accept Friend Request");
                             friendRequest.setBackgroundColor(Color.GREEN);
+                            friendRequest.setEnabled(true);
                             break;
                         //Friends
                         case 3:
+                            declineRequest.setVisibility(View.GONE);
                             friendRequest.setBackgroundColor(Color.RED);
                             friendRequest.setText("Remove Friend");
-                            declineRequest.setVisibility(View.GONE);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        requestRef.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(userId)){
-                    String requestType = dataSnapshot.child(userId).child("request").getValue().toString();
-                    if(requestType.equals("request received")){
-                        //This means that a friend request has been received
-                        requestRef.child(userId).child("friend state").setValue(2);
-                    }else if(requestType.equals("request sent")){
-                        requestRef.child(userId).child("friend state").setValue(1);
+                            friendRequest.setEnabled(true);
                     }
                 }
             }
@@ -175,30 +141,28 @@ public class AnotherUserActivity extends AppCompatActivity {
 
                 // Users are not friends
                 if(currentFriendState == 0){
-
-                    requestRef.child(currentUser.getUid()).child(userId).child("request")
-                            .setValue("request sent").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    requestRef.child(currentUser.getUid()).child(userId).child("friend state").setValue(1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                          if(task.isSuccessful()){
-                              requestRef.child(userId).child("friend state").setValue(1);
-                              requestRef.child(userId).child(currentUser.getUid()).child("request")
-                                      .setValue("request received").addOnSuccessListener(new OnSuccessListener<Void>() {
-                                  @Override
-                                  public void onSuccess(Void aVoid) {
-                                       friendRequest.setEnabled(true);
-                                  }
-                              });
-                          }else{
-                              Toast.makeText(AnotherUserActivity.this,
-                                      "The request wasn't sent",Toast.LENGTH_LONG).show();
-                          }
+                            if(task.isSuccessful()){
+                                requestRef.child(userId).child(currentUser.getUid()).child("friend state").setValue(2).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(AnotherUserActivity.this,
+                                                "The request wasn't sent properly",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }else{
+                                Toast.makeText(AnotherUserActivity.this,
+                                        "The request wasn't sent",Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
+
+
                 }
                 // This means that a friend request is pending
                 if(currentFriendState == 1){
-                    friendRequest.setEnabled(false);
                     requestRef.child(currentUser.getUid()).child(userId).removeValue()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -209,8 +173,23 @@ public class AnotherUserActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if(task.isSuccessful()){
-                                                            requestRef.child(userId).child("friend state").setValue(0);
-                                                            friendRequest.setEnabled(true);
+                                                            requestRef.child(userId).child(currentUser.getUid()).child("friend state").setValue(0)
+                                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                        @Override
+                                                                        public void onSuccess(Void aVoid) {
+                                                                            requestRef.child(currentUser.getUid()).child(userId).child("friend state")
+                                                                                    .setValue(0).addOnFailureListener(new OnFailureListener() {
+                                                                                @Override
+                                                                                public void onFailure(@NonNull Exception e) {
+                                                                                    Toast.makeText(AnotherUserActivity.this,
+                                                                                            "Friend State wasn't set properly",
+                                                                                            Toast.LENGTH_LONG).show();
+                                                                                }
+                                                                            });
+
+                                                                        }
+                                                                    });
+
 
                                                         }else{
                                                             Toast.makeText(AnotherUserActivity.this,"Friend Request wasn't canceled properly.",
@@ -229,40 +208,34 @@ public class AnotherUserActivity extends AppCompatActivity {
                 if(currentFriendState == 2){
                     //Currently set the value of friend to when they accepted the friend request
                     final String theCurrentDate = DateFormat.getDateTimeInstance().format(new Date());
-
-                    requestRef.child(userId).child(currentUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    friendsRef.child(currentUser.getUid()).child(userId).setValue(theCurrentDate).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onSuccess(Void aVoid) {
-                            requestRef.child(currentUser.getUid()).child(userId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    requestRef.child(currentUser.getUid()).child("friend state").removeValue();
-                                    requestRef.child(userId).child("friend state").removeValue();
-                                    friendsRef.child(currentUser.getUid()).child(userId).setValue(theCurrentDate)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if(task.isSuccessful()){
-                                                        friendsRef.child(userId).child(currentUser.getUid()).setValue(theCurrentDate)
-                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                                        if(task.isSuccessful()){
-                                                                            friendRequest.setEnabled(true);
-
-
-
-                                                                        }else{ Toast.makeText(AnotherUserActivity.this,"Friend Request wasn't accepted properly.",
-                                                                                Toast.LENGTH_LONG).show();}
-                                                                    }
-                                                                });
-                                                    }else{ Toast.makeText(AnotherUserActivity.this,"Friend Request wasn't accepted properly.",
-                                                            Toast.LENGTH_LONG).show();
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                friendsRef.child(userId).child(currentUser.getUid()).setValue(theCurrentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        requestRef.child(currentUser.getUid()).child(userId)
+                                                .child("friend state").setValue(3).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                requestRef.child(userId).child(currentUser.getUid())
+                                                        .child("friend state").setValue(3).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(AnotherUserActivity.this,
+                                                                "Friend State wasn't set properly",
+                                                                Toast.LENGTH_LONG).show();
                                                     }
-                                                }
-                                            });
-                                }
-                            });
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }else{
+                                Toast.makeText(AnotherUserActivity.this,"Friend Request wasn't accepted properly.",
+                                        Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
 
@@ -280,9 +253,24 @@ public class AnotherUserActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if(task.isSuccessful()){
-                                                            requestRef.child(userId).child("friend state").setValue(0);
-                                                            requestRef.child(currentUser.getUid()).child("friend state").setValue(0);
-                                                            friendRequest.setEnabled(true);
+                                                            requestRef.child(userId).child(currentUser.getUid()).child("friend state").setValue(0)
+                                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                        @Override
+                                                                        public void onSuccess(Void aVoid) {
+                                                                            requestRef.child(currentUser.getUid()).child(userId)
+                                                                                    .child("friend state").setValue(0)
+                                                                                    .addOnFailureListener(new OnFailureListener() {
+                                                                                @Override
+                                                                                public void onFailure(@NonNull Exception e) {
+                                                                                    Toast.makeText(AnotherUserActivity.this,
+                                                                                            "Friend State wasn't set properly",
+                                                                                            Toast.LENGTH_LONG).show();
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    });
+
+
 
                                                         }else{
                                                             Toast.makeText(AnotherUserActivity.this,"Friend wasnt removed properly.",
@@ -296,6 +284,25 @@ public class AnotherUserActivity extends AppCompatActivity {
                                 }
                             });
                 }
+            }
+        });
+
+        declineRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestRef.child(userId).child(currentUser.getUid()).child("friend state").setValue(0).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        requestRef.child(currentUser.getUid()).child(userId).child("friend state").setValue(0).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AnotherUserActivity.this,
+                                        "Friend State wasn't set properly",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
             }
         });
 
