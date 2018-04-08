@@ -71,6 +71,7 @@ public class AnotherUserActivity extends AppCompatActivity {
         friendsRef = db.getReference().child("friends");
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
         anotherUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -79,6 +80,13 @@ public class AnotherUserActivity extends AppCompatActivity {
                 toolText.setText(theUsersName + "'s Profile");
                 textName.setText(theUsersName);
                 textPoints.setText("Has collected " + points +" points");
+
+                if(currentUser.getUid().equals(userId)){
+                    friendRequest.setVisibility(View.GONE);
+                    declineRequest.setVisibility(View.GONE);
+                    toolText.setText("me");
+                    textPoints.setText("You have collected " + points +" points");
+                }
             }
 
             @Override
