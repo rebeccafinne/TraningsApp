@@ -16,7 +16,7 @@ tools:showIn="@layout/activity_another_user">
     android:orientation="vertical">
     <include layout="@layout/layout_activity_toolbar"/>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePicture"
         android:layout_width="match_parent"
         android:layout_height="130dp"
@@ -28,8 +28,16 @@ tools:showIn="@layout/activity_another_user">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text=""
+        android:text="@string/display_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/displayPoints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/points"
+        android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -38,10 +46,10 @@ tools:showIn="@layout/activity_another_user">
         android:layout_marginBottom="8dp"
         android:layout_marginTop="80dp"
 
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <Button
-            android:id="@+id/addUserButton"
+            android:id="@+id/sendRequestBtn"
             android:layout_width="156dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -49,7 +57,7 @@ tools:showIn="@layout/activity_another_user">
             android:layout_marginRight="80dp"
             android:layout_weight="1"
             android:background="@color/colorButtonCharts"
-            android:text="@string/group_invite" />
+            android:text="@string/send_request" />
 
     </LinearLayout>
 
@@ -61,6 +69,13 @@ tools:showIn="@layout/activity_another_user">
         android:layout_gravity="center"
         android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/declineRequestBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/errorColor"
+            android:text="@string/decline" />
     </LinearLayout>
 
     <LinearLayout

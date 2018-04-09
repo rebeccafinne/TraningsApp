@@ -129,4 +129,6 @@
     <string name="which_daily_log">Which type of activity do you want to log?</string>
     <string name="how_much_did_you_do">How much did you do?</string>
 
+    <string name="send_request">Send Friend Request</string>
+    <string name="decline">Decline Friend Request</string>
 </resources>
