@@ -16,8 +16,11 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,13 +95,30 @@ public class MainActivity extends AppCompatActivity{
             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             DatabaseReference userRef = db.getReference("users").child(user.getUid());
 
+        //    DatabaseReference ref = db.getReference("users").child("points");
+
             //Create and add the user to database.
             String UID = user.getUid();
             String email = user.getEmail();
             String displayName = user.getDisplayName();
+            final int[] points = new int[1];
+
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    points[0] = (int) dataSnapshot.child("points").getValue();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+           // String points = user.getP
 
 
-            UserInformation theUser = new UserInformation(UID,displayName,email);
+
+            UserInformation theUser = new UserInformation(UID,displayName,email, points[0]);
             userRef.setValue(theUser);
 
             startActivity(AppMainActivity.createIntent(this, response));

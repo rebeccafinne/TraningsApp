@@ -28,8 +28,6 @@ public class Points {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference ref = db.getReference("users");
 
-
-
         pointRef = ref.child(user.getUid());
         negPointRef = ref.child(user.getUid()).child("negPoints");
 

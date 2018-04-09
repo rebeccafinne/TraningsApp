@@ -123,7 +123,7 @@ public class CreateActivity extends AppCompatActivity{
     public void addUsertoDatabase(DatabaseReference mrefUser, FirebaseAuth mAuth){
         //Sets a unique id to the user that gets added
         String userId = mAuth.getCurrentUser().getUid();
-        UserInformation theUser = new UserInformation(userId,editUsername.getText().toString().trim(),editEmail.getText().toString().trim());
+        UserInformation theUser = new UserInformation(userId,editUsername.getText().toString().trim(),editEmail.getText().toString().trim(), 0);
         mrefUser.child(userId).setValue(theUser);
     }
 

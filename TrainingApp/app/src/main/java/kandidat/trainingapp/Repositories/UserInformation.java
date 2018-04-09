@@ -28,11 +28,11 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(String userId, String displayName, String email){
+    public UserInformation(String userId, String displayName, String email, int points){
         this.userId = userId;
         this.displayName = displayName;
         this.email = email;
-        this.points = 0;
+        this.points = points;
         //Used to sort users from highetst points to lowest
         this.negPoints = points * -1;
 
