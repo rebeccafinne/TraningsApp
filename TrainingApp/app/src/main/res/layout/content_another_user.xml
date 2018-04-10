@@ -9,12 +9,16 @@ tools:showIn="@layout/activity_another_user">
 
     <!-- TODO: Update blank fragment layout -->
 
+    <include layout="@layout/layout_fragment_toolbar"/>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <include layout="@layout/layout_activity_toolbar"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize">
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePicture"

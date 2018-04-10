@@ -21,8 +21,8 @@ public class AddFavoritesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_favorites);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
-        toolText = (TextView) toolbar.findViewById(R.id.activity_text);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
+        toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
         toolText.setText("Add Favorite Workouts");
 
         stairsButton = (Button) findViewById(R.id.add_stairs);

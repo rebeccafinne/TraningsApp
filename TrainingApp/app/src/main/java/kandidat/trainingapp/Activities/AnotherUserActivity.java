@@ -34,7 +34,6 @@ import kandidat.trainingapp.Repositories.UserInformation;
 
 public class AnotherUserActivity extends AppCompatActivity {
     private TextView textName,textPoints,toolText;
-    private Toolbar toolbar;
     private Button friendRequest,declineRequest;
     private int currentFriendState;
     private String friendDisplayName,friendEmail;
@@ -53,13 +52,15 @@ public class AnotherUserActivity extends AppCompatActivity {
         * ---------------Instantiate widgets-----------
         *----------------------------------------------
         * ---------------------------------------------*/
-        toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
-        toolText = (TextView) toolbar.findViewById(R.id.activity_text);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
+        toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
+
         textName = (TextView) findViewById(R.id.theDisplayName);
         textPoints = (TextView) findViewById(R.id.displayPoints);
         friendRequest = (Button) findViewById(R.id.sendRequestBtn);
         declineRequest = (Button) findViewById(R.id.declineRequestBtn);
         String userId = getIntent().getStringExtra("userId");
+
 
 
         //Hide decline button
