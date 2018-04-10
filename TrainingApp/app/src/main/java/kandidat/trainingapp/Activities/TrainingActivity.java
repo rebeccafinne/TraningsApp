@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,7 +19,9 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.IdpResponse;
 
+import kandidat.trainingapp.Models.BasicWorkout;
 import kandidat.trainingapp.Models.Exercise;
+import kandidat.trainingapp.Models.Points;
 import kandidat.trainingapp.Models.Timer;
 import kandidat.trainingapp.Models.Workout;
 import kandidat.trainingapp.R;
@@ -38,7 +41,7 @@ public class TrainingActivity extends AppCompatActivity {
     private Button btnTimerStart;
     private Button btnTimerStop;
     private Button btnTimerPaus;
-
+    private Points points;
     private Timer timer;
     private Thread timerThread;
 
@@ -51,12 +54,13 @@ public class TrainingActivity extends AppCompatActivity {
     private Button btnDone;
     private Exercise currentExercise; //used when editing one exercise.
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
         workout = new Workout();
-
+        points = new Points();
         context = this;
 
         //******************************************************************************************
@@ -84,15 +88,77 @@ public class TrainingActivity extends AppCompatActivity {
         btnTimerStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked stop" , Toast.LENGTH_SHORT).show();
-                if(timer != null){
-                    workout.setDuration(timer.stopTimer());
-                    timerThread.interrupt();
-                    timerThread = null;
-                    timer = null;
+
+                if(timer == null){
+                    Toast.makeText(getApplicationContext(), "No workout started", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                if(timer != null) timer.pausTimer(); //Pause timer, should be able to go back.
+
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(TrainingActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.activity_how_challenging, null);
+
+                CheckBox btnEasy = mView.findViewById(R.id.btn_easy);
+                CheckBox btnMed = mView.findViewById(R.id.btn_med);
+                CheckBox btnHard = mView.findViewById(R.id.btn_hard);
+                Button btnDone = mView.findViewById(R.id.btn_done);
+                btnEasy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (btnEasy.isChecked()){
+                            btnMed.setChecked(false); btnHard.setChecked(false);
+                            workout.setDifficulty(BasicWorkout.Difficulty.EASY);
+                        }
+                    }
+                });
+                btnMed.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (btnMed.isChecked()){
+                            btnEasy.setChecked(false); btnHard.setChecked(false);
+                            workout.setDifficulty(BasicWorkout.Difficulty.MEDIUM);
+                        }
+                    }
+                });
+                btnHard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (btnHard.isChecked()){
+                            btnEasy.setChecked(false); btnMed.setChecked(false);
+                            workout.setDifficulty(BasicWorkout.Difficulty.HARD);
+                        }
+                    }
+                });
+
+                mBuilder.setView(mView);
+                final AlertDialog howHardDialog = mBuilder.create();
+                howHardDialog.show();
+
+                btnDone.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        howHardDialog.dismiss();
+
+                        if(timer != null){
+                            workout.setDuration(timer.stopTimer());
+                            timerThread.interrupt();
+                            timerThread = null;
+                            timer = null;
+                        }
+
+                        points.calcualtePoints(workout.getPoints());
+
+                        Toast.makeText(getApplicationContext(), "You just earned " + workout.getPoints()
+                                + " points!", Toast.LENGTH_SHORT).show();
+
+                        finish();
+                    }
+                });
+
             }
         });
+
 
         btnTimerPaus.setOnClickListener(new View.OnClickListener() {
             @Override
