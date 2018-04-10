@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.ui.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,12 +30,15 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import kandidat.trainingapp.R;
+import kandidat.trainingapp.Repositories.UserInformation;
 
 public class AnotherUserActivity extends AppCompatActivity {
     private TextView textName,textPoints,toolText;
     private Toolbar toolbar;
     private Button friendRequest,declineRequest;
     private int currentFriendState;
+    private String friendDisplayName,friendEmail;
+
 
     //-------------- Database ---------------
     private DatabaseReference anotherUserRef,requestRef,friendsRef;
@@ -75,10 +79,11 @@ public class AnotherUserActivity extends AppCompatActivity {
         anotherUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String theUsersName = dataSnapshot.child("displayName").getValue().toString();
+               friendDisplayName = dataSnapshot.child("displayName").getValue().toString();
+               friendEmail = dataSnapshot.child("email").getValue().toString();
                 String points = dataSnapshot.child("points").getValue().toString();
-                toolText.setText(theUsersName + "'s Profile");
-                textName.setText(theUsersName);
+                toolText.setText(friendDisplayName + "'s Profile");
+                textName.setText(friendDisplayName);
                 textPoints.setText("Has collected " + points +" points");
 
                 if(currentUser.getUid().equals(userId)){
@@ -215,12 +220,13 @@ public class AnotherUserActivity extends AppCompatActivity {
                 //This means that user has gotten a friend request
                 if(currentFriendState == 2){
                     //Currently set the value of friend to when they accepted the friend request
-                    final String theCurrentDate = DateFormat.getDateTimeInstance().format(new Date());
-                    friendsRef.child(currentUser.getUid()).child(userId).setValue(theCurrentDate).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    UserInformation friendAdded = new UserInformation(userId,friendDisplayName,friendEmail);
+                    UserInformation theCurrentUser = new UserInformation(currentUser.getUid(),currentUser.getDisplayName(),currentUser.getEmail());
+                    friendsRef.child(currentUser.getUid()).child(userId).setValue(friendAdded).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                friendsRef.child(userId).child(currentUser.getUid()).setValue(theCurrentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                friendsRef.child(userId).child(currentUser.getUid()).setValue(theCurrentUser).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         requestRef.child(currentUser.getUid()).child(userId)

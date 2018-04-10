@@ -48,7 +48,6 @@ dependencies {
     compile 'com.android.support:design:26.1.0' //For bottom navigation bar
 
 
-
 }
 
 apply plugin: 'com.google.gms.google-services'

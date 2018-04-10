@@ -28,7 +28,7 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(String userId, String displayName, String email, int points){
+    public UserInformation(String userId, String displayName, String email){
         this.userId = userId;
         this.displayName = displayName;
         this.email = email;

@@ -93,20 +93,24 @@ public class MainActivity extends AppCompatActivity{
         if (resultCode == ResultCodes.OK) {
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            DatabaseReference userRef = db.getReference("users").child(user.getUid());
+            DatabaseReference userRef = db.getReference("users");
+            DatabaseReference putUserRef= db.getReference("users").child(user.getUid());
 
-        //    DatabaseReference ref = db.getReference("users").child("points");
-
-            //Create and add the user to database.
-            String UID = user.getUid();
-            String email = user.getEmail();
-            String displayName = user.getDisplayName();
-            final int[] points = new int[1];
-
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            userRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    points[0] = (int) dataSnapshot.child("points").getValue();
+                    if(dataSnapshot.hasChild(user.getUid())){
+
+                    }else{
+                        //Create and add the user to database.
+                        String UID = user.getUid();
+                        String email = user.getEmail();
+                        String displayName = user.getDisplayName();
+
+
+                        UserInformation theUser = new UserInformation(UID,displayName,email);
+                        putUserRef.setValue(theUser);
+                    }
                 }
 
                 @Override
@@ -114,12 +118,6 @@ public class MainActivity extends AppCompatActivity{
 
                 }
             });
-           // String points = user.getP
-
-
-
-            UserInformation theUser = new UserInformation(UID,displayName,email, points[0]);
-            userRef.setValue(theUser);
 
             startActivity(AppMainActivity.createIntent(this, response));
             finish();

@@ -1,14 +1,12 @@
 package kandidat.trainingapp.Fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,25 +22,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import kandidat.trainingapp.Activities.AddFriendActivity;
 import kandidat.trainingapp.Activities.AnotherUserActivity;
 import kandidat.trainingapp.Repositories.UserInformation;
 import kandidat.trainingapp.R;
 
 
-public class LeaderboardFragment extends Fragment {
+public class AddFriendFragment extends Fragment {
 
     private FirebaseDatabase db;
     private DatabaseReference ref;
     private ListView leaderboardList;
-    private Button addFriend;
     private FirebaseUser theCurrenUser = FirebaseAuth.getInstance().getCurrentUser();
-    private UserInformation currentUser;
 
 
 
-    public static LeaderboardFragment newInstance() {
-        LeaderboardFragment fragment = new LeaderboardFragment();
+    public static AddFriendFragment newInstance() {
+        AddFriendFragment fragment = new AddFriendFragment();
         return fragment;
     }
 
@@ -61,21 +56,14 @@ public class LeaderboardFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View theView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
-        currentUser = new UserInformation(theCurrenUser.getUid(),theCurrenUser.getDisplayName(),theCurrenUser.getEmail());
+        View theView = inflater.inflate(R.layout.fragment_add_friend, container, false);
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
         leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
-        addFriend = (Button) theView.findViewById(R.id.add_new_friend);
-        ref.child("friends").child(theCurrenUser.getUid()).child(theCurrenUser.getUid()).setValue(currentUser);
 
-        addFriend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addFriendIntent = new Intent(getActivity(), AddFriendActivity.class);
-                startActivity(addFriendIntent);
-            }
-        });
+
+
+
 
 
 
@@ -83,7 +71,7 @@ public class LeaderboardFragment extends Fragment {
                 getActivity(),
                 UserInformation.class,
                 R.layout.leaderboard_representation,
-                ref.child("friends").child(theCurrenUser.getUid()).orderByChild("negPoints")
+                ref.child("users").orderByChild("negPoints")
         ) {
             TextView name;
             TextView points;
@@ -92,20 +80,8 @@ public class LeaderboardFragment extends Fragment {
             protected void populateView(View v, UserInformation model, int position) {
                 name = v.findViewById(R.id.txt_name);
                 points = v.findViewById(R.id.txt_points);
-
-
-                if(model.getUserId().equals(theCurrenUser.getUid())){
-                    name.setText(String.valueOf(model.getDisplayName()) + " (You)");
-                    name.setTextColor(Color.rgb(0,108,0));
-                    points.setText(String.valueOf(model.getPoints()));
-                }else{
-                    name.setText(String.valueOf(model.getDisplayName()));
-                    name.setTextColor(Color.BLUE);
-                    points.setText(String.valueOf(model.getPoints()));
-
-                }
-
-
+                name.setText(String.valueOf(model.getDisplayName()));
+                points.setText(String.valueOf(model.getPoints()));
 
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
