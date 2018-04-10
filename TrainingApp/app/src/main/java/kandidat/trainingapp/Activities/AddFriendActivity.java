@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +24,7 @@ public class AddFriendActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private ListView leaderboardList;
     private FirebaseUser theCurrenUser = FirebaseAuth.getInstance().getCurrentUser();
+    private TextView toolText;
 
 
     @Override
@@ -33,6 +34,10 @@ public class AddFriendActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
         leaderboardList = (ListView) findViewById(R.id.leaderList);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
+        toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
+        toolText.setText("Add new friend");
 
         FirebaseListAdapter<UserInformation> fListAdapter = new FirebaseListAdapter<UserInformation>(
                 AddFriendActivity.this,

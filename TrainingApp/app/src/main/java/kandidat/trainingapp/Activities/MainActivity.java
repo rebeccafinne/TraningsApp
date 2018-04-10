@@ -119,9 +119,6 @@ public class MainActivity extends AppCompatActivity{
                 }
             });
 
-
-
-
             startActivity(AppMainActivity.createIntent(this, response));
             finish();
             return;
