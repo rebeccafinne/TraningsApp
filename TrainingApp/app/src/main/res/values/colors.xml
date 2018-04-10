@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1976d2</color>
-    <color name="colorPrimaryDark">#004ba0</color>
+    <color name="colorPrimary">#282F44</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorPrimaryLight">#63a4ff</color>
-    <color name="colorButtonCharts">#95aabf</color>
-    <color name="colorButtonStats">#7393BA</color>
-    <color name="colorAccent">#b4ef70</color>
-    <color name="colorAccent2">#ffc832</color>
+    <color name="colorButtonCharts">#9397a2</color>
+    <color name="colorButtonStats">#767A88</color>
+    <color name="colorAccent">#8dd57f</color>
+    <color name="colorAccent2">#FFD275</color>
 
 
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBottomNavBar">#DCE0D9</color>
+    <color name="colorBottomNavBar">#EAEAEC</color>
     <color name="colorBlack">#000000</color>
 
 

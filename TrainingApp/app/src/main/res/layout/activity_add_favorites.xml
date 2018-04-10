@@ -15,53 +15,40 @@
         android:layout_marginTop="?attr/actionBarSize">
 
         <Button
-            android:id="@+id/add_gym"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="100dp"
-            android:background="@color/colorButtonCharts"
-            android:text="@string/addGymFavorite"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            />
-
-        <Button
             android:id="@+id/add_stairs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:text="@string/stairs"
             android:background="@color/colorButtonCharts"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:text="@string/stairs"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Button
             android:id="@+id/add_bus"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:text="@string/busstop"
             android:background="@color/colorButtonCharts"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:text="@string/busstop"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Button
             android:id="@+id/add_stand"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:text="@string/stand"
             android:background="@color/colorButtonCharts"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:text="@string/stand"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
     </LinearLayout>
