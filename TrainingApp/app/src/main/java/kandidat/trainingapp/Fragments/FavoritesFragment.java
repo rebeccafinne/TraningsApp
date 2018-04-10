@@ -37,8 +37,8 @@ public class FavoritesFragment extends Fragment {
 
     private ListView listView;
     private Context context;
-    private TextView emptyText;
     private Points points;
+    private TextView headerText;
 
 
     public static FavoritesFragment newInstance() {
@@ -76,11 +76,14 @@ public class FavoritesFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
         listView = (ListView) rootView.findViewById(R.id.favorite_list);
 
+        headerText = (TextView) rootView.findViewById(R.id.empty_favorites);
+
+
         LayoutInflater inflateheader = getLayoutInflater();
-        ViewGroup header = (ViewGroup)inflateheader.inflate(R.layout.layout_favorites_header, listView,false);
+        //ViewGroup header = (ViewGroup)inflateheader.inflate(R.layout.layout_favorites_header, listView,false);
 
 
-        listView.addHeaderView(header);
+       // listView.addHeaderView(header);
 
         ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
 
@@ -125,13 +128,13 @@ public class FavoritesFragment extends Fragment {
                             R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
                     if(allFavoriteItems.isEmpty()){
                         if(isAdded()) {
-                            emptyText = (TextView) header.findViewById(R.id.empty_favorites);
-                            emptyText.setText(getString(R.string.empty_favorites_string));
+                          //  emptyText = (TextView) h.findViewById(R.id.empty_favorites);
+                            headerText.setText(getString(R.string.empty_favorites_string));
                         }
                     }else{
                         if(isAdded()) {
-                            emptyText = (TextView) header.findViewById(R.id.empty_favorites);
-                            emptyText.setText(getString(R.string.explain_favorites));
+                       //     emptyText = (TextView) header.findViewById(R.id.empty_favorites);
+                            headerText.setText(getString(R.string.explain_favorites));
                         }
 
                     }
