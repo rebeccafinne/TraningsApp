@@ -1,18 +1,23 @@
 package kandidat.trainingapp.Activities;
 
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ui.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -52,14 +57,18 @@ public class AnotherUserActivity extends AppCompatActivity {
         * ---------------Instantiate widgets-----------
         *----------------------------------------------
         * ---------------------------------------------*/
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
-        toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
+        toolText = (TextView) toolbar.findViewById(R.id.activity_text);
 
         textName = (TextView) findViewById(R.id.theDisplayName);
         textPoints = (TextView) findViewById(R.id.displayPoints);
         friendRequest = (Button) findViewById(R.id.sendRequestBtn);
         declineRequest = (Button) findViewById(R.id.declineRequestBtn);
         String userId = getIntent().getStringExtra("userId");
+
+
+
+
 
 
 
@@ -322,5 +331,7 @@ public class AnotherUserActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 }
