@@ -5,13 +5,14 @@
     <color name="colorPrimaryLight">#63a4ff</color>
     <color name="colorButtonCharts">#9397a2</color>
     <color name="colorButtonStats">#767A88</color>
-    <color name="colorAccent">#8dd57f</color>
+    <color name="colorAccent">#82c575</color>
     <color name="colorAccent2">#FFD275</color>
 
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBottomNavBar">#EAEAEC</color>
     <color name="colorBlack">#000000</color>
+    <color name="dark_blue">#6A6E84</color>
 
 
 </resources>
