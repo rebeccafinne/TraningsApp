@@ -69,6 +69,8 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                        }
                    }
                });
+
+       finish();
    }
 
    
