@@ -9,7 +9,6 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
             android:layout_marginBottom="@dimen/navigation_bar_height">
 
                 <TextView
@@ -18,11 +17,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:layout_marginStart="4dp"
+
                     android:gravity="center"
-                    android:maxHeight="75dp"
                     android:text=""
                     android:textColor="@color/com_facebook_blue"
                     android:textSize="26sp"
+                    app:layout_constraintBottom_toBottomOf="@id/toolbar_fragment"
+
                     app:layout_constraintEnd_toStartOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
