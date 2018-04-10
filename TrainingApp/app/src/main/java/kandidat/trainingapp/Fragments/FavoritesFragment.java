@@ -155,28 +155,6 @@ public class FavoritesFragment extends Fragment {
                     FavoriteModel itemClicked = (FavoriteModel) item;
                     points.calcualtePoints(itemClicked.getValue());
 
-
-      /*              pointRef.runTransaction(new Transaction.Handler() {
-                        @Override
-                        public Transaction.Result doTransaction(MutableData mutableData) {
-                            Integer currentData = mutableData.getValue(Integer.class);
-                            if (currentData == 0) {
-                                pointRef.setValue(itemClicked.getValue());
-                                negPointRef.setValue(itemClicked.getValue()*-1);
-
-                            } else {
-                                currentData = currentData + itemClicked.getValue();
-                                pointRef.setValue(currentData);
-                                negPointRef.setValue(currentData*-1);
-                            }
-                            return null;
-                        }
-
-                        @Override
-                        public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-
-                        }
-                    });*/
                     Context context = getApplicationContext();
 
                     CharSequence text = "Favorite complete registered!";
@@ -186,16 +164,6 @@ public class FavoritesFragment extends Fragment {
                     toast.show();
                 }
             });
-
-
-
-
-
-
-
-
-
-
 
         return rootView;
     }

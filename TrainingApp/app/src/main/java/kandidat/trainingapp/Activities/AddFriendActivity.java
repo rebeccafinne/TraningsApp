@@ -2,14 +2,21 @@ package kandidat.trainingapp.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +45,37 @@ public class AddFriendActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
         toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
         toolText.setText("Add new friend");
+
+
+
+        ImageButton settingsButton = (ImageButton) toolbar.findViewById(R.id.settings_button);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(AddFriendActivity.this, settingsButton);
+                popup.getMenuInflater()
+                        .inflate(R.menu.the_main_menu, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getTitle().toString()){
+                            case "Log Out":
+                                signOut();
+                                break;
+                            case "Account Settings":
+                                settings(view);
+                                break;
+                            case "Add New Favorite":
+                                addFavorite(view);
+                                break;
+                        }
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
+            }
+        }); //closing the setOnClickListener method
 
         FirebaseListAdapter<UserInformation> fListAdapter = new FirebaseListAdapter<UserInformation>(
                 AddFriendActivity.this,
@@ -76,5 +114,31 @@ public class AddFriendActivity extends AppCompatActivity {
         };
 
         leaderboardList.setAdapter(fListAdapter);
+    }
+
+
+    public void signOut(){
+        AuthUI.getInstance().signOut(AddFriendActivity.this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            startActivity(MainActivity.createIntent(AddFriendActivity.this));
+                            finish();
+                        } else {
+                            // Signout failed
+                        }
+                    }
+                });
+    }
+
+
+    private void settings(View view){
+        Intent intent = new Intent(this, ProfileSettingsActivity.class);
+        startActivity(intent);
+    }
+    private void addFavorite(View view){
+        Intent intent = new Intent(this, AddFavoritesActivity.class);
+        startActivity(intent);
     }
 }
