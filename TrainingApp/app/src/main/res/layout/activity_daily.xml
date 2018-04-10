@@ -67,11 +67,11 @@
             android:id="@+id/save_daily_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
+            android:layout_gravity="center"
 
+            android:layout_marginTop="75dp"
             android:background="@color/colorButtonCharts"
-            android:text="@string/save"
-            android:layout_gravity="center"/>
+            android:text="@string/save" />
 
 
     </LinearLayout>
