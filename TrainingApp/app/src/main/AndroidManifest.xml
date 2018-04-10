@@ -19,7 +19,7 @@
         <activity
             android:name=".Activities.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.TrainingActivity"
             android:configChanges="orientation"
@@ -38,8 +38,7 @@
             android:name=".Activities.CardioActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_cardio"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.StatsActivity"
             android:configChanges="orientation"
@@ -83,7 +82,8 @@
         <activity
             android:name=".Activities.AnotherUserActivity"
             android:label="@string/title_activity_another_user"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activities.AddFriendActivity"></activity>
     </application>
 
 </manifest>

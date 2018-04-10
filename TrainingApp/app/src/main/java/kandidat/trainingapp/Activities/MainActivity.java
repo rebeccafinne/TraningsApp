@@ -16,8 +16,11 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,16 +93,34 @@ public class MainActivity extends AppCompatActivity{
         if (resultCode == ResultCodes.OK) {
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            DatabaseReference userRef = db.getReference("users").child(user.getUid());
+            DatabaseReference userRef = db.getReference("users");
+            DatabaseReference putUserRef= db.getReference("users").child(user.getUid());
 
-            //Create and add the user to database.
-            String UID = user.getUid();
-            String email = user.getEmail();
-            String displayName = user.getDisplayName();
+            userRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChild(user.getUid())){
+
+                    }else{
+                        //Create and add the user to database.
+                        String UID = user.getUid();
+                        String email = user.getEmail();
+                        String displayName = user.getDisplayName();
 
 
-            UserInformation theUser = new UserInformation(UID,displayName,email);
-            userRef.setValue(theUser);
+                        UserInformation theUser = new UserInformation(UID,displayName,email);
+                        putUserRef.setValue(theUser);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+
 
             startActivity(AppMainActivity.createIntent(this, response));
             finish();

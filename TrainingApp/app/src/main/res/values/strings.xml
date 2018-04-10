@@ -131,4 +131,5 @@
 
     <string name="send_request">Send Friend Request</string>
     <string name="decline">Decline Friend Request</string>
+    <string name="add_new">Add New Friend</string>
 </resources>
