@@ -47,9 +47,9 @@ public class CardioActivity extends AppCompatActivity {
     //******************************Timer and stuff for that****************************************
     //********************************************************************************************
     private TextView timerText;
-    private Button btnTimerStart;
-    private Button btnTimerStop;
-    private Button btnTimerPaus;
+    private ImageButton btnTimerStart;
+    private ImageButton btnTimerStop;
+    private Boolean timerOn;
 
     private Timer timer;
     private Thread timerThread;
@@ -80,20 +80,36 @@ public class CardioActivity extends AppCompatActivity {
         //**************************For the timer **************************************************
         //******************************************************************************************
         timerText = findViewById(R.id.timer_text);
-        btnTimerStart = findViewById(R.id.btn_timer_start);
+        btnTimerStart = findViewById(R.id.btn_timer_start_pause);
         btnTimerStop = findViewById(R.id.btn_timer_stop);
-        btnTimerPaus = findViewById(R.id.btn_timer_paus);
+
+        timerOn = false;
+
 
         btnTimerStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked start " , Toast.LENGTH_SHORT).show(); //TODO remove when everything works.
-                if(timer == null){
-                    timer = new Timer(context);
-                    timerThread = new Thread(timer);
-                    timerThread.start();
+                if(!timerOn) {
+                    Toast.makeText(getApplicationContext(), "Clicked start ", Toast.LENGTH_SHORT).show(); //TODO remove when everything works.
+                    if (timer == null) {
+                        timer = new Timer(context);
+                        timerThread = new Thread(timer);
+                        timerThread.start();
+                    }
+                    timer.startTimer();
+                    timerOn = true;
+                    btnTimerStart.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+
+                } else{
+                    Toast.makeText(getApplicationContext(), "Clicked Paus", Toast.LENGTH_SHORT).show();
+                    if(timer != null){
+                        timer.pausTimer();
+                        timerOn = false;
+                        btnTimerStart.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+                    }
+
                 }
-                timer.startTimer();
+
             }
         });
 
@@ -196,13 +212,7 @@ public class CardioActivity extends AppCompatActivity {
         });
 
 
-        btnTimerPaus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked Paus", Toast.LENGTH_SHORT).show();
-                if(timer != null) timer.pausTimer();
-            }
-        });
+
 
 
     }
