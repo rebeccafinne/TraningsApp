@@ -1,58 +1,54 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kandidat.trainingapp.Fragments.TrainingFragment">
+    tools:context="kandidat.trainingapp.Fragments.TrainingFragment"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/navigation_bar_height">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <LinearLayout
+    <Button
+        android:id="@+id/gymButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/navigation_bar_height">
-
-        <Button
-            android:id="@+id/gymButton"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="100dp"
-            android:text="@string/gym"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:background="@color/colorButtonCharts"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="@color/colorButtonCharts"
+        android:text="@string/gym"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
-        <Button
-            android:id="@+id/cardioButton"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/cardio"
-            android:background="@color/colorButtonCharts"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    <Button
+        android:id="@+id/cardioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="@color/colorButtonCharts"
+        android:text="@string/cardio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
-        <Button
-            android:id="@+id/dailyButton"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/daily"
-            android:background="@color/colorButtonCharts"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    <Button
+        android:id="@+id/dailyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="@color/colorButtonCharts"
+        android:text="@string/daily"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+ </LinearLayout>
 
-    </LinearLayout>
-</FrameLayout>
