@@ -132,4 +132,8 @@
     <string name="send_request">Send Friend Request</string>
     <string name="decline">Decline Friend Request</string>
     <string name="add_new">Add New Friend</string>
+    <string name="settings">Settings</string>
+    <string name="how_many_stairs">How many flight of stairs did you walk?</string>
+    <string name="how_many_minutes">How many minutes did you stand up?</string>
+    <string name="how_many_bus_stops">Between how many bus stops did you walk?</string>
 </resources>

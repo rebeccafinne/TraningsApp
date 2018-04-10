@@ -5,10 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +33,11 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
+        TextView textView = (TextView) toolbar.findViewById(R.id.activity_text);
+
+        textView.setText(R.string.settings);
 
         editDisplayName = (TextInputLayout)findViewById(R.id.edit_username);
         save = (Button)findViewById(R.id.save);
