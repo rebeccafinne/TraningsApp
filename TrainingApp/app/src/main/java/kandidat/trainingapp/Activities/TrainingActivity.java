@@ -165,7 +165,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         workout = new Workout();
 
-        ListView lstExercises = findViewById(R.id.list_view_gym_exercies);
+        ListView lstExercises = findViewById(R.id.list_view_gym_exercise);
         final ListExerciseAdapter listAdapter = new ListExerciseAdapter();
         final RowAdapter rowAdapter = new RowAdapter();
 
