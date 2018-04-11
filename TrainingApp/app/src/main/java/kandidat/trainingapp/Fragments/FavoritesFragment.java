@@ -78,7 +78,7 @@ public class FavoritesFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
         listView = (ListView) rootView.findViewById(R.id.favorite_list);
 
-        headerText = (TextView) rootView.findViewById(R.id.empty_favorites);
+      //  headerText = (TextView) rootView.findViewById(R.id.empty_favorites);
 
         ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
 
@@ -120,11 +120,11 @@ public class FavoritesFragment extends Fragment {
                             R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
                     if(allFavoriteItems.isEmpty()){
                         if(isAdded()) {
-                            headerText.setText(getString(R.string.empty_favorites_string));
+                //            headerText.setText(getString(R.string.empty_favorites_string));
                         }
                     }else{
                         if(isAdded()) {
-                            headerText.setText(getString(R.string.explain_favorites));
+                //            headerText.setText(getString(R.string.explain_favorites));
                         }
 
                     }

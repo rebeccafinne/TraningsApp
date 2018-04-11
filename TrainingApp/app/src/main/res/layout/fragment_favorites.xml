@@ -11,7 +11,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/navigation_bar_height">
 
-                <TextView
+        <!--        <TextView
                     android:id="@+id/empty_favorites"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -25,15 +25,15 @@
                     app:layout_constraintBottom_toBottomOf="@id/toolbar_fragment"
 
                     app:layout_constraintEnd_toStartOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent" />-->
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/fab"
                     android:layout_width="254dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
                     android:src="@drawable/plus_sign"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -45,6 +45,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="75dp"
+                    android:background="#40ffffff"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/empty_favorites"
                     app:layout_constraintStart_toStartOf="parent"

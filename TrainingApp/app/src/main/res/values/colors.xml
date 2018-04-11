@@ -14,5 +14,9 @@
     <color name="colorBlack">#000000</color>
     <color name="dark_blue">#6A6E84</color>
 
+    <color name="background">#141B41</color>
+    <color name="buttonColor">#306BAC</color>
+
+
 
 </resources>
