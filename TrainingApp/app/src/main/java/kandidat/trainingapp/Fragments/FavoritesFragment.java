@@ -1,7 +1,10 @@
 package kandidat.trainingapp.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
+import kandidat.trainingapp.Activities.AddFavoritesActivity;
 import kandidat.trainingapp.Adapter.FavoriteAdapter;
 import kandidat.trainingapp.Models.FavoriteModel;
 import kandidat.trainingapp.Models.Points;
@@ -134,6 +138,15 @@ public class FavoritesFragment extends Fragment {
 
                 }
             });
+
+        FloatingActionButton fab = rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddFavoritesActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
