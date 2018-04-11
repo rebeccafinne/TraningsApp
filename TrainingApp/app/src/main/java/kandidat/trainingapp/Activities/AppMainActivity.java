@@ -88,7 +88,6 @@ public class AppMainActivity extends AppCompatActivity {
 
         toolText.setText("Workout");
 
-        mBottomNav.setSelectedItemId(R.id.action_workout);
 
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -96,17 +95,18 @@ public class AppMainActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
 
                 switch (item.getItemId()){
+                    case R.id.action_workout:
+                        toolText.setText("Workout");
+
+                        selectedFragment = TrainingFragment.newInstance();
+                        break;
                     case R.id.action_me:
                         toolText.setText("Me");
 
                         selectedFragment = ProfileFragment.newInstance();
 
                         break;
-                    case R.id.action_workout:
-                        toolText.setText("Workout");
 
-                        selectedFragment = TrainingFragment.newInstance();
-                        break;
                     case R.id.action_favorites:
                         toolText.setText("Favorites");
                         selectedFragment = FavoritesFragment.newInstance();
@@ -127,6 +127,9 @@ public class AppMainActivity extends AppCompatActivity {
 
 
         });
+
+        mBottomNav.setSelectedItemId(R.id.action_workout);
+
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, TrainingFragment.newInstance());
