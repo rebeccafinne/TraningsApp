@@ -23,7 +23,7 @@ public class AddFavoritesActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
-        toolText.setText("Add Favorite Workouts");
+        toolText.setText(R.string.add_favorite_text);
 
         stairsButton = (Button) findViewById(R.id.add_stairs);
         stairsButton.setOnClickListener(new View.OnClickListener() {
@@ -49,16 +49,28 @@ public class AddFavoritesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Creates an intent and starts a new activity to add a specific type of favorite
+     * @param view - the view from onClicked method
+     */
     private void addStairsClicked(View view){
         Intent intent = new Intent(this, FavoriteStairsActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Creates an intent and starts a new activity to add a specific type of favorite
+     * @param view - the view from onClicked method
+     */
     private void addBusClicked(View view){
         Intent intent = new Intent(this, FavoriteBusStopActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Creates an intent and starts a new activity to add a specific type of favorite
+     * @param view - the view from onClicked method
+     */
     private void addStandClicked(View view){
         Intent intent = new Intent(this, FavoriteTimeStandingActivity.class);
         startActivity(intent);

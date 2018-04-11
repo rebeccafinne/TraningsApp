@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.Activities.TrainingActivity">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_activity_toolbar" />
+
+
     <ImageButton
         android:id="@+id/btn_timer_start_pause"
         android:layout_width="52dp"
@@ -48,9 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_timer_start_pause" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/layout_activity_toolbar" />
+
 
     <ListView
         android:id="@+id/list_view_gym_exercies"
