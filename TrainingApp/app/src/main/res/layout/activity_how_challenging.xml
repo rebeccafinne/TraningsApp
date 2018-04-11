@@ -34,9 +34,10 @@
             android:id="@+id/btn_med"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@drawable/yellow_checkbox_selector"
+            android:checked="true"
             android:padding="8dp"
-            android:text="Medium"
-            android:button="@drawable/yellow_checkbox_selector" />
+            android:text="Medium" />
 
         <CheckBox
             android:id="@+id/btn_hard"
