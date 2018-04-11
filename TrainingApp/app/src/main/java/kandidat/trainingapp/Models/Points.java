@@ -32,6 +32,10 @@ public class Points {
     }
 
 
+    /**
+     * Updates the user's points in the database
+     * @param newPoint - the point to be added
+     */
     public void calcualtePoints(Integer newPoint){
 
 
