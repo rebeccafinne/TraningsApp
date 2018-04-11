@@ -2,6 +2,7 @@ package kandidat.trainingapp.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,7 +50,7 @@ public class TrainingActivity extends AppCompatActivity {
     //******************************Stuff for the listview *****************************************
     //**********************************************************************************************
     private Workout workout;
-    private Button btnAddExercise;
+    private FloatingActionButton btnAddExercise;
     private Button btnAddRow;
     private Button btnDone;
     private Exercise currentExercise; //used when editing one exercise.

@@ -66,31 +66,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <Button
-        android:id="@+id/btn_add_ex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/add_ex"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_timer_stop" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="36dp"
         android:background="@color/authui_colorPrimary"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_ex">
+        app:layout_constraintTop_toBottomOf="@+id/btn_timer_stop">
 
         <TextView
             android:layout_width="wrap_content"
@@ -126,5 +114,23 @@
             android:textColor="@color/authui_inputTextColor"
             android:textSize="18sp" />
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_add_ex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/list_view_gym_exercies"
+        app:layout_constraintEnd_toEndOf="@+id/list_view_gym_exercies"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/list_view_gym_exercies"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/plus_sign" />
 
 </android.support.constraint.ConstraintLayout>
