@@ -10,7 +10,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -23,7 +22,6 @@ public class Favorites {
 
     private FirebaseDatabase db;
     private CharSequence text = null;
-    private Integer val;
 
 
     public  Favorites(){
@@ -35,7 +33,7 @@ public class Favorites {
 
 
     //Add the new value depending to the list
-    public boolean addNewFavorite(Integer newValue, String key){
+    public void addNewFavorite(Integer newValue, String key){
 
         Context context = getApplicationContext();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -52,6 +50,7 @@ public class Favorites {
                 String currentKey = null;
 
 
+                //Get a key with the same value as just added
                 if(dataSnapshot.getKey().equals(key)) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Integer dsVal = (int) (long) ds.getValue();
@@ -63,6 +62,7 @@ public class Favorites {
                     }
 
 
+                    //Check if there is two or more different keys with the same value
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Integer dsVal = (int) (long) ds.getValue();
                         if (dsVal.equals(newValue) && !currentKey.equals(ds.getKey())) {
@@ -110,13 +110,6 @@ public class Favorites {
 
         myRef.setValue(newValue);
 
-
-
-
-
-
-
-        return true;
     }
 
 }

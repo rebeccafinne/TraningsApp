@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -40,8 +39,6 @@ public class AppMainActivity extends AppCompatActivity {
     private TextView toolText;
     private ImageButton settingsButton;
     private FirebaseAuth mAuth;
-
-
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +83,7 @@ public class AppMainActivity extends AppCompatActivity {
 
 
 
-        toolText.setText("Workout");
+        toolText.setText(R.string.tool_workout);
 
 
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -96,24 +93,24 @@ public class AppMainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.action_workout:
-                        toolText.setText("Workout");
+                        toolText.setText(R.string.tool_workout);
 
                         selectedFragment = TrainingFragment.newInstance();
                         break;
                     case R.id.action_me:
-                        toolText.setText("Me");
+                        toolText.setText(R.string.tool_me);
 
                         selectedFragment = ProfileFragment.newInstance();
 
                         break;
 
                     case R.id.action_favorites:
-                        toolText.setText("Favorites");
+                        toolText.setText(R.string.tool_favorites);
                         selectedFragment = FavoritesFragment.newInstance();
 
                         break;
                     case R.id.action_leaderboard:
-                        toolText.setText("Friends");
+                        toolText.setText(R.string.tool_leaderboard);
                         selectedFragment = LeaderboardFragment.newInstance();
 
                         break;

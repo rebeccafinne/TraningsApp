@@ -17,8 +17,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -78,21 +76,11 @@ public class FavoritesFragment extends Fragment {
 
         headerText = (TextView) rootView.findViewById(R.id.empty_favorites);
 
-
-        LayoutInflater inflateheader = getLayoutInflater();
-        //ViewGroup header = (ViewGroup)inflateheader.inflate(R.layout.layout_favorites_header, listView,false);
-
-
-       // listView.addHeaderView(header);
-
         ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
 
             myRef.orderByChild("favorites").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-
                     String busStops = "Walked bus stops";
                     Set<FavoriteModel> bus = new TreeSet<>();
                     String stairs = "Walked flight of stairs";
@@ -128,12 +116,10 @@ public class FavoritesFragment extends Fragment {
                             R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
                     if(allFavoriteItems.isEmpty()){
                         if(isAdded()) {
-                          //  emptyText = (TextView) h.findViewById(R.id.empty_favorites);
                             headerText.setText(getString(R.string.empty_favorites_string));
                         }
                     }else{
                         if(isAdded()) {
-                       //     emptyText = (TextView) header.findViewById(R.id.empty_favorites);
                             headerText.setText(getString(R.string.explain_favorites));
                         }
 
