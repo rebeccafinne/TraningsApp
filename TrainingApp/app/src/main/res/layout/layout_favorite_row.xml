@@ -16,34 +16,29 @@
 
             android:layout_marginEnd="24dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:paddingBottom="10dp"
+
+            android:paddingBottom="20dp"
             android:paddingLeft="10dp"
             android:paddingTop="20dp"
+
             android:layout_weight="1"
-            android:textColor="@color/authui_colorPrimary"
             android:textSize="24sp"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/value"/>
+           />
 
         <TextView
             android:id="@+id/value"
-            android:layout_width="20dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:paddingBottom="10dp"
-            android:paddingLeft="0dp"
+
+
+            android:paddingBottom="20dp"
             android:paddingRight="10dp"
             android:paddingTop="20dp"
             android:textSize="24sp"
             android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.029"
-            app:layout_constraintStart_toEndOf="@+id/activity_name"
+
 
 
             />
