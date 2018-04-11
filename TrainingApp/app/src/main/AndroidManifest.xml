@@ -83,7 +83,8 @@
             android:name=".Activities.AnotherUserActivity"
             android:label="@string/title_activity_another_user"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activities.AddFriendActivity"></activity>
+        <activity android:name=".Activities.AddFriendActivity" />
+        <activity android:name=".Logg_in"></activity>
     </application>
 
 </manifest>
