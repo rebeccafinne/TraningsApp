@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.IdpResponse;
+
+import org.w3c.dom.Text;
 
 import kandidat.trainingapp.Models.BasicWorkout;
 import kandidat.trainingapp.Models.Exercise;
@@ -64,6 +67,11 @@ public class TrainingActivity extends AppCompatActivity {
         timerOn = false;
         points = new Points();
         context = this;
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.include);
+        TextView toolText = (TextView) toolbar.findViewById(R.id.activity_text);
+        toolText.setText(R.string.addGymFavorite);
 
         //******************************************************************************************
         //**************************For the timer **************************************************
