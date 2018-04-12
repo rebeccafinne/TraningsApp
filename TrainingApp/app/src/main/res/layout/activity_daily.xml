@@ -28,6 +28,7 @@
             android:text="@string/which_daily_log"
             android:textSize="22sp"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,6 +39,8 @@
             android:layout_marginTop="16dp"
             android:layout_gravity="center"
             android:gravity="center"
+            android:backgroundTint="@color/colorWhite"
+
             />
 
         <TextView
@@ -50,6 +53,7 @@
             android:layout_marginTop="100dp"
             android:textSize="22sp"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -60,20 +64,31 @@
             android:layout_marginTop="16dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@android:color/black"
+            android:backgroundTint="@color/colorWhite"
+
 
 
             />
 
-        <Button
-            android:id="@+id/save_daily_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            android:layout_marginTop="75dp"
-            android:background="@color/colorButtonCharts"
-            android:text="@string/save" />
+            <Button
+                android:id="@+id/save_daily_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/save"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:textColor="@color/colorWhite"
+
+                android:background="@color/almostTransparent"/>
+        </LinearLayout>
 
 
     </LinearLayout>
