@@ -6,8 +6,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 /**
@@ -34,6 +32,10 @@ public class Points {
     }
 
 
+    /**
+     * Updates the user's points in the database
+     * @param newPoint - the point to be added
+     */
     public void calcualtePoints(Integer newPoint){
 
 

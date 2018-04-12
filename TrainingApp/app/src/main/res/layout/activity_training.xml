@@ -4,66 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/button_gratident"
+
     tools:context="kandidat.trainingapp.Activities.TrainingActivity">
 
-    <Button
-        android:id="@+id/btn_timer_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_weight="1"
-        android:text="@string/stop_timer"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_paus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_timer_paus"
-        app:layout_constraintTop_toTopOf="@+id/btn_timer_paus" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_activity_toolbar" />
 
-    <Button
-        android:id="@+id/btn_timer_paus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+
+    <ImageButton
+        android:id="@+id/btn_timer_start_pause"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_weight="1"
-        android:text="@string/paus_timer"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start"
+        android:background="@drawable/ic_play_arrow_black_24dp"
+
+        android:backgroundTint="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_stop"
         app:layout_constraintEnd_toStartOf="@+id/btn_timer_stop"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_timer_start"
-        app:layout_constraintTop_toTopOf="@+id/btn_timer_start"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/timer_text"
+        app:layout_constraintTop_toTopOf="@+id/btn_timer_stop" />
 
-    <Button
-        android:id="@+id/btn_timer_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+    <ImageButton
+        android:id="@+id/btn_timer_stop"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
         android:layout_weight="1"
-        android:text="@string/start_pause_timer"
+        android:background="@drawable/ic_stop_black_24dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="@string/stop_timer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_timer_paus"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timer_text" />
+        app:layout_constraintStart_toEndOf="@+id/btn_timer_start_pause"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
+
 
     <TextView
         android:id="@+id/timer_text"
         android:layout_width="102dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
         android:layout_weight="1"
         android:text="00:00:00"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start_pause"
+        app:layout_constraintEnd_toStartOf="@+id/btn_timer_start_pause"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toTopOf="@+id/btn_timer_start_pause" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/layout_activity_toolbar" />
+
 
     <ListView
         android:id="@+id/list_view_gym_exercies"
@@ -85,11 +77,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="36dp"
         android:text="@string/add_ex"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_timer_paus" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_timer_stop" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -97,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:background="@color/authui_colorPrimary"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"

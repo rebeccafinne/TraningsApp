@@ -1,7 +1,11 @@
 package kandidat.trainingapp.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +21,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
+import kandidat.trainingapp.Activities.AddFavoritesActivity;
 import kandidat.trainingapp.Adapter.FavoriteAdapter;
 import kandidat.trainingapp.Models.FavoriteModel;
 import kandidat.trainingapp.Models.Points;
@@ -37,8 +40,8 @@ public class FavoritesFragment extends Fragment {
 
     private ListView listView;
     private Context context;
-    private TextView emptyText;
     private Points points;
+    private TextView headerText;
 
 
     public static FavoritesFragment newInstance() {
@@ -76,20 +79,13 @@ public class FavoritesFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
         listView = (ListView) rootView.findViewById(R.id.favorite_list);
 
-        LayoutInflater inflateheader = getLayoutInflater();
-        ViewGroup header = (ViewGroup)inflateheader.inflate(R.layout.layout_favorites_header, listView,false);
-
-
-        listView.addHeaderView(header);
+        headerText = (TextView) rootView.findViewById(R.id.empty_favorites);
 
         ArrayList<FavoriteModel> allFavoriteItems = new ArrayList<>();
 
             myRef.orderByChild("favorites").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-
                     String busStops = "Walked bus stops";
                     Set<FavoriteModel> bus = new TreeSet<>();
                     String stairs = "Walked flight of stairs";
@@ -125,13 +121,16 @@ public class FavoritesFragment extends Fragment {
                             R.layout.layout_favorite_row, R.id.activity_text, allFavoriteItems);
                     if(allFavoriteItems.isEmpty()){
                         if(isAdded()) {
-                            emptyText = (TextView) header.findViewById(R.id.empty_favorites);
-                            emptyText.setText(getString(R.string.empty_favorites_string));
+                            headerText.setText(getString(R.string.empty_favorites_string));
+                            headerText.setBackgroundColor(getResources().getColor(R.color.almostTransparent));
+                            listView.setBackgroundColor(Color.TRANSPARENT);
                         }
                     }else{
                         if(isAdded()) {
-                            emptyText = (TextView) header.findViewById(R.id.empty_favorites);
-                            emptyText.setText(getString(R.string.explain_favorites));
+                            headerText.setText("");
+                            headerText.setBackgroundColor(Color.TRANSPARENT);
+                            listView.setBackgroundColor(getResources().getColor(R.color.almostTransparent));
+
                         }
 
                     }
@@ -146,6 +145,15 @@ public class FavoritesFragment extends Fragment {
                 }
             });
 
+        FloatingActionButton fab = rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddFavoritesActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -157,7 +165,7 @@ public class FavoritesFragment extends Fragment {
 
                     Context context = getApplicationContext();
 
-                    CharSequence text = "Favorite complete registered!";
+                    CharSequence text = "You earned " + itemClicked.getValue() + " points!";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);

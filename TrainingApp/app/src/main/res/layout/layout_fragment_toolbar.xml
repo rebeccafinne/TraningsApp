@@ -4,7 +4,7 @@
     android:id="@+id/toolbar_fragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/gradient"
     android:maxHeight="?attr/actionBarSize">
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_height="54dp"
             android:layout_marginEnd="0dp"
             android:layout_marginRight="0dp"
-            app:srcCompat="@color/colorPrimary"
+            android:background="#00000000"
             android:maxHeight="?attr/actionBarSize"
             android:maxWidth="54dp"/>
 
@@ -48,9 +48,10 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:background="#00000000"
             android:clickable="true"
             android:gravity="start"
+
             android:maxHeight="?attr/actionBarSize"
             android:maxWidth="45dp"
             android:scaleType="fitStart"

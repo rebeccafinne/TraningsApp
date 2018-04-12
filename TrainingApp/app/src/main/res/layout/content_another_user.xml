@@ -3,13 +3,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context="kandidat.trainingapp.Activities.AnotherUserActivity"
+    android:background="@drawable/button_gratident"
+
+    tools:context="kandidat.trainingapp.Activities.AnotherUserActivity"
 
 tools:showIn="@layout/activity_another_user">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <include layout="@layout/layout_fragment_toolbar"/>
+    <include layout="@layout/layout_activity_toolbar"/>
 
 
 

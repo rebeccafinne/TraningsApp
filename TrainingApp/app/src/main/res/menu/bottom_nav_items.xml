@@ -8,6 +8,7 @@
         android:enabled="true"
         android:icon="@drawable/log_workout_grey"
         android:title="@string/workout"
+        android:background="@color/almostTransparent"
         app:showAsAction="" />
 
     <item
@@ -15,6 +16,8 @@
         android:enabled="true"
         android:icon="@drawable/favorites_grey"
         android:title="@string/favorites"
+        android:background="@color/almostTransparent"
+
         app:showAsAction="" />
 
     <item
@@ -22,6 +25,8 @@
         android:enabled="true"
         android:icon="@drawable/friends_grey"
         android:title="@string/leaderboard"
+        android:background="@color/almostTransparent"
+
         app:showAsAction="" />
 
     <item
@@ -29,6 +34,8 @@
         android:enabled="true"
         android:icon="@drawable/me_grey"
         android:title="@string/me"
+        android:background="@color/almostTransparent"
+
         app:showAsAction="" />
 
 </menu>
