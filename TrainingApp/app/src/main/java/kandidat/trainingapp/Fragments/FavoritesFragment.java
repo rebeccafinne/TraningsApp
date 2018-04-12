@@ -122,6 +122,7 @@ public class FavoritesFragment extends Fragment {
                     if(allFavoriteItems.isEmpty()){
                         if(isAdded()) {
                             headerText.setText(getString(R.string.empty_favorites_string));
+                            headerText.setBackgroundColor(getResources().getColor(R.color.almostTransparent));
                             listView.setBackgroundColor(Color.TRANSPARENT);
                         }
                     }else{

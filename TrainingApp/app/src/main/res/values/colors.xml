@@ -18,6 +18,9 @@
     <color name="buttonColor">#306BAC</color>
     <color name="almostTransparent">#40FFFFFF</color>
 
+    <color name="colorAccent3">#BE60EC</color>
+
+
 
 
 </resources>

@@ -32,7 +32,7 @@ public class FavoriteTimeStandingActivity extends AppCompatActivity {
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.amount_of_time_standing, android.R.layout.simple_spinner_item);
+                R.array.amount_of_time_standing, R.layout.layout_spinner);
 
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
