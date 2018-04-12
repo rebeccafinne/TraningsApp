@@ -48,9 +48,10 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:background="#00000000"
             android:clickable="true"
             android:gravity="start"
+
             android:maxHeight="?attr/actionBarSize"
             android:maxWidth="45dp"
             android:scaleType="fitStart"
