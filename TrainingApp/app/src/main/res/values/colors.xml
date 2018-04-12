@@ -16,6 +16,7 @@
 
     <color name="background">#141B41</color>
     <color name="buttonColor">#306BAC</color>
+    <color name="almostTransparent">#40FFFFFF</color>
 
 
 
