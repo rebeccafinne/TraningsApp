@@ -127,6 +127,7 @@ public class FavoritesFragment extends Fragment {
                     }else{
                         if(isAdded()) {
                             headerText.setText("");
+                            headerText.setBackgroundColor(Color.TRANSPARENT);
                             listView.setBackgroundColor(getResources().getColor(R.color.almostTransparent));
 
                         }
@@ -163,7 +164,7 @@ public class FavoritesFragment extends Fragment {
 
                     Context context = getApplicationContext();
 
-                    CharSequence text = "Favorite complete registered!";
+                    CharSequence text = "You earned " + itemClicked.getValue() + " points!";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
