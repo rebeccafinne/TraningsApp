@@ -45,7 +45,7 @@
     <!-- Strings for training -->
     <string name="gym">Log Gym Exercise</string>
     <string name="cardio">Log Cardio Exercise</string>
-    <string name="daily">Log Daily Activity</string>
+    <string name="daily">Log Daily Exercise</string>
     <string name="stairs">Stairs</string>
     <string name="busstop">Bus Stops</string>
     <string name="stand">Stand up</string>

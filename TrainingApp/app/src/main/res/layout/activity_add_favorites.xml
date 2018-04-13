@@ -27,6 +27,8 @@
             android:background="@color/almostTransparent"
             android:layout_weight="1"
             android:text="@string/stairs"
+            android:textColor="@color/colorWhite"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Button
@@ -41,6 +43,7 @@
             android:background="@color/almostTransparent"
             android:layout_weight="1"
             android:text="@string/busstop"
+            android:textColor="@color/colorWhite"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Button
@@ -55,6 +58,8 @@
             android:background="@color/almostTransparent"
             android:layout_weight="1"
             android:text="@string/stand"
+            android:textColor="@color/colorWhite"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
