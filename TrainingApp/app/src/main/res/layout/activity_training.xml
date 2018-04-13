@@ -49,6 +49,7 @@
         android:layout_weight="1"
         android:text="00:00:00"
         android:textSize="24sp"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start_pause"
         app:layout_constraintEnd_toStartOf="@+id/btn_timer_start_pause"
         app:layout_constraintHorizontal_bias="0.5"
@@ -62,10 +63,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorAccent2"
+        android:background="@color/almostTransparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +80,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:text="@string/add_ex"
-        android:background="@color/colorAccent2"
+        android:background="@color/almostTransparent"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_timer_stop" />
@@ -88,10 +90,10 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:background="@color/authui_colorPrimary"
+        android:background="@drawable/gradient"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -103,7 +105,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Exercise"
-            android:textColor="@color/authui_inputTextColor"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp" />
 
         <TextView
@@ -112,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Sets"
-            android:textColor="@color/authui_inputTextColor"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
         <TextView
@@ -120,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Reps"
-            android:textColor="@color/authui_inputTextColor"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
         <TextView
@@ -129,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Weight"
-            android:textColor="@color/authui_inputTextColor"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
     </LinearLayout>
 
