@@ -97,6 +97,7 @@
     <string name="ex_name">Exercise name</string>
     <string name="name_of_exercise">Name of Exercise</string>
 
+    <string name="exercise">Exercise</string>
     <string name="sets">Sets</string>
     <string name="reps">Reps</string>
     <string name="weight">Weight</string>
@@ -112,12 +113,19 @@
     <string name="easy">Easy</string>
     <string name="medium">MEDIUM</string>
     <string name="hard">HARD</string>
+    <string name="how_challenging_was_it">How challenging was it?</string>
 
     <!-- Exercise names -->
     <string-array name="exercises">
         <item>Pull Ups</item>
         <item>Biceps Curl</item>
     </string-array>
+
+    <!-- Timer -->
+    <string name="_00_00_00">00:00:00</string>
+
+
+    <!-- Other -->
     <string name="title_activity_another_user">AnotherUserActivity</string>
     <string name="group_invite">Send Group Invite</string>
     <string name="change_name">Change Name</string>
@@ -125,7 +133,6 @@
     <string name="add_new_favorite">Add New Favorite</string>
     <string name="empty_favorites_string">You have no favorites yet, add favorites by pressing the menu in the right upper corner</string>
     <string name="explain_favorites">Click on your favorite, when activity is done, to earn points</string>
-    <string name="how_challenging_was_it">How challenging was it?</string>
     <string name="which_daily_log">Which type of activity do you want to log?</string>
     <string name="how_much_did_you_do">How much did you do?</string>
 

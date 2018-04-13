@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/button_gratident"
-
     tools:context="kandidat.trainingapp.Activities.TrainingActivity">
 
     <include
@@ -25,7 +24,8 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_timer_stop"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/timer_text"
-        app:layout_constraintTop_toTopOf="@+id/btn_timer_stop" />
+        app:layout_constraintTop_toTopOf="@+id/btn_timer_stop"
+        android:contentDescription="TODO"/>
 
     <ImageButton
         android:id="@+id/btn_timer_stop"
@@ -39,7 +39,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_timer_start_pause"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        android:contentDescription="TODO"/>
 
 
     <TextView
@@ -47,7 +48,7 @@
         android:layout_width="102dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="00:00:00"
+        android:text="@string/_00_00_00"
         android:textSize="24sp"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start_pause"
@@ -59,7 +60,7 @@
 
 
     <ListView
-        android:id="@+id/list_view_gym_exercies"
+        android:id="@+id/list_view_gym_exercise"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -71,20 +72,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <Button
-        android:id="@+id/btn_add_ex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/add_ex"
-        android:background="@color/almostTransparent"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_timer_stop" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -98,13 +85,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_ex">
+        app:layout_constraintTop_toBottomOf="@+id/btn_timer_stop">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Exercise"
+            android:text="@string/exercise"
             android:layout_marginStart="4dp"
             android:textColor="@color/colorWhite"
             android:textSize="24sp" />
@@ -114,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sets"
+            android:text="@string/sets"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
@@ -122,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Reps"
+            android:text="@string/reps"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
@@ -135,5 +122,25 @@
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_add_ex"
+        android:layout_width="254dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/plus_sign_filled"
+        android:background="@color/colorAccent3"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/list_view_gym_exercise"
+        app:layout_constraintEnd_toEndOf="@+id/list_view_gym_exercise"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/list_view_gym_exercise"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0"
+        android:focusable="true"/>
 
 </android.support.constraint.ConstraintLayout>
