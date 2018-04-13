@@ -28,9 +28,16 @@
             android:capitalize="words"
             android:gravity="center"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text=""
             android:textSize="24sp"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorWhite"
+            android:background="@color/almostTransparent"/>
 
         <TextView
             android:id="@+id/points_display"
@@ -38,50 +45,15 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="18sp"
-            android:textColor="@color/colorWhite"/>
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
 
-  <!--      <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="80dp"
-
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/chartButton"
-                android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="80dp"
-                android:layout_weight="1"
-                android:background="@color/colorButtonCharts"
-                android:text="@string/charts" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/statsButton"
-                android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="80dp"
-                android:layout_weight="1"
-                android:background="@color/colorButtonStats"
-                android:text="@string/stats" />
-        </LinearLayout> -->
-
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/almostTransparent"/>
 
 
     </LinearLayout>
