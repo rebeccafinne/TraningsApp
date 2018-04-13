@@ -49,13 +49,7 @@ android:layout_height="match_parent"
                 android:textColor="@color/colorWhite"
                 android:hint="@string/display_name"
                 >
-
-        <!--        <android.support.design.widget.TextInputEditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/display_name"
-                    android:textColor="@color/colorWhite"
-                    android:minWidth="150dp" />-->
+                
             </EditText>
 
         </LinearLayout>
