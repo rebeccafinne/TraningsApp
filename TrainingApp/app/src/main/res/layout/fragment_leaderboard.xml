@@ -1,56 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:layout_marginBottom="@dimen/navigation_bar_height">
 
-    <LinearLayout
+
+    <ListView
+        android:id="@+id/leaderList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/navigation_bar_height"
-        >
+
+
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+
+        android:background="@color/almostTransparent"
+        app:layout_constraintBottom_toTopOf="@+id/add_new_friend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </ListView>
 
 
 
-        <ListView
-            android:id="@+id/leaderList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/almostTransparent"
-            android:layout_marginBottom="200dp"
-
-
-            >
-
-
-        </ListView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-
-            <Button
-                    android:id="@+id/add_new_friend"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginEnd="60dp"
-                    android:textColor="@color/colorWhite"
-                    android:background="@color/almostTransparent"
-                    android:text="@string/add_new"
-                    />
-
-        </LinearLayout>
-    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_new_friend"
+        android:layout_width="254dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/plus_sign_filled"
+        android:background="@color/colorAccent3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

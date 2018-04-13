@@ -3,6 +3,7 @@ package kandidat.trainingapp.Fragments;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,7 +36,7 @@ public class LeaderboardFragment extends Fragment {
     private FirebaseDatabase db;
     private DatabaseReference ref;
     private ListView leaderboardList;
-    private Button addFriend;
+    private FloatingActionButton addFriend;
     private FirebaseUser theCurrenUser = FirebaseAuth.getInstance().getCurrentUser();
     private UserInformation currentUser;
 
@@ -66,7 +67,7 @@ public class LeaderboardFragment extends Fragment {
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
         leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
-        addFriend = (Button) theView.findViewById(R.id.add_new_friend);
+        addFriend = (FloatingActionButton) theView.findViewById(R.id.add_new_friend);
         ref.child("friends").child(theCurrenUser.getUid()).child(theCurrenUser.getUid()).setValue(currentUser);
 
         addFriend.setOnClickListener(new View.OnClickListener() {
