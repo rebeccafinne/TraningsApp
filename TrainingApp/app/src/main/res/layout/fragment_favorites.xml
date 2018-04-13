@@ -13,28 +13,42 @@
 
                 <TextView
                     android:id="@+id/empty_favorites"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                 
 
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginTop="32dp"
                     android:gravity="center"
                     android:text=""
                     android:textColor="@color/colorWhite"
-                    android:background="@color/colorPrimary"
-                    android:textSize="26sp"
-                    app:layout_constraintBottom_toBottomOf="@id/toolbar_fragment"
+                    android:layout_weight="1"
 
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+
+                    android:textSize="26sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/fab"
                     android:layout_width="254dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/plus_sign"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/plus_sign_filled"
+                    android:background="@color/colorAccent3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -44,9 +58,10 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="4dp"
                     android:layout_marginStart="4dp"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="#40ffffff"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/empty_favorites"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

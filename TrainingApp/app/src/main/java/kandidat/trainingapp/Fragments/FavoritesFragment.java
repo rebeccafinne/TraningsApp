@@ -2,6 +2,7 @@ package kandidat.trainingapp.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -121,10 +122,15 @@ public class FavoritesFragment extends Fragment {
                     if(allFavoriteItems.isEmpty()){
                         if(isAdded()) {
                             headerText.setText(getString(R.string.empty_favorites_string));
+                            headerText.setBackgroundColor(getResources().getColor(R.color.almostTransparent));
+                            listView.setBackgroundColor(Color.TRANSPARENT);
                         }
                     }else{
                         if(isAdded()) {
-                            headerText.setText(getString(R.string.explain_favorites));
+                            headerText.setText("");
+                            headerText.setBackgroundColor(Color.TRANSPARENT);
+                            listView.setBackgroundColor(getResources().getColor(R.color.almostTransparent));
+
                         }
 
                     }
@@ -159,7 +165,7 @@ public class FavoritesFragment extends Fragment {
 
                     Context context = getApplicationContext();
 
-                    CharSequence text = "Favorite complete registered!";
+                    CharSequence text = "You earned " + itemClicked.getValue() + " points!";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);

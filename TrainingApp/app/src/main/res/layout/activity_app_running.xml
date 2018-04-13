@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/button_gratident"
     tools:context="kandidat.trainingapp.Activities.AppMainActivity">
 
     <include layout="@layout/layout_fragment_toolbar"/>
@@ -22,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="0dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/gradient"
             android:paddingBottom="0dp"
             app:itemIconTint="@color/colorBottomNavBar"
             app:itemTextColor="@color/colorBottomNavBar"

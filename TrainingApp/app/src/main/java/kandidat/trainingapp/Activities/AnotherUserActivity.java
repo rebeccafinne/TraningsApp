@@ -99,7 +99,7 @@ public class AnotherUserActivity extends AppCompatActivity {
                 if(currentUser.getUid().equals(userId)){
                     friendRequest.setVisibility(View.GONE);
                     declineRequest.setVisibility(View.GONE);
-                    toolText.setText("me");
+                    toolText.setText("Me");
                     textPoints.setText("You have collected " + points +" points");
                 }
             }

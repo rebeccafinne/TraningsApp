@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/button_gratident"
+
     tools:context="kandidat.trainingapp.Activities.FavoriteStairsActivity">
 
     <include layout="@layout/layout_activity_toolbar"/>
@@ -20,8 +22,12 @@
             android:layout_height="wrap_content"
             android:text="@string/addStairsText"
             android:layout_marginTop="100dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
             android:layout_gravity="center"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             />
         <Spinner
@@ -29,7 +35,9 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/colorWhite"
+            >
 
         </Spinner>
 
@@ -48,7 +56,8 @@
                 android:gravity="center"
                 android:layout_marginStart="60dp"
                 android:layout_marginEnd="60dp"
-                android:background="@color/colorButtonCharts"/>
+                android:textColor="@color/colorWhite"
+                android:background="@color/almostTransparent"/>
         </LinearLayout>
 
     </LinearLayout>

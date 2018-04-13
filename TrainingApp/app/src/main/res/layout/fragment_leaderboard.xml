@@ -7,36 +7,50 @@
     android:layout_height="match_parent"
     >
 
-    <ListView
-        android:id="@+id/leaderList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/navigation_bar_height"
+        >
 
 
-    </ListView>
 
-    <Button
-        android:id="@+id/add_new_friend"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginBottom="72dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/colorAccent"
-        android:text="@string/add_new"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leaderList"
-        app:layout_constraintVertical_bias="0.393" />
+        <ListView
+            android:id="@+id/leaderList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/almostTransparent"
+            android:layout_marginBottom="200dp"
+
+
+            >
+
+
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+
+            <Button
+                    android:id="@+id/add_new_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/almostTransparent"
+                    android:text="@string/add_new"
+                    />
+
+        </LinearLayout>
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

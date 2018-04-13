@@ -5,7 +5,9 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context="kandidat.trainingapp.Activities.AddFriendActivity">
+    android:background="@drawable/button_gratident"
+
+    tools:context="kandidat.trainingapp.Activities.AddFriendActivity">
 
 
     <include layout="@layout/layout_fragment_toolbar"/>

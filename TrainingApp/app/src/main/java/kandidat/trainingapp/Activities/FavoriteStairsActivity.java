@@ -38,7 +38,7 @@ public class FavoriteStairsActivity extends AppCompatActivity {
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.amount_of_stairs, android.R.layout.simple_spinner_item);
+                R.array.amount_of_stairs, R.layout.layout_spinner);
 
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

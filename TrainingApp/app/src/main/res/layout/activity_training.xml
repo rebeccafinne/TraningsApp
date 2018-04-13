@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/button_gratident"
     tools:context="kandidat.trainingapp.Activities.TrainingActivity">
 
     <include
@@ -49,6 +50,7 @@
         android:layout_weight="1"
         android:text="@string/_00_00_00"
         android:textSize="24sp"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start_pause"
         app:layout_constraintEnd_toStartOf="@+id/btn_timer_start_pause"
         app:layout_constraintHorizontal_bias="0.5"
@@ -65,7 +67,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorAccent2"
+        android:background="@color/almostTransparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,8 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:background="@color/authui_colorPrimary"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/gradient"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -90,7 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/exercise"
-            android:textColor="@color/authui_inputTextColor"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp" />
 
         <TextView
@@ -99,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/sets"
-            android:textColor="@color/authui_inputTextColor"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
         <TextView
@@ -107,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/reps"
-            android:textColor="@color/authui_inputTextColor"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
         <TextView
@@ -115,8 +118,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/weight"
-            android:textColor="@color/authui_inputTextColor"
+            android:text="Weight"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
     </LinearLayout>
 
