@@ -2,11 +2,14 @@ package kandidat.trainingapp.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -23,8 +26,11 @@ import com.firebase.ui.auth.IdpResponse;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 import kandidat.trainingapp.Models.BasicWorkout;
 import kandidat.trainingapp.Models.Exercise;
+import kandidat.trainingapp.Models.ExerciseRow;
 import kandidat.trainingapp.Models.Points;
 import kandidat.trainingapp.Models.Timer;
 import kandidat.trainingapp.Models.Workout;
@@ -167,7 +173,6 @@ public class TrainingActivity extends AppCompatActivity {
 
         ListView lstExercises = findViewById(R.id.list_view_gym_exercise);
         final ListExerciseAdapter listAdapter = new ListExerciseAdapter();
-        final RowAdapter rowAdapter = new RowAdapter();
 
         lstExercises.setAdapter(listAdapter);
 
@@ -177,14 +182,13 @@ public class TrainingActivity extends AppCompatActivity {
 
 
         btnAddExercise.setOnClickListener(view -> {
-            currentExercise = new Exercise();
-            workout.addNewExercise(currentExercise);
-
+            final RowAdapter rowAdapter = new RowAdapter();
             final AlertDialog.Builder mBuilder = new AlertDialog.Builder(TrainingActivity.this);
             View mView = View.inflate(context, R.layout.dialog_exercise, null);
 
             final TextView mExerciseHeader = mView.findViewById(R.id.ex_name);
             final ListView lstRows = mView.findViewById(R.id.lst_rows);
+            lstRows.setItemsCanFocus(true);
             lstRows.setAdapter(rowAdapter);
             final TextView description = mView.findViewById(R.id.description_edit);
 
@@ -195,70 +199,20 @@ public class TrainingActivity extends AppCompatActivity {
             btnAddRow = mView.findViewById(R.id.btn_add_row);
             btnAddRow.setOnClickListener(view15 -> {
 
-                View temporaryView;
-                EditText setEt, repEt, weightEt;
-                for (int i = 0; i < rowAdapter.getCount(); i++) {
-                    temporaryView = lstRows.getChildAt(i);
-
-                    setEt = temporaryView.findViewById(R.id.set_set);
-                    repEt = temporaryView.findViewById(R.id.set_rep);
-                    weightEt = temporaryView.findViewById(R.id.set_weight);
-
-                    int setValue = 0;
-                    int repValue = 0;
-                    int weightValue = 0;
-
-                    if(setEt.getText().toString() != null && !setEt.getText().toString().matches("")){
-                        setValue = Integer.parseInt(setEt.getText().toString());
-                    }
-                    if(repEt.getText().toString() != null && !repEt.getText().toString().matches("")){
-                        repValue = Integer.parseInt(repEt.getText().toString());
-                    }
-                    if(weightEt.getText().toString() != null && !weightEt.getText().toString().matches("") ){
-                        weightValue = Integer.parseInt(weightEt.getText().toString());
-                    }
-
-                    workout.setRow(currentExercise,i, setValue, repValue, weightValue);
-                }
-
-                workout.newRow(currentExercise);
+                rowAdapter.myItems.add(new ExerciseRow(0,0,0));
                 rowAdapter.notifyDataSetChanged();
+
             });
 
             btnDone = mView.findViewById(R.id.btn_add_ex_done);
             btnDone.setOnClickListener(view16 -> {
-                View temporaryView;
-                EditText setEt, repEt, weightEt;
-                for (int i = 0; i < rowAdapter.getCount(); i++) {
-                    temporaryView = lstRows.getChildAt(i);
-
-                    setEt = temporaryView.findViewById(R.id.set_set);
-                    repEt = temporaryView.findViewById(R.id.set_rep);
-                    weightEt = temporaryView.findViewById(R.id.set_weight);
-
-                    int setValue = 0;
-                    int repValue = 0;
-                    int weightValue = 0;
-
-                    if (setEt.getText().toString() != null && !setEt.getText().toString().matches("")) {
-                        setValue = Integer.parseInt(setEt.getText().toString());
-                    }
-                    if (repEt.getText().toString() != null && !repEt.getText().toString().matches("")) {
-                        repValue = Integer.parseInt(repEt.getText().toString());
-                    }
-                    if (weightEt.getText().toString() != null && !weightEt.getText().toString().matches("")) {
-                        weightValue = Integer.parseInt(weightEt.getText().toString());
-                    }
-
-                    workout.setRow(currentExercise, i, setValue, repValue, weightValue);
+                //TODO om namnet redan finns, neka.
+                if (mExerciseHeader.getText().toString().equals("")){
+                    currentExercise = new Exercise();
+                }else {
+                    currentExercise = new Exercise(mExerciseHeader.getText().toString());
                 }
-
-                if(!mExerciseHeader.getText().toString().matches( "") ){
-                    currentExercise.setName(mExerciseHeader.getText().toString());
-                }
-                if(!description.getText().toString().matches("")){
-                    currentExercise.setDescription(description.getText().toString());
-                }
+                workout.addNewExercise(currentExercise, rowAdapter.myItems);
                 exerciseDialog.dismiss();
                 listAdapter.notifyDataSetChanged();
             });
@@ -346,50 +300,117 @@ public class TrainingActivity extends AppCompatActivity {
     }*/
 
     class RowAdapter extends BaseAdapter{
+        private LayoutInflater mInflater;
+        public ArrayList<ExerciseRow> myItems = new ArrayList();
+
+        public RowAdapter(){
+            mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            ExerciseRow tmpRow = new ExerciseRow(0,0,0);
+            myItems.add(tmpRow);
+
+            notifyDataSetChanged();
+        }
 
         @Override
         public int getCount() {
-            return workout.nbrOfRows(currentExercise);
+            return myItems.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return null;
+            return i;
         }
 
         @Override
         public long getItemId(int i) {
-            return 0;
-        }
-
-        public int getSets(int i){
-            return workout.getSets(currentExercise, i);
+            return i;
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            view = View.inflate(context, R.layout.exercise_edit_layout, null);
-
-            TextView setsView = view.findViewById(R.id.set_set);
-            TextView repsView = view.findViewById(R.id.set_rep);
-            TextView weightView = view.findViewById(R.id.set_weight);
-
-            String tmpString;
-            if(workout.getSets(currentExercise, i) != 0){
-                tmpString = ""+ workout.getSets(currentExercise, i);
-                setsView.setText(tmpString);
-            }
-            if(workout.getReps(currentExercise, i) != 0){
-                tmpString = ""+ workout.getReps(currentExercise, i);
-                repsView.setText(tmpString);
-            }
-            if(workout.getWeight(currentExercise, i) != 0){
-                tmpString = ""+ workout.getWeight(currentExercise, i);
-                weightView.setText(tmpString);
+        public View getView(int i, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if(convertView == null){
+                holder = new ViewHolder();
+                convertView = mInflater.inflate(R.layout.exercise_edit_layout, null);
+                holder.set = convertView.findViewById(R.id.set_set);
+                holder.rep = convertView.findViewById(R.id.set_rep);
+                holder.weight = convertView.findViewById(R.id.set_weight);
+                //TODO for rep och weight
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
             }
 
-            return view;
+            if(myItems.get(i).getSets() != 0 ) {
+                holder.set.setText("" + myItems.get(i).getSets());
+            }else{
+                holder.set.setText("");
+            }
+            holder.set.setId(i);
+
+            if(myItems.get(i).getReps() != 0 ) {
+                holder.rep.setText("" + myItems.get(i).getReps());
+            }else{
+                holder.rep.setText("");
+            }
+            holder.rep.setId(i);
+
+            if(myItems.get(i).getWeight() != 0 ) {
+                holder.weight.setText("" + myItems.get(i).getWeight());
+            }else{
+                holder.weight.setText("");
+            }
+            holder.weight.setId(i);
+
+            holder.set.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus){
+                        final int position = v.getId();
+                        final EditText Caption = (EditText) v;
+                        if(!Caption.getText().toString().equals("") ){
+                            myItems.get(position).setSets(Integer.parseInt(Caption.getText().toString()));
+                        }else{
+                            myItems.get(position).setSets(0);
+                        }
+                    }
+                }
+            });
+
+            holder.rep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus){
+                        final int position = v.getId();
+                        final EditText Caption = (EditText) v;
+                        if(!Caption.getText().toString().equals("") ){
+                            myItems.get(position).setReps(Integer.parseInt(Caption.getText().toString()));
+                        }else{
+                            myItems.get(position).setReps(0);
+                        }
+                    }
+                }
+            });
+
+            holder.weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus){
+                        final int position = v.getId();
+                        final EditText Caption = (EditText) v;
+                        if(!Caption.getText().toString().equals("") ){
+                            myItems.get(position).setWeight(Integer.parseInt(Caption.getText().toString()));
+                        }else{
+                            myItems.get(position).setWeight(0);
+                        }
+                    }
+                }
+            });
+
+            return convertView;
         }
     }
 
+    class ViewHolder {
+        EditText set;
+        EditText rep;
+        EditText weight;
+    }
 }
