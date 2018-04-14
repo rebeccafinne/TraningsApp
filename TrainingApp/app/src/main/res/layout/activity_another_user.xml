@@ -4,11 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/button_gratident"
+
     tools:context="kandidat.trainingapp.Activities.AnotherUserActivity">
+
+   <!-- <include layout="@layout/layout_fragment_toolbar"/>-->
+
 
     <include
         layout="@layout/content_another_user"
-        android:layout_height="381dp"
         tools:layout_editor_absoluteY="186dp" />
 
 </android.support.design.widget.CoordinatorLayout>

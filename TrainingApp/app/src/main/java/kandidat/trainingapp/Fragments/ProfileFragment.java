@@ -27,7 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class ProfileFragment extends Fragment  {
 
     private TextView profileText;
     private TextView pointsDisplay;
@@ -57,10 +57,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         pointsDisplay = (TextView) rootView.findViewById(R.id.points_display);
         profileText = (TextView) rootView.findViewById(R.id.nameInProfile);
-        chartButton = (Button) rootView.findViewById(R.id.chartButton);
+       /* chartButton = (Button) rootView.findViewById(R.id.chartButton);
         chartButton.setOnClickListener(this);
         statsButton = (Button) rootView.findViewById(R.id.statsButton);
-        statsButton.setOnClickListener(this);
+        statsButton.setOnClickListener(this);*/
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -107,7 +107,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    @Override
+  /*  @Override
     public void onClick(View view) {
 
         Intent intent;
@@ -119,5 +119,5 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
 
         startActivity(intent);
-    }
+    }*/
 }

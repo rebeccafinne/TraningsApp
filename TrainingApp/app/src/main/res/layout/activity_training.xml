@@ -4,92 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/button_gratident"
     tools:context="kandidat.trainingapp.Activities.TrainingActivity">
-
-    <Button
-        android:id="@+id/btn_timer_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_weight="1"
-        android:text="@string/stop_timer"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_paus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_timer_paus"
-        app:layout_constraintTop_toTopOf="@+id/btn_timer_paus" />
-
-    <Button
-        android:id="@+id/btn_timer_paus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_weight="1"
-        android:text="@string/paus_timer"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start"
-        app:layout_constraintEnd_toStartOf="@+id/btn_timer_stop"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_timer_start"
-        app:layout_constraintTop_toTopOf="@+id/btn_timer_start"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btn_timer_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:text="@string/start_pause_timer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_timer_paus"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timer_text" />
-
-    <TextView
-        android:id="@+id/timer_text"
-        android:layout_width="102dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_weight="1"
-        android:text="00:00:00"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <include
         android:id="@+id/include"
         layout="@layout/layout_activity_toolbar" />
 
+
+    <ImageButton
+        android:id="@+id/btn_timer_start_pause"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_play_arrow_black_24dp"
+
+        android:backgroundTint="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_stop"
+        app:layout_constraintEnd_toStartOf="@+id/btn_timer_stop"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/timer_text"
+        app:layout_constraintTop_toTopOf="@+id/btn_timer_stop"
+        android:contentDescription="TODO"/>
+
+    <ImageButton
+        android:id="@+id/btn_timer_stop"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_stop_black_24dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="@string/stop_timer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_timer_start_pause"
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        android:contentDescription="TODO"/>
+
+
+    <TextView
+        android:id="@+id/timer_text"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/_00_00_00"
+        android:textSize="24sp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start_pause"
+        app:layout_constraintEnd_toStartOf="@+id/btn_timer_start_pause"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_timer_start_pause" />
+
+
+
     <ListView
-        android:id="@+id/list_view_gym_exercies"
+        android:id="@+id/list_view_gym_exercise"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorAccent2"
+        android:background="@color/almostTransparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <Button
-        android:id="@+id/btn_add_ex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/add_ex"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_timer_paus" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -97,20 +79,21 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/authui_colorPrimary"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/gradient"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_ex">
+        app:layout_constraintTop_toBottomOf="@+id/btn_timer_stop">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Exercise"
-            android:textColor="@color/authui_inputTextColor"
+            android:text="@string/exercise"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp" />
 
         <TextView
@@ -118,16 +101,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sets"
-            android:textColor="@color/authui_inputTextColor"
+            android:text="@string/sets"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Reps"
-            android:textColor="@color/authui_inputTextColor"
+            android:text="@string/reps"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
         <TextView
@@ -136,8 +119,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Weight"
-            android:textColor="@color/authui_inputTextColor"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_add_ex"
+        android:layout_width="254dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/plus_sign_filled"
+        android:background="@color/colorAccent3"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/list_view_gym_exercise"
+        app:layout_constraintEnd_toEndOf="@+id/list_view_gym_exercise"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/list_view_gym_exercise"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0"
+        android:focusable="true"/>
 
 </android.support.constraint.ConstraintLayout>

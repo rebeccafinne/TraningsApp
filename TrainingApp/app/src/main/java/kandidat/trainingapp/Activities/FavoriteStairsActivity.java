@@ -30,16 +30,19 @@ public class FavoriteStairsActivity extends AppCompatActivity {
         //Set toolbar and the text
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         TextView toolText = (TextView) toolbar.findViewById(R.id.activity_text);
-        toolText.setText("Stairs");
+        toolText.setText(R.string.tool_stairs);
 
 
         //Initialize the spinner
         spinner = (Spinner) findViewById(R.id.stairs_spinner);
+
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.amount_of_stairs, android.R.layout.simple_spinner_item);
+                R.array.amount_of_stairs, R.layout.layout_spinner);
+
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
@@ -56,9 +59,9 @@ public class FavoriteStairsActivity extends AppCompatActivity {
     private void saveStairsClicked(View view){
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-        if(favorites.addNewFavorite(newValueInteger, "Stairs")){
-              finish();
-          }
+        favorites.addNewFavorite(newValueInteger, "Stairs");
+        finish();
+
 
 
     }

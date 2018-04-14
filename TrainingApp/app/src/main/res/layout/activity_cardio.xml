@@ -4,60 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/button_gratident"
+
     tools:context="kandidat.trainingapp.Activities.CardioActivity">
 
-    <include layout="@layout/layout_activity_toolbar" />
+    <include
+        android:id="@+id/toolbar_activity"
+        layout="@layout/layout_activity_toolbar" />
 
     <TextView
         android:id="@+id/timer_text"
-        android:layout_width="102dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="24dp"
         android:layout_weight="1"
         android:text="00:00:00"
-        android:textSize="24sp"
+        android:textColor="@color/colorWhite"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_activity" />
 
-    <Button
-        android:id="@+id/btn_timer_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        android:text="@string/stop_timer"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_paus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_timer_paus"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/btn_timer_paus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+    <ImageButton
+        android:id="@+id/btn_timer_start_pause"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_weight="1"
-        android:text="@string/paus_timer"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_play_arrow_black_24dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_text"
         app:layout_constraintEnd_toStartOf="@+id/btn_timer_stop"
-        app:layout_constraintStart_toEndOf="@+id/btn_timer_start"
-        app:layout_constraintTop_toTopOf="@+id/btn_timer_start"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/btn_timer_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
-        android:layout_weight="1"
-        android:text="@string/start_pause_timer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timer_text" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_activity" />
+
+    <ImageButton
+        android:id="@+id/btn_timer_stop"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_stop_black_24dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_timer_start_pause"
+
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_activity" />
 
 
 </android.support.constraint.ConstraintLayout>

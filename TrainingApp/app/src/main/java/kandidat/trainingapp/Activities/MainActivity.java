@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
         mauth = FirebaseAuth.getInstance();
 
 
-        findViewById(R.id.sign_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<AuthUI.IdpConfig> providers = new ArrayList<>();
@@ -117,9 +117,6 @@ public class MainActivity extends AppCompatActivity{
 
                 }
             });
-
-
-
 
             startActivity(AppMainActivity.createIntent(this, response));
             finish();

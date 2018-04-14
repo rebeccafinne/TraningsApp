@@ -39,7 +39,7 @@ public class UserInformation {
         this.userId = userId;
         this.displayName = displayName;
         this.email = email;
-        this.points = 0;
+        this.points = points;
         //Used to sort users from highetst points to lowest
         this.negPoints = points * -1;
         //friends = new ArrayList<>();

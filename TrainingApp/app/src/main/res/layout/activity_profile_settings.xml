@@ -4,24 +4,28 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context="kandidat.trainingapp.Activities.ProfileSettingsActivity">
+    android:background="@drawable/button_gratident"
 
-<!-- TODO: Update blank fragment layout -->
+    tools:context="kandidat.trainingapp.Activities.ProfileSettingsActivity">
+
+    <include layout="@layout/layout_activity_toolbar" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:minWidth="@dimen/com_facebook_share_button_padding_left"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize">
 
-        <include layout="@layout/layout_activity_toolbar" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilePicture"
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:gravity="center"
+            android:layout_marginTop="30dp"
+
             android:src="@android:drawable/sym_def_app_icon" />
 
 
@@ -34,26 +38,28 @@ tools:context="kandidat.trainingapp.Activities.ProfileSettingsActivity">
 
             android:orientation="horizontal">
 
-            <android.support.design.widget.TextInputLayout
+            <EditText
                 android:id="@+id/edit_username"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:theme="@style/TextLabel"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
 
-                <android.support.design.widget.TextInputEditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/display_name"
-                    android:minWidth="150dp" />
-            </android.support.design.widget.TextInputLayout>
+                android:textColor="@color/colorWhite"
+                android:hint="@string/display_name"
+                >
+                
+            </EditText>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="50dp"
 
             android:orientation="horizontal">
 
@@ -62,9 +68,11 @@ tools:context="kandidat.trainingapp.Activities.ProfileSettingsActivity">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="60dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/colorButtonCharts"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="60dp"
+                android:layout_weight="1"
+                android:textColor="@color/colorWhite"
+                android:background="@color/almostTransparent"
                 android:text="@string/change_name" />
 
         </LinearLayout>

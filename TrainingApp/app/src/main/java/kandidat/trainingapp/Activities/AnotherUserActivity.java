@@ -2,6 +2,7 @@ package kandidat.trainingapp.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -9,12 +10,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ui.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,7 +43,6 @@ import kandidat.trainingapp.Repositories.UserInformation;
 
 public class AnotherUserActivity extends AppCompatActivity {
     private TextView textName,textPoints,toolText;
-    private Toolbar toolbar;
     private Button friendRequest,declineRequest;
     private int currentFriendState;
     private String friendDisplayName,friendEmail;
@@ -57,13 +61,19 @@ public class AnotherUserActivity extends AppCompatActivity {
         * ---------------Instantiate widgets-----------
         *----------------------------------------------
         * ---------------------------------------------*/
-        toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
+
         textName = (TextView) findViewById(R.id.theDisplayName);
         textPoints = (TextView) findViewById(R.id.displayPoints);
         friendRequest = (Button) findViewById(R.id.sendRequestBtn);
         declineRequest = (Button) findViewById(R.id.declineRequestBtn);
         String userId = getIntent().getStringExtra("userId");
+
+
+
+
+
 
 
         //Hide decline button
@@ -93,7 +103,7 @@ public class AnotherUserActivity extends AppCompatActivity {
                 if(currentUser.getUid().equals(userId)){
                     friendRequest.setVisibility(View.GONE);
                     declineRequest.setVisibility(View.GONE);
-                    toolText.setText("me");
+                    toolText.setText("Me");
                     textPoints.setText("You have collected " + points +" points");
                 }
             }
@@ -332,5 +342,7 @@ public class AnotherUserActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 }

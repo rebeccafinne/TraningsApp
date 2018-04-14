@@ -28,15 +28,18 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
         favorites = new Favorites();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         TextView toolText = (TextView) toolbar.findViewById(R.id.activity_text);
-        toolText.setText("Bus Stops");
+        toolText.setText(R.string.tool_bus);
 
          spinner = (Spinner) findViewById(R.id.bus_stop_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         //Using amount of stairs since it contains the same values.
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.amount_of_stairs, android.R.layout.simple_spinner_item);
+                R.array.amount_of_stairs, R.layout.layout_spinner);
+
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
@@ -54,9 +57,9 @@ public class FavoriteBusStopActivity extends AppCompatActivity {
 
         String newValueString = spinner.getSelectedItem().toString();
         Integer newValueInteger = Integer.parseInt(newValueString);
-        if(favorites.addNewFavorite(newValueInteger, "BusStop")){
-            finish();
-        }
+        favorites.addNewFavorite(newValueInteger, "BusStop");
+        finish();
+
 
 
     }

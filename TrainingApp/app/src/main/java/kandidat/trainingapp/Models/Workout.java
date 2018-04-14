@@ -26,14 +26,14 @@ public class Workout extends BasicWorkout {
     private static ArrayList<Workout> savedWorkouts = new ArrayList<>();
 
     private String name;
-    private LinkedHashMap<Exercise, ArrayList<Row>> exerciseList;
+    private LinkedHashMap<Exercise, ArrayList<ExerciseRow>> exerciseList;
 
     //**********************************************************************************************
     //***************************** Constructors ***************************************************
     //**********************************************************************************************
     public Workout(){
         super();
-        exerciseList = new LinkedHashMap<Exercise, ArrayList<Row>>();
+        exerciseList = new LinkedHashMap<Exercise, ArrayList<ExerciseRow>>();
         unsavedWorkouts.add(this);
     }
     public Workout(String name){
@@ -64,11 +64,15 @@ public class Workout extends BasicWorkout {
         Exercise newEx = new Exercise(name, description);
         addNewExercise(newEx);
     }
+    public void addNewExercise(Exercise exercise, ArrayList<ExerciseRow> rows){
+        exerciseList.put(exercise, rows);
+    }
+
 
     public void addExercise(String name){
         Exercise exercise = Exercise.getExercise(name);
         newRow(Exercise.getExercise(exercise),0, 0,0 );
-        exerciseList.put(exercise, new ArrayList<Row>());
+        exerciseList.put(exercise, new ArrayList<ExerciseRow>());
     }
     public void addExercise(Exercise exercise){
         String name = exercise.getName();
@@ -95,7 +99,7 @@ public class Workout extends BasicWorkout {
         newRow(exercise, 0,0,0);
     }
     public void newRow(Exercise exercise, int set, int rep, int weight){
-        Row newRow = new Row(set, rep, weight);
+        ExerciseRow newRow = new ExerciseRow(set, rep, weight);
         exerciseList.get(exercise).add(newRow);
     }
     public int nbrOfRows(Exercise exercise){
@@ -118,49 +122,4 @@ public class Workout extends BasicWorkout {
         return exerciseList.get(exercise).get(rownumber).getWeight();
     }
 
-    class Row{
-        private int sets;
-        private int reps;
-        private int weight;
-
-        private Row(int set, int reps, int weigth){
-            this.sets = set;
-            this.reps = reps;
-            this.weight = weigth;
-        }
-
-
-        public void setRow(int set, int rep, int weight){
-            setSets(set); setReps(rep); setWeight(weight);
-        }
-        public LinkedHashMap<String, Integer> getRow(){
-            LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
-            map.put("Sets", sets);
-            map.put("Reps", reps);
-            map.put("Weight", weight);
-            return map;
-
-        }
-
-        public int getSets(){
-            return sets;
-        }
-        public void setSets(int i){
-            sets = i;
-        }
-
-        public int getReps(){
-            return reps;
-        }
-        public void setReps(int i){
-            reps = i;
-        }
-
-        public int getWeight(){
-            return weight;
-        }
-        public void setWeight(int i){
-            weight = i;
-        }
-    }
 }

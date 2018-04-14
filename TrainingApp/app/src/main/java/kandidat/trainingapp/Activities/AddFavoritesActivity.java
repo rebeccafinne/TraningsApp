@@ -14,7 +14,7 @@ public class AddFavoritesActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView toolText;
-    Button gymButton, stairsButton, busButton, standingButton;
+    Button stairsButton, busButton, standingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +23,7 @@ public class AddFavoritesActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_activity);
         toolText = (TextView) toolbar.findViewById(R.id.activity_text);
-        toolText.setText("Add Favorite Workouts");
-        gymButton = (Button) findViewById(R.id.add_gym);
-        gymButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gymClicked(view);
-
-            }
-        });
+        toolText.setText(R.string.add_favorite_text);
 
         stairsButton = (Button) findViewById(R.id.add_stairs);
         stairsButton.setOnClickListener(new View.OnClickListener() {
@@ -57,21 +49,28 @@ public class AddFavoritesActivity extends AppCompatActivity {
 
     }
 
-    private void gymClicked(View view){
-        Intent intent = new Intent(this, AddNewGymActiviy.class);
-        startActivity(intent);
-    }
-
+    /**
+     * Creates an intent and starts a new activity to add a specific type of favorite
+     * @param view - the view from onClicked method
+     */
     private void addStairsClicked(View view){
         Intent intent = new Intent(this, FavoriteStairsActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Creates an intent and starts a new activity to add a specific type of favorite
+     * @param view - the view from onClicked method
+     */
     private void addBusClicked(View view){
         Intent intent = new Intent(this, FavoriteBusStopActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Creates an intent and starts a new activity to add a specific type of favorite
+     * @param view - the view from onClicked method
+     */
     private void addStandClicked(View view){
         Intent intent = new Intent(this, FavoriteTimeStandingActivity.class);
         startActivity(intent);
