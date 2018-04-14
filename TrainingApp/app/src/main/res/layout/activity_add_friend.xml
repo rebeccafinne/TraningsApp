@@ -6,10 +6,9 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
     android:background="@drawable/button_gratident"
-
     tools:context="kandidat.trainingapp.Activities.AddFriendActivity">
 
-
+    <include layout="@layout/layout_fragment_toolbar"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,7 +42,7 @@ android:layout_height="match_parent"
             android:text="Search" />
 
 
-    <include layout="@layout/layout_fragment_toolbar"/>
+
 
 
     <android.support.constraint.ConstraintLayout

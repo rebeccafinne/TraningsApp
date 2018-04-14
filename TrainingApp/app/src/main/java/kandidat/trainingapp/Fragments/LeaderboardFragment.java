@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -108,6 +109,7 @@ public class LeaderboardFragment extends Fragment {
         friendRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                sortList();
                 LeaderboardFragment.newInstance().getView();
                 userRef.child(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
                         @Override
@@ -135,13 +137,12 @@ public class LeaderboardFragment extends Fragment {
 
                             String userName = dataSnapshot.child("displayName").getValue().toString();
                             String points = dataSnapshot.child("points").getValue().toString();
-                            String UID = ds.getKey().toString();
+                            String UID = dataSnapshot.child("userId").getValue().toString();
 
                             dataModels.add(new LeaderboardModel(userName,points,UID));
                             LeaderboardFragment.newInstance().getView();
                             sortList();
-                            Collections.reverse(dataModels);
-                            leaderboardAdapter.notifyDataSetChanged();
+
 
                         }
 
@@ -262,10 +263,6 @@ public class LeaderboardFragment extends Fragment {
                 name = v.findViewById(R.id.txt_name);
                 points = v.findViewById(R.id.thePointsCollected);
 
-
-
-
-
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -280,20 +277,14 @@ public class LeaderboardFragment extends Fragment {
             }
         };
 
-
-
         leaderboardList.setAdapter(leaderboardAdapter);
         return theView;
     }
 
     private void sortList() {
-        Collections.sort(dataModels ,new Comparator<LeaderboardModel>()
-        {
-            @Override
-            public int compare(LeaderboardModel o1, LeaderboardModel o2) {
-                return o1.getPoints().compareTo(o2.getPoints());
-            }
-        });
+        Collections.sort(dataModels);
+        Collections.reverse(dataModels);
+        leaderboardAdapter.notifyDataSetChanged();
     }
 
 

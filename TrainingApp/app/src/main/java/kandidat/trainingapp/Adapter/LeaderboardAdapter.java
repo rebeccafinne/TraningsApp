@@ -22,7 +22,7 @@ import kandidat.trainingapp.R;
 
 public class LeaderboardAdapter extends ArrayAdapter<LeaderboardModel> implements View.OnClickListener {
     private ArrayList<LeaderboardModel> theData;
-    private FirebaseUser theCurrenUser = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseAuth mAuth;
     Context theContext;
 
     @Override
@@ -47,6 +47,8 @@ public class LeaderboardAdapter extends ArrayAdapter<LeaderboardModel> implement
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         LeaderboardModel model = getItem(position);
+        mAuth = FirebaseAuth.getInstance();
+
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
 
@@ -69,7 +71,7 @@ public class LeaderboardAdapter extends ArrayAdapter<LeaderboardModel> implement
             result = convertView;
         }
 
-        if(theCurrenUser.getUid().equals(model.getUID())){
+        if(mAuth.getCurrentUser().getUid().equals(model.getUID())){
             viewHolder.userNameTxt.setText(model.getUserName() + " (You)");
             viewHolder.pointsTxt.setText(model.getPoints());
             viewHolder.userNameTxt.setTextColor(Color.GREEN);
