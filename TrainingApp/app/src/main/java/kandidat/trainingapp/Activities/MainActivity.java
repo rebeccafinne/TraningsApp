@@ -99,16 +99,15 @@ public class MainActivity extends AppCompatActivity{
             userRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.hasChild(user.getUid())){
-
-                    }else{
+                    if(!dataSnapshot.hasChild(user.getUid())) {
                         //Create and add the user to database.
                         String UID = user.getUid();
                         String email = user.getEmail();
                         String displayName = user.getDisplayName();
 
 
-                        UserInformation theUser = new UserInformation(UID,displayName,email);
+                        UserInformation theUser = new UserInformation(UID, displayName, email);
+                        //theUser.getFriends().add(UID);
                         putUserRef.setValue(theUser);
                     }
                 }
