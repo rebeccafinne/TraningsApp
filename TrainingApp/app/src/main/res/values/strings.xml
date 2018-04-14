@@ -132,4 +132,7 @@
     <string name="send_request">Send Friend Request</string>
     <string name="decline">Decline Friend Request</string>
     <string name="add_new">Add New Friend</string>
+    <string name="friend_email">Enter your friends email</string>
+    <string name="add_remove">Add/Remove Friends</string>
+    <string name="find">Find Your Friend</string>
 </resources>

@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context="kandidat.trainingapp.Activities.AddFavoritesActivity">
 
-    <include layout="@layout/layout_activity_toolbar"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,6 +63,11 @@
 
 
     </LinearLayout>
+
+    <include
+        layout="@layout/layout_activity_toolbar"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="255dp" />
 
 
 </android.support.constraint.ConstraintLayout>

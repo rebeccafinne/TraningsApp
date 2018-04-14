@@ -1,11 +1,13 @@
 package kandidat.trainingapp.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -29,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.util.Date;
 
+import kandidat.trainingapp.Adapter.LeaderboardAdapter;
+import kandidat.trainingapp.Fragments.LeaderboardFragment;
 import kandidat.trainingapp.R;
 import kandidat.trainingapp.Repositories.UserInformation;
 
@@ -220,13 +224,14 @@ public class AnotherUserActivity extends AppCompatActivity {
                 //This means that user has gotten a friend request
                 if(currentFriendState == 2){
                     //Currently set the value of friend to when they accepted the friend request
-                    UserInformation friendAdded = new UserInformation(userId,friendDisplayName,friendEmail);
-                    UserInformation theCurrentUser = new UserInformation(currentUser.getUid(),currentUser.getDisplayName(),currentUser.getEmail());
-                    friendsRef.child(currentUser.getUid()).child(userId).setValue(friendAdded).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    String currentDate = DateFormat.getDateInstance().format(new Date());
+                    // UserInformation friendAdded = new UserInformation(userId,friendDisplayName,friendEmail);
+                    // UserInformation theCurrentUser = new UserInformation(currentUser.getUid(),currentUser.getDisplayName(),currentUser.getEmail());
+                    friendsRef.child(currentUser.getUid()).child(userId).setValue(currentDate).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                friendsRef.child(userId).child(currentUser.getUid()).setValue(theCurrentUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                friendsRef.child(userId).child(currentUser.getUid()).setValue(currentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         requestRef.child(currentUser.getUid()).child(userId)
@@ -242,6 +247,9 @@ public class AnotherUserActivity extends AppCompatActivity {
                                                                 Toast.LENGTH_LONG).show();
                                                     }
                                                 });
+
+                                                Intent mainIntent = new Intent(AnotherUserActivity.this,AppMainActivity.class);
+                                                startActivity(mainIntent);
                                             }
                                         });
                                     }
@@ -280,7 +288,10 @@ public class AnotherUserActivity extends AppCompatActivity {
                                                                                             "Friend State wasn't set properly",
                                                                                             Toast.LENGTH_LONG).show();
                                                                                 }
+
                                                                             });
+                                                                            Intent mainIntent = new Intent(AnotherUserActivity.this,AppMainActivity.class);
+                                                                            startActivity(mainIntent);
                                                                         }
                                                                     });
 

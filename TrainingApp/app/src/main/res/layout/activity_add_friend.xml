@@ -8,20 +8,57 @@ android:layout_height="match_parent"
 tools:context="kandidat.trainingapp.Activities.AddFriendActivity">
 
 
-    <ListView
-        android:id="@+id/leaderList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="567dp"
-        android:layout_marginBottom="64dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize">
 
 
-    </ListView>
+        <TextView
+            android:id="@+id/txt_label"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/find"
+            android:textColor="@color/authui_inputTextColorDark"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/friend_email"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/findBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_button"
+            android:textColor="#ffffff"
+            android:text="Search" />
+
+        <ListView
+            android:id="@+id/leaderList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="64dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </ListView>
+
+
+
+
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
