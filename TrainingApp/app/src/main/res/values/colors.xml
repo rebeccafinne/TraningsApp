@@ -7,7 +7,8 @@
     <color name="colorButtonStats">#767A88</color>
     <color name="colorAccent">#ED4C5F</color>
     <color name="colorAccent2">#AF76E9</color>
-
+    <color name="red">#D93656</color>
+    <color name="green">#00a878</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBottomNavBar">#EAEAEC</color>

@@ -19,13 +19,13 @@
         android:layout_weight="1"
         android:background="@drawable/ic_play_arrow_black_24dp"
 
-        android:backgroundTint="@android:color/holo_green_dark"
+        android:backgroundTint="@color/green"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="@+id/btn_timer_stop"
         app:layout_constraintEnd_toStartOf="@+id/btn_timer_stop"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/timer_text"
-        app:layout_constraintTop_toTopOf="@+id/btn_timer_stop"
-        android:contentDescription="TODO"/>
+        app:layout_constraintTop_toTopOf="@+id/btn_timer_stop" />
 
     <ImageButton
         android:id="@+id/btn_timer_stop"
@@ -34,13 +34,13 @@
         android:layout_marginTop="56dp"
         android:layout_weight="1"
         android:background="@drawable/ic_stop_black_24dp"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:backgroundTint="@color/red"
+        android:contentDescription="TODO"
         android:text="@string/stop_timer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_timer_start_pause"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        android:contentDescription="TODO"/>
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
 
     <TextView
@@ -49,8 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/_00_00_00"
-        android:textSize="24sp"
         android:textColor="@color/colorWhite"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_timer_start_pause"
         app:layout_constraintEnd_toStartOf="@+id/btn_timer_start_pause"
         app:layout_constraintHorizontal_bias="0.5"
