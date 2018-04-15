@@ -1,5 +1,7 @@
 package kandidat.trainingapp.Repositories;
 
+import android.support.annotation.NonNull;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -7,8 +9,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -21,8 +26,10 @@ public class UserInformation {
     private String userId;
     private String displayName;
     private String email;
+    //private List<String> friends;
     private int points;
     private int negPoints;
+
 
 
     public UserInformation() {
@@ -35,6 +42,7 @@ public class UserInformation {
         this.points = points;
         //Used to sort users from highetst points to lowest
         this.negPoints = points * -1;
+        //friends = new ArrayList<>();
 
     }
 
@@ -56,7 +64,7 @@ public class UserInformation {
 
     public int getNegPoints() {return negPoints;}
 
-
-
-
+   /* public List<String> getFriends() {
+        return friends;
+    }*/
 }

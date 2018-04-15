@@ -41,7 +41,7 @@ public class DailyActivity extends AppCompatActivity {
                 R.array.type_of_daily, R.layout.layout_spinner);
 
         // Specify the layout to use when the list of choices appears
-        adapterType.setDropDownViewResource(R.layout.layout_spinner);
+        adapterType.setDropDownViewResource(R.layout.layout_dropdown_spinner);
 
         // Apply the adapter to the spinner
         spinnerType.setAdapter(adapterType);
@@ -57,7 +57,7 @@ public class DailyActivity extends AppCompatActivity {
                     ArrayAdapter<CharSequence> adapterHowMany = ArrayAdapter.createFromResource(getApplicationContext(),
                             R.array.amount_of_time_standing, R.layout.layout_spinner);
                     // Specify the layout to use when the list of choices appears
-                    adapterHowMany.setDropDownViewResource(R.layout.layout_spinner);
+                    adapterHowMany.setDropDownViewResource(R.layout.layout_dropdown_spinner);
                     // Apply the adapter to the spinner
                     spinnerHowMany.setAdapter(adapterHowMany);
                     howManyText.setText(R.string.how_many_minutes);
@@ -67,7 +67,7 @@ public class DailyActivity extends AppCompatActivity {
                     ArrayAdapter<CharSequence> adapterHowMany = ArrayAdapter.createFromResource(getApplicationContext(),
                             R.array.amount_of_stairs, R.layout.layout_spinner);
                     // Specify the layout to use when the list of choices appears
-                    adapterHowMany.setDropDownViewResource(R.layout.layout_spinner);
+                    adapterHowMany.setDropDownViewResource(R.layout.layout_dropdown_spinner);
                     // Apply the adapter to the spinner
                     spinnerHowMany.setAdapter(adapterHowMany);
                     howManyText.setText(R.string.how_many_bus_stops);
@@ -78,7 +78,7 @@ public class DailyActivity extends AppCompatActivity {
                     ArrayAdapter<CharSequence> adapterHowMany = ArrayAdapter.createFromResource(getApplicationContext(),
                             R.array.amount_of_stairs, R.layout.layout_spinner);
                     // Specify the layout to use when the list of choices appears
-                    adapterHowMany.setDropDownViewResource(R.layout.layout_spinner);
+                    adapterHowMany.setDropDownViewResource(R.layout.layout_dropdown_spinner);
                     // Apply the adapter to the spinner
                     spinnerHowMany.setAdapter(adapterHowMany);
                     howManyText.setText(R.string.how_many_stairs);

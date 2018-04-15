@@ -7,6 +7,22 @@
     android:layout_marginBottom="@dimen/navigation_bar_height">
 
     <Button
+        android:id="@+id/dailyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="#40ffffff"
+        android:textColor="@color/colorWhite"
+
+        android:text="@string/daily"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Button
         android:id="@+id/gymButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,21 +55,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
-    <Button
-        android:id="@+id/dailyButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:background="#40ffffff"
-        android:textColor="@color/colorWhite"
 
-        android:text="@string/daily"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
  </LinearLayout>
 

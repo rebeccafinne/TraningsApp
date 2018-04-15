@@ -26,7 +26,7 @@ import kandidat.trainingapp.R;
 public class ProfileSettingsActivity extends AppCompatActivity {
 
     private Button save;
-    private TextInputLayout editDisplayName;
+    private EditText editDisplayName;
 
 
     @Override
@@ -39,12 +39,12 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
         textView.setText(R.string.settings);
 
-        editDisplayName = (TextInputLayout)findViewById(R.id.edit_username);
+        editDisplayName = (EditText) findViewById(R.id.edit_username);
         save = (Button)findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            String theNameWanted = editDisplayName.getEditText().getText().toString();
+            String theNameWanted = editDisplayName.getText().toString();
             changeDisplayName(theNameWanted);
         }
     });

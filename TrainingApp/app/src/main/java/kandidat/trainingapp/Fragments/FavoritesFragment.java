@@ -72,9 +72,6 @@ public class FavoritesFragment extends Fragment {
         DatabaseReference ref = db.getReference("favorites");
         DatabaseReference myRef = ref.child(user.getUid());
 
-        DatabaseReference pointRef = db.getReference("users").child(user.getUid()).child("points");
-        DatabaseReference negPointRef = db.getReference("users").child(user.getUid()).child("negPoints");
-
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
         listView = (ListView) rootView.findViewById(R.id.favorite_list);

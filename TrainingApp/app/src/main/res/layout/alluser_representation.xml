@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/button_gratident"
+
     >
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/display_name"
-        android:textColor="@color/authui_colorPrimary"
+        android:textColor="@color/colorWhite"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
