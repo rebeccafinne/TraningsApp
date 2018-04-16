@@ -76,10 +76,6 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HowChallenging"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Activities.AnotherUserActivity"
             android:label="@string/title_activity_another_user"
             android:theme="@style/AppTheme" />

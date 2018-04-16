@@ -166,10 +166,10 @@ public class AddFriendActivity extends AppCompatActivity {
 
                 name = v.findViewById(R.id.txt_name);
                 if(theCurrenUser.getUid().equals(model.getUserId())){
-                    name.setTextColor(Color.rgb(0,108,0));
+                    name.setTextColor(getResources().getColor(R.color.colorWhite));
                     name.setText(String.valueOf(model.getDisplayName()) + " (You)");
                 }else{
-                    name.setTextColor(Color.rgb(0,0,108));
+                    name.setTextColor(getResources().getColor(R.color.colorWhite));
                     name.setText(String.valueOf(model.getDisplayName()));
                 }
 
