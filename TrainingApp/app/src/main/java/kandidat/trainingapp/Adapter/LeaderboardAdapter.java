@@ -22,7 +22,7 @@ import kandidat.trainingapp.R;
 
 public class LeaderboardAdapter extends ArrayAdapter<LeaderboardModel> implements View.OnClickListener {
     private ArrayList<LeaderboardModel> theData;
-    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
     Context theContext;
 
     @Override
@@ -47,7 +47,9 @@ public class LeaderboardAdapter extends ArrayAdapter<LeaderboardModel> implement
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         LeaderboardModel model = getItem(position);
-        mAuth = FirebaseAuth.getInstance();
+
+        //Gets the user that is logged in right now
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
@@ -71,20 +73,32 @@ public class LeaderboardAdapter extends ArrayAdapter<LeaderboardModel> implement
             result = convertView;
         }
 
-        if(mAuth.getCurrentUser().getUid().equals(model.getUID())){
-            viewHolder.userNameTxt.setText(model.getUserName() + " (You)");
-            viewHolder.pointsTxt.setText(model.getPoints());
-            viewHolder.userNameTxt.setTextColor(Color.GREEN);
+        if(currentUser.getUid().equals(model.getUID())){
+
+            String userName = model.getUserName() + " (You)";
+            String points = model.getPoints();
+            int color = Color.GREEN;
+
+            setText(viewHolder, userName,points,color);
 
         }else{
-            viewHolder.userNameTxt.setText(model.getUserName());
-            viewHolder.pointsTxt.setText(model.getPoints());
-            viewHolder.userNameTxt.setTextColor(Color.BLUE);
+            String userName = model.getUserName();
+            String points = model.getPoints();
+            int color = Color.BLUE;
+
+            setText(viewHolder, userName,points,color);
         }
-        viewHolder.userNameTxt.setTag(position);
-        viewHolder.userNameTxt.setOnClickListener(this);
+
         return convertView;
     }
+
+    private void setText(ViewHolder viewHolder, String userName, String points, int color) {
+        viewHolder.userNameTxt.setTextColor(color);
+        viewHolder.userNameTxt.setText(userName);
+        viewHolder.pointsTxt.setText(points);
+    }
+
+
 }
 
 
