@@ -55,8 +55,6 @@ public class LeaderboardFragment extends Fragment {
     private LeaderboardAdapter leaderboardAdapter;
 
 
-
-
     public static LeaderboardFragment newInstance() {
         LeaderboardFragment fragment = new LeaderboardFragment();
         return fragment;
@@ -84,19 +82,9 @@ public class LeaderboardFragment extends Fragment {
         leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
         addFriend = (FloatingActionButton) theView.findViewById(R.id.add_new_friend);
         ref.child("friends").child(theCurrenUser.getUid()).child(theCurrenUser.getUid()).setValue(currentUser);
-
         friendRef = ref.child("friends");
         userRef= ref.child("users");
         dataModels = new ArrayList<>();
-
-
-        /*List<String> friendUIDS = new ArrayList<String>();
-        ArrayAdapter<String> arrayA = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1,
-                friendUIDS);*/
-
-        // Can't use this.
-        // ref.child("friends").child(theCurrenUser.getUid()).child(theCurrenUser.getUid()).setValue(currentUser);
 
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,45 +159,12 @@ public class LeaderboardFragment extends Fragment {
             }
         });
 
-       /* friendRef.child(currentUser.getUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot ds: dataSnapshot.getChildren()) {
-                    userRef.child(ds.getKey()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            String userName = dataSnapshot.child("displayName").getValue().toString();
-                            String points = dataSnapshot.child("points").getValue().toString();
-                            String UID = ds.getKey().toString();
-
-                            dataModels.add(new LeaderboardModel(userName,points,UID));
-                            leaderboardAdapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 leaderboardAdapter.clear();
                 LeaderboardFragment.newInstance().getView();
                 friendRef.child(currentUser.getUserId()).child(currentUser.getUserId()).setValue(Math.random()*2000000000);
-
-
             }
 
             @Override
@@ -219,64 +174,6 @@ public class LeaderboardFragment extends Fragment {
         });
 
         leaderboardAdapter = new LeaderboardAdapter(dataModels,getApplicationContext());
-
-        /*friendRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    userRef.child(ds.getKey()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            friendUIDS.add(dataSnapshot.getValue(UserInformation.class).getDisplayName().toString() + "\t" +
-                                    dataSnapshot.getValue(UserInformation.class).getPoints());
-                            arrayA.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-                arrayA.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
-
-        FirebaseListAdapter<UserInformation> fListAdapter = new FirebaseListAdapter<UserInformation>(
-                getActivity(),
-                UserInformation.class,
-                R.layout.leaderboard_representation,
-                userRef
-        ) {
-            TextView name;
-            TextView points;
-
-            @Override
-            protected void populateView(View v, UserInformation model, int position) {
-                name = v.findViewById(R.id.txt_name);
-                points = v.findViewById(R.id.thePointsCollected);
-
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent profileIntent = new Intent(getActivity(),AnotherUserActivity.class);
-                        String userId = getRef(position).getKey();
-                        profileIntent.putExtra("userId", userId);
-                        startActivity(profileIntent);
-
-                    }
-                });
-
-            }
-        };
-
         leaderboardList.setAdapter(leaderboardAdapter);
         return theView;
     }
