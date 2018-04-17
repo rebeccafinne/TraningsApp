@@ -54,9 +54,8 @@ public class AddFriendActivity extends AppCompatActivity {
     private EditText searchFriends;
     private FirebaseUser theCurrenUser = FirebaseAuth.getInstance().getCurrentUser();
     private TextView toolText;
-    private ArrayList<AddFriendModel> dataModels;
-    private ArrayAdapter<AddFriendModel> adapter;
     private Button enterSearchBtn;
+    private Query searchQuery;
 
 
     @Override
@@ -68,7 +67,6 @@ public class AddFriendActivity extends AppCompatActivity {
         leaderboardList = (ListView) findViewById(R.id.leaderList);
         searchFriends = (EditText) findViewById(R.id.searchText);
         enterSearchBtn = (Button) findViewById(R.id.findBtn);
-        dataModels = new ArrayList<>();
         userRef = ref.child("users");
         enterSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,25 +79,35 @@ public class AddFriendActivity extends AppCompatActivity {
 
     private void searchForUsers(String theSearch) {
 
-        Query searchQuery = userRef.orderByChild("email").startAt(theSearch)
-                .endAt(theSearch + "\uf8ff");
-
-        searchQuery.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.exists()){
-                    Toast.makeText(AddFriendActivity.this,"No users found with that email.",
-                            Toast.LENGTH_LONG).show();
+        if (!theSearch.isEmpty()) {
+            searchQuery = userRef.orderByChild("email").startAt(theSearch)
+                    .endAt(theSearch + "\uf8ff");
+            searchQuery.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.exists()) {
+                        Toast.makeText(AddFriendActivity.this, "No users found with that email.",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        } else {
 
-
+            /*
+            *Since I know that email always starts with an small letter
+            * I can be sure that his query won't produce any results in my Firebaselistadaper
+            * which is what I want.
+            */
+            searchQuery = userRef.orderByChild("email").startAt("ABC")
+                    .endAt("ABC" + "\uf8ff");
+            Toast.makeText(AddFriendActivity.this, "When you search for nothing you get nothing. .",
+                    Toast.LENGTH_LONG).show();
+        }
 
 
 
