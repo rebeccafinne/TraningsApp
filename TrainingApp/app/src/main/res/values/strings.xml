@@ -154,4 +154,5 @@
     <string name="tool_daily">Daily</string>
     <string name="tool_bus">Bus Stops</string>
     <string name="tool_stairs">Stairs</string>
+    <string name="search">Search</string>
 </resources>

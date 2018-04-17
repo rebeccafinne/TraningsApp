@@ -22,13 +22,21 @@ android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/find"
-            android:textColor="@color/authui_inputTextColorDark"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:textColor="@color/colorWhite"
             android:textSize="30sp" />
 
         <EditText
             android:id="@+id/searchText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="20dp"
+
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
             android:ems="10"
             android:hint="@string/friend_email"
             android:inputType="textPersonName" />
@@ -37,9 +45,12 @@ android:layout_height="match_parent"
             android:id="@+id/findBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_button"
-            android:textColor="#ffffff"
-            android:text="Search" />
+            android:layout_marginEnd="60dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/almostTransparent"
+            android:text="@string/search"
+            android:textColor="@color/colorWhite" />
 
 
 
@@ -48,7 +59,7 @@ android:layout_height="match_parent"
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_marginTop="20dp">
 
         <ListView
             android:id="@+id/leaderList"

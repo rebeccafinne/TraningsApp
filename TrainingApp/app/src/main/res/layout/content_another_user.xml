@@ -29,21 +29,39 @@ tools:showIn="@layout/activity_another_user">
         android:gravity="center"
         android:src="@android:drawable/sym_def_app_icon" />
 
-    <TextView
-        android:id="@+id/theDisplayName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/display_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <TextView
-        android:id="@+id/displayPoints"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/points"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/theDisplayName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text=""
+            android:textSize="24sp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/almostTransparent"/>
+
+        <TextView
+            android:id="@+id/displayPoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/almostTransparent"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
