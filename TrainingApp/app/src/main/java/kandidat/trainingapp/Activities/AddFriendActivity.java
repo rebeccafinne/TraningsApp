@@ -88,7 +88,7 @@ public class AddFriendActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()){
-                    Toast.makeText(AddFriendActivity.this,"No user with that email.",
+                    Toast.makeText(AddFriendActivity.this,"No users found with that email.",
                             Toast.LENGTH_LONG).show();
                 }
             }
