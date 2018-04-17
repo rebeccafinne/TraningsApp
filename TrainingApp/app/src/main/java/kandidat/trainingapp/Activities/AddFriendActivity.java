@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -31,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -75,46 +77,31 @@ public class AddFriendActivity extends AppCompatActivity {
             }
         });
 
-
-      /*  userRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String userName = dataSnapshot.child("displayName").getValue().toString();
-                String UID = "Just something";
-                dataModels.add(new AddFriendModel(userName,UID));
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
-
-        //adapter = new AddFriendAdapter(dataModels,getApplicationContext());
-
-
     }
 
     private void searchForUsers(String theSearch) {
 
         Query searchQuery = userRef.orderByChild("email").startAt(theSearch)
                 .endAt(theSearch + "\uf8ff");
+
+        searchQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()){
+                    Toast.makeText(AddFriendActivity.this,"No user with that email.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
         toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
