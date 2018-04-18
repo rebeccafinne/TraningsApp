@@ -33,26 +33,21 @@ import kandidat.trainingapp.Repositories.UserInformation;
 
 public class AddFriendActivity extends AppCompatActivity {
 
-    private FirebaseDatabase db;
-    private DatabaseReference ref;
     private DatabaseReference userRef;
     private ListView leaderboardList;
     private EditText searchFriends;
     private FirebaseUser theCurrenUser = FirebaseAuth.getInstance().getCurrentUser();
-    private TextView toolText;
-    private Button enterSearchBtn;
-    private Query searchQuery;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
-        db = FirebaseDatabase.getInstance();
-        ref = db.getReference();
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference ref = db.getReference();
         leaderboardList = (ListView) findViewById(R.id.leaderList);
         searchFriends = (EditText) findViewById(R.id.searchText);
-        enterSearchBtn = (Button) findViewById(R.id.findBtn);
+        Button enterSearchBtn = (Button) findViewById(R.id.findBtn);
         userRef = ref.child("users");
         enterSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +60,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
     private void searchForUsers(String theSearch) {
 
+        Query searchQuery;
         if (!theSearch.isEmpty()) {
             searchQuery = userRef.orderByChild("email").startAt(theSearch)
                     .endAt(theSearch + "\uf8ff");
@@ -98,7 +94,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
-        toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
+        TextView toolText = (TextView) toolbar.findViewById(R.id.toolbar_text);
         toolText.setText("Add new friend");
 
 

@@ -31,8 +31,7 @@ import kandidat.trainingapp.R;
 //testing git again
 public class MainActivity extends AppCompatActivity{
     private static final int RC_SIGN_IN = 100;
-    EditText editEmail, editPassword;
-    private FirebaseAuth mauth;
+
 
 
 
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mauth = FirebaseAuth.getInstance();
+        FirebaseAuth mauth = FirebaseAuth.getInstance();
 
 
         findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
@@ -62,8 +61,8 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        editEmail = findViewById(R.id.editEmail);
-        editPassword = findViewById(R.id.editPassword);
+        EditText editEmail = findViewById(R.id.editEmail);
+        EditText editPassword = findViewById(R.id.editPassword);
     }
 
     @Override

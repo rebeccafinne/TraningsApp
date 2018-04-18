@@ -40,14 +40,6 @@
             android:label="@string/title_activity_cardio"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.StatsActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.ChartActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Activities.DailyActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
@@ -57,10 +49,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.AddFavoritesActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.AddNewGymActiviy"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity

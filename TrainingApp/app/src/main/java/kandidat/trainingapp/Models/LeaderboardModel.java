@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
  */
 
 public class LeaderboardModel implements Comparable {
-    String userName,points,UID;
+    private String userName,points,UID;
 
     public LeaderboardModel(String userName, String points, String UID) {
         this.userName = userName;

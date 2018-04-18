@@ -2,24 +2,16 @@ package kandidat.trainingapp.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.TestLooperManager;
-import android.support.annotation.NonNull;
+
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import kandidat.trainingapp.Activities.ChartActivity;
-import kandidat.trainingapp.Activities.StatsActivity;
-import kandidat.trainingapp.Activities.MainActivity;
 import kandidat.trainingapp.Repositories.UserInformation;
 import kandidat.trainingapp.R;
 
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +23,7 @@ public class ProfileFragment extends Fragment  {
 
     private TextView profileText;
     private TextView pointsDisplay;
-    private Button chartButton, statsButton, signOutButton;
+
 
 
     public static ProfileFragment newInstance() {
@@ -57,10 +49,7 @@ public class ProfileFragment extends Fragment  {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         pointsDisplay = (TextView) rootView.findViewById(R.id.points_display);
         profileText = (TextView) rootView.findViewById(R.id.nameInProfile);
-       /* chartButton = (Button) rootView.findViewById(R.id.chartButton);
-        chartButton.setOnClickListener(this);
-        statsButton = (Button) rootView.findViewById(R.id.statsButton);
-        statsButton.setOnClickListener(this);*/
+
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -107,17 +96,4 @@ public class ProfileFragment extends Fragment  {
         });
     }
 
-  /*  @Override
-    public void onClick(View view) {
-
-        Intent intent;
-        if(view.getId() == R.id.chartButton) {
-            intent = new Intent(getActivity(), ChartActivity.class);
-
-        }else{
-            intent = new Intent(getActivity(), StatsActivity.class);
-        }
-
-        startActivity(intent);
-    }*/
 }

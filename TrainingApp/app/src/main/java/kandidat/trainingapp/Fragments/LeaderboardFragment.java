@@ -43,12 +43,8 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class LeaderboardFragment extends Fragment {
 
-    private FirebaseDatabase db;
-    private DatabaseReference ref;
     private DatabaseReference friendRef;
     private DatabaseReference userRef;
-    private ListView leaderboardList;
-    private FloatingActionButton addFriend;
     private FirebaseUser theCurrenUser = FirebaseAuth.getInstance().getCurrentUser();
     private UserInformation currentUser;
     private ArrayList<LeaderboardModel> dataModels;
@@ -56,8 +52,8 @@ public class LeaderboardFragment extends Fragment {
 
 
     public static LeaderboardFragment newInstance() {
-        LeaderboardFragment fragment = new LeaderboardFragment();
-        return fragment;
+        return new LeaderboardFragment();
+
     }
 
     @Override
@@ -77,10 +73,10 @@ public class LeaderboardFragment extends Fragment {
         // Inflate the layout for this fragment
         View theView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         currentUser = new UserInformation(theCurrenUser.getUid(),theCurrenUser.getDisplayName(),theCurrenUser.getEmail());
-        db = FirebaseDatabase.getInstance();
-        ref = db.getReference();
-        leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
-        addFriend = (FloatingActionButton) theView.findViewById(R.id.add_new_friend);
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference ref = db.getReference();
+        ListView leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
+        FloatingActionButton addFriend = (FloatingActionButton) theView.findViewById(R.id.add_new_friend);
         ref.child("friends").child(theCurrenUser.getUid()).child(theCurrenUser.getUid()).setValue(currentUser);
         friendRef = ref.child("friends");
         userRef= ref.child("users");

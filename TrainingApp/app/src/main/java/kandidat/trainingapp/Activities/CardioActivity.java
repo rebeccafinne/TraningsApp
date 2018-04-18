@@ -48,12 +48,6 @@ public class CardioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardio);
 
-
-       /* FirebaseDatabase db = FirebaseDatabase.getInstance();
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference pointRef = db.getReference("users").child(user.getUid()).child("points");
-        DatabaseReference negPointRef = db.getReference("users").child(user.getUid()).child("negPoints");*/
-
         points = new Points();
         workout = new BasicWorkout();
         context = this;
@@ -164,29 +158,6 @@ public class CardioActivity extends AppCompatActivity {
 
                         points.calcualtePoints(workout.getPoints());
 
-
-
-               /*         pointRef.runTransaction(new Transaction.Handler() {
-                            @Override
-                            public Transaction.Result doTransaction(MutableData mutableData) {
-                                Integer currentData = mutableData.getValue(Integer.class);
-                                if (currentData == 0) {
-                                    pointRef.setValue(workout.getPoints());
-                                    negPointRef.setValue(workout.getPoints()*-1);
-
-                                } else {
-                                    currentData = currentData + workout.getPoints();
-                                    pointRef.setValue(currentData);
-                                    negPointRef.setValue(currentData*-1);
-                                }
-                                return null;
-                            }
-
-                            @Override
-                            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-
-                            }
-                        });*/
 
                         Toast.makeText(getApplicationContext(), "You just earned " + workout.getPoints()
                                 + " points!", Toast.LENGTH_SHORT).show();
