@@ -98,7 +98,7 @@ public class AnotherUserActivity extends AppCompatActivity {
                 String points = dataSnapshot.child("points").getValue().toString();
                 toolText.setText(friendDisplayName + "'s Profile");
                 textName.setText(friendDisplayName);
-                textPoints.setText("Has reached level " + level + "and collected " + points + " points");
+                textPoints.setText("Has reached level " + level + " and collected " + points + " points");
 
                 if(currentUser.getUid().equals(userId)){
                     friendRequest.setVisibility(View.GONE);
