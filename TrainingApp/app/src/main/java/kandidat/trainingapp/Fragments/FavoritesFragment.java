@@ -156,11 +156,18 @@ public class FavoritesFragment extends Fragment {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Object item = adapterView.getItemAtPosition(i);
                     FavoriteModel itemClicked = (FavoriteModel) item;
-                    points.calcualtePoints(itemClicked.getValue());
+                    Integer finalPoints;
+                    if(itemClicked.getActivity().equals("Walked bus stops")){
+                        finalPoints = itemClicked.getValue() * 5;
+                        points.calcualtePoints(finalPoints);
+                    }else{
+                        finalPoints = itemClicked.getValue();
+                        points.calcualtePoints(finalPoints);
+                    }
 
                     Context context = getApplicationContext();
 
-                    CharSequence text = "You earned " + itemClicked.getValue() + " points!";
+                    CharSequence text = "You earned " + finalPoints + " points!";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
