@@ -1,6 +1,7 @@
 package kandidat.trainingapp.Fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.TestLooperManager;
 import android.support.annotation.NonNull;
@@ -11,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import kandidat.trainingapp.Activities.ChartActivity;
-import kandidat.trainingapp.Activities.StatsActivity;
+//import kandidat.trainingapp.Activities.ChartActivity;
+//import kandidat.trainingapp.Activities.StatsActivity;
 import kandidat.trainingapp.Activities.MainActivity;
 import kandidat.trainingapp.Repositories.UserInformation;
 import kandidat.trainingapp.R;
@@ -102,16 +103,26 @@ public class ProfileFragment extends Fragment  {
                     pointsDisplay.setText("You have collected " + points + " points!" );
                     levelDisplay.setText("You have reached level " + level);
 
-                    if (level < 5) {
-                        levelTxtDisplay.setText("You can do this don't give up");
+                    if (level < 3) {
+                        levelTxtDisplay.setText("You can do this!");
+                        levelTxtDisplay.setTextColor(Color.rgb(255, 153, 153));
+                    } else if (level >= 3 && level < 5) {
+                        levelTxtDisplay.setText("Very good don't give up!");
                     } else if (level >= 5 && level < 10) {
                         levelTxtDisplay.setText("Keep up the good work!");
-                    } else if (level >= 10 && level < 30) {
+                        levelTxtDisplay.setTextColor(Color.rgb(255, 204, 153));
+                    } else if (level >= 10 && level < 15) {
                         levelTxtDisplay.setText("You're doing great!");
-                    } else if (level >= 30 && level < 50) {
+                        levelTxtDisplay.setTextColor(Color.rgb(153, 255, 153));
+                    } else if (level >= 15 && level < 30) {
                         levelTxtDisplay.setText("Amazing job!");
+                    } else if (level >= 30 && level < 50) {
+                        levelTxtDisplay.setText("You're fantastic!");
+                        levelTxtDisplay.setTextColor(Color.rgb(153, 255, 255));
+
                     } else {
                         levelTxtDisplay.setText("WOW! You're a superstar!!! ");
+                        levelTxtDisplay.setTextColor(Color.rgb(255, 255, 153));
                     }
                 }
 
