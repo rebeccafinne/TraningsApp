@@ -30,9 +30,6 @@
     <string name="title_activity_cardio">CardioActivity</string>
     <string name="title_activity_gym">GymActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!-- Strings for bottom navigationbar -->
     <string name="me">Profile</string>
     <string name="workout">Log Workout</string>
@@ -43,9 +40,9 @@
 
 
     <!-- Strings for training -->
-    <string name="gym">Log Gym Exercise</string>
-    <string name="cardio">Log Cardio Exercise</string>
-    <string name="daily">Log Daily Exercise</string>
+    <string name="gym">Gym Exercise</string>
+    <string name="cardio">Cardio Exercise</string>
+    <string name="daily">Daily Exercise</string>
     <string name="stairs">Stairs</string>
     <string name="busstop">Bus Stops</string>
     <string name="stand">Stand up</string>

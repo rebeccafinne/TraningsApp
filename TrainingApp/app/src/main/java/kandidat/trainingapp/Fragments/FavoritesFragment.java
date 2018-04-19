@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +44,7 @@ public class FavoritesFragment extends Fragment {
 
 
     public static FavoritesFragment newInstance() {
-        FavoritesFragment fragment = new FavoritesFragment();
-        return fragment;
+        return new FavoritesFragment();
     }
 
 
@@ -158,11 +156,18 @@ public class FavoritesFragment extends Fragment {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Object item = adapterView.getItemAtPosition(i);
                     FavoriteModel itemClicked = (FavoriteModel) item;
-                    points.calcualtePoints(itemClicked.getValue());
+                    Integer finalPoints;
+                    if(itemClicked.getActivity().equals("Walked bus stops")){
+                        finalPoints = itemClicked.getValue() * 5;
+                        points.calcualtePoints(finalPoints);
+                    }else{
+                        finalPoints = itemClicked.getValue();
+                        points.calcualtePoints(finalPoints);
+                    }
 
                     Context context = getApplicationContext();
 
-                    CharSequence text = "You earned " + itemClicked.getValue() + " points!";
+                    CharSequence text = "You earned " + finalPoints + " points!";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);

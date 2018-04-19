@@ -1,6 +1,7 @@
 package kandidat.trainingapp.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -102,11 +103,19 @@ public class DailyActivity extends AppCompatActivity {
 
                 String selectedString = spinnerHowMany.getSelectedItem().toString();
                 Integer selectedInteger = Integer.parseInt(selectedString);
-                points.calcualtePoints(selectedInteger);
+                String typeString = spinnerType.getSelectedItem().toString();
+                Integer finalPoints;
+                if(typeString.equals("Bus Stops")){
+                    finalPoints = selectedInteger * 5;
+                    points.calcualtePoints(finalPoints);
+                }else{
+                    finalPoints = selectedInteger;
+                    points.calcualtePoints(selectedInteger);
+                }
 
                 Context context = getApplicationContext();
 
-                CharSequence text = "You have earned " + selectedString + " points!";
+                CharSequence text = "You have earned " + finalPoints + " points!";
 
 
                 int duration = Toast.LENGTH_SHORT;

@@ -28,7 +28,8 @@ public class FavoriteAdapter extends ArrayAdapter<FavoriteModel>{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         // Get the data item for this position
         FavoriteModel fav = getItem(position);
 

@@ -20,8 +20,7 @@ public class TrainingFragment extends Fragment implements View.OnClickListener {
 
 
     public static TrainingFragment newInstance() {
-        TrainingFragment fragment = new TrainingFragment();
-        return fragment;
+        return new TrainingFragment();
 
     }
 

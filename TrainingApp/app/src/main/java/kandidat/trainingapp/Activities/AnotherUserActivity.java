@@ -49,7 +49,7 @@ public class AnotherUserActivity extends AppCompatActivity {
 
 
     //-------------- Database ---------------
-    private DatabaseReference anotherUserRef,requestRef,friendsRef;
+    private DatabaseReference requestRef,friendsRef;
     private FirebaseUser currentUser;
 
     @Override
@@ -84,7 +84,7 @@ public class AnotherUserActivity extends AppCompatActivity {
         *----------------------------------------------
         * ---------------------------------------------*/
        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        anotherUserRef = db.getReference().child("users").child(userId);
+        DatabaseReference anotherUserRef = db.getReference().child("users").child(userId);
         requestRef = db.getReference().child("friend_request");
         friendsRef = db.getReference().child("friends");
         currentUser = FirebaseAuth.getInstance().getCurrentUser();

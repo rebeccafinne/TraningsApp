@@ -1,13 +1,10 @@
 package kandidat.trainingapp.Activities;
 
 import android.content.Context;
-import android.content.Intent;
-import android.inputmethodservice.Keyboard;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.firebase.ui.auth.IdpResponse;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -287,17 +280,6 @@ public class TrainingActivity extends AppCompatActivity {
         }
     }
 
- /*   public static Intent createIntent(Context context, IdpResponse idpResponse) {
-        Intent in = IdpResponse.getIntent(idpResponse);
-        in.setClass(context, TrainingActivity.class);
-        return in;
-    }
-
-    public static Intent createIntent(Context context) {
-        Intent in = new Intent();
-        in.setClass(context, TrainingActivity.class);
-        return in;
-    }*/
 
     class RowAdapter extends BaseAdapter{
         private LayoutInflater mInflater;
