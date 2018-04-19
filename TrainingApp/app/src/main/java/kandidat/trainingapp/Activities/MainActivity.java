@@ -95,6 +95,8 @@ public class MainActivity extends AppCompatActivity{
             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             DatabaseReference userRef = db.getReference("users");
             DatabaseReference putUserRef= db.getReference("users").child(user.getUid());
+            DatabaseReference putYourselfRef = db.getReference("friends").child(user.getUid()).child(user.getUid());
+
 
             userRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity{
                         UserInformation theUser = new UserInformation(UID, displayName, email);
                         //theUser.getFriends().add(UID);
                         putUserRef.setValue(theUser);
+                        putYourselfRef.setValue("myself");
                     }
                 }
 

@@ -28,7 +28,7 @@ public class UserInformation {
     private String email;
     //private List<String> friends;
     private int points;
-    private int negPoints;
+    private int level;
 
 
 
@@ -40,10 +40,7 @@ public class UserInformation {
         this.displayName = displayName;
         this.email = email;
         this.points = points;
-        //Used to sort users from highetst points to lowest
-        this.negPoints = points * -1;
-        //friends = new ArrayList<>();
-
+        this.level = 1;
     }
 
     public String getDisplayName() {
@@ -62,9 +59,9 @@ public class UserInformation {
         return points;
     }
 
-    public int getNegPoints() {return negPoints;}
+    public int getLevel() {
+        return level;
+    }
 
-   /* public List<String> getFriends() {
-        return friends;
-    }*/
+
 }

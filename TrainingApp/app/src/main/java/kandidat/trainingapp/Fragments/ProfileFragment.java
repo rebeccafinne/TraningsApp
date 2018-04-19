@@ -29,8 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment  {
 
-    private TextView profileText;
-    private TextView pointsDisplay;
+    private TextView profileText, pointsDisplay, levelDisplay, levelTxtDisplay;
+
     private Button chartButton, statsButton, signOutButton;
 
 
@@ -57,6 +57,9 @@ public class ProfileFragment extends Fragment  {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         pointsDisplay = (TextView) rootView.findViewById(R.id.points_display);
         profileText = (TextView) rootView.findViewById(R.id.nameInProfile);
+        levelDisplay = (TextView) rootView.findViewById(R.id.lvl_display);
+        levelTxtDisplay = (TextView) rootView.findViewById(R.id.lvl_text);
+
        /* chartButton = (Button) rootView.findViewById(R.id.chartButton);
         chartButton.setOnClickListener(this);
         statsButton = (Button) rootView.findViewById(R.id.statsButton);
@@ -94,8 +97,22 @@ public class ProfileFragment extends Fragment  {
                 }else{
                     String userDisplayCap = user.getDisplayName();
                     int points =  user.getPoints();
+                    int level = user.getLevel();
                     profileText.setText(userDisplayCap);
                     pointsDisplay.setText("You have collected " + points + " points!" );
+                    levelDisplay.setText("You have reached level " + level);
+
+                    if (level < 5) {
+                        levelTxtDisplay.setText("You can do this don't give up");
+                    } else if (level >= 5 && level < 10) {
+                        levelTxtDisplay.setText("Keep up the good work!");
+                    } else if (level >= 10 && level < 30) {
+                        levelTxtDisplay.setText("You're doing great!");
+                    } else if (level >= 30 && level < 50) {
+                        levelTxtDisplay.setText("Amazing job!");
+                    } else {
+                        levelTxtDisplay.setText("WOW! You're a superstar!!! ");
+                    }
                 }
 
             }
