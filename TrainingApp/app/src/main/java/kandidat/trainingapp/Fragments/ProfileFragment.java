@@ -108,6 +108,7 @@ public class ProfileFragment extends Fragment  {
                         levelTxtDisplay.setTextColor(Color.rgb(255, 153, 153));
                     } else if (level >= 3 && level < 5) {
                         levelTxtDisplay.setText("Very good don't give up!");
+                        levelTxtDisplay.setTextColor(Color.rgb(255, 153, 153));
                     } else if (level >= 5 && level < 10) {
                         levelTxtDisplay.setText("Keep up the good work!");
                         levelTxtDisplay.setTextColor(Color.rgb(255, 204, 153));
@@ -116,6 +117,7 @@ public class ProfileFragment extends Fragment  {
                         levelTxtDisplay.setTextColor(Color.rgb(153, 255, 153));
                     } else if (level >= 15 && level < 30) {
                         levelTxtDisplay.setText("Amazing job!");
+                        levelTxtDisplay.setTextColor(Color.rgb(153, 255, 153));
                     } else if (level >= 30 && level < 50) {
                         levelTxtDisplay.setText("You're fantastic!");
                         levelTxtDisplay.setTextColor(Color.rgb(153, 255, 255));
