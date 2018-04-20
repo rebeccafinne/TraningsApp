@@ -137,17 +137,4 @@ public class ProfileFragment extends Fragment  {
         });
     }
 
-  /*  @Override
-    public void onClick(View view) {
-
-        Intent intent;
-        if(view.getId() == R.id.chartButton) {
-            intent = new Intent(getActivity(), ChartActivity.class);
-
-        }else{
-            intent = new Intent(getActivity(), StatsActivity.class);
-        }
-
-        startActivity(intent);
-    }*/
 }

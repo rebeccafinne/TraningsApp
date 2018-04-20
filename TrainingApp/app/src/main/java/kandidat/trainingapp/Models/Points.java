@@ -81,7 +81,7 @@ public class Points {
 
     }
 
-    public boolean calculateLevel(Integer points, Integer level) {
+    private boolean calculateLevel(Integer points, Integer level) {
 
         if (points > getNextLevel(level)) {
             try {
@@ -105,7 +105,7 @@ public class Points {
         return false;
     }
 
-    public int getNextLevel(Integer currentLevel) {
+    private int getNextLevel(Integer currentLevel) {
         return ((100 * currentLevel) - 1);
     }
 }
