@@ -45,7 +45,7 @@ public class AnotherUserActivity extends AppCompatActivity {
     private TextView textName,textPoints,toolText;
     private Button friendRequest,declineRequest;
     private int currentFriendState;
-    private String friendDisplayName,friendEmail;
+    private String friendDisplayName;
 
 
     //-------------- Database ---------------
@@ -94,17 +94,17 @@ public class AnotherUserActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                friendDisplayName = dataSnapshot.child("displayName").getValue().toString();
-               friendEmail = dataSnapshot.child("email").getValue().toString();
+                String level = dataSnapshot.child("level").getValue().toString();
                 String points = dataSnapshot.child("points").getValue().toString();
                 toolText.setText(friendDisplayName + "'s Profile");
                 textName.setText(friendDisplayName);
-                textPoints.setText("Has collected " + points +" points");
+                textPoints.setText("Has reached level " + level + " and collected " + points + " points");
 
                 if(currentUser.getUid().equals(userId)){
                     friendRequest.setVisibility(View.GONE);
                     declineRequest.setVisibility(View.GONE);
                     toolText.setText("Me");
-                    textPoints.setText("You have collected " + points +" points");
+                    textPoints.setText("You have reached level " + level + " and collected " + points + " points");
                 }
             }
 
@@ -235,8 +235,6 @@ public class AnotherUserActivity extends AppCompatActivity {
                 if(currentFriendState == 2){
                     //Currently set the value of friend to when they accepted the friend request
                     String currentDate = DateFormat.getDateInstance().format(new Date());
-                    // UserInformation friendAdded = new UserInformation(userId,friendDisplayName,friendEmail);
-                    // UserInformation theCurrentUser = new UserInformation(currentUser.getUid(),currentUser.getDisplayName(),currentUser.getEmail());
                     friendsRef.child(currentUser.getUid()).child(userId).setValue(currentDate).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

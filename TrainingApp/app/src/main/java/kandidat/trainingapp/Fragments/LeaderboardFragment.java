@@ -1,20 +1,14 @@
 package kandidat.trainingapp.Fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -24,27 +18,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
 
 import kandidat.trainingapp.Activities.AddFriendActivity;
-import kandidat.trainingapp.Activities.AnotherUserActivity;
 import kandidat.trainingapp.Adapter.LeaderboardAdapter;
 import kandidat.trainingapp.Models.LeaderboardModel;
-import kandidat.trainingapp.Repositories.UserInformation;
 import kandidat.trainingapp.R;
+import kandidat.trainingapp.Repositories.UserInformation;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class LeaderboardFragment extends Fragment {
 
+    private FirebaseDatabase db;
+    private DatabaseReference ref;
     private DatabaseReference friendRef;
     private DatabaseReference userRef;
+    private ListView leaderboardList;
+    private FloatingActionButton addFriend;
     private FirebaseUser theCurrenUser = FirebaseAuth.getInstance().getCurrentUser();
     private UserInformation currentUser;
     private ArrayList<LeaderboardModel> dataModels;
@@ -52,12 +45,12 @@ public class LeaderboardFragment extends Fragment {
 
 
     public static LeaderboardFragment newInstance() {
-        return new LeaderboardFragment();
-
+        LeaderboardFragment fragment = new LeaderboardFragment();
+        return fragment;
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
     }
 
@@ -72,14 +65,12 @@ public class LeaderboardFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View theView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
-        currentUser = new UserInformation(theCurrenUser.getUid(),theCurrenUser.getDisplayName(),theCurrenUser.getEmail());
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference();
-        ListView leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
-        FloatingActionButton addFriend = (FloatingActionButton) theView.findViewById(R.id.add_new_friend);
-        ref.child("friends").child(theCurrenUser.getUid()).child(theCurrenUser.getUid()).setValue(currentUser);
+        db = FirebaseDatabase.getInstance();
+        ref = db.getReference();
+        leaderboardList = (ListView) theView.findViewById(R.id.leaderList);
+        addFriend = (FloatingActionButton) theView.findViewById(R.id.add_new_friend);
         friendRef = ref.child("friends");
-        userRef= ref.child("users");
+        userRef = ref.child("users");
         dataModels = new ArrayList<>();
 
         addFriend.setOnClickListener(new View.OnClickListener() {
@@ -90,23 +81,21 @@ public class LeaderboardFragment extends Fragment {
             }
         });
 
+
         friendRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 sortList();
-                LeaderboardFragment.newInstance().getView();
                 userRef.child(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
+                    }
+                });
 
             }
 
@@ -114,7 +103,7 @@ public class LeaderboardFragment extends Fragment {
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 leaderboardAdapter.clear();
 
-                for(DataSnapshot ds: dataSnapshot.getChildren()) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     userRef.child(ds.getKey()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -123,8 +112,8 @@ public class LeaderboardFragment extends Fragment {
                             String points = dataSnapshot.child("points").getValue().toString();
                             String UID = dataSnapshot.child("userId").getValue().toString();
 
-                            dataModels.add(new LeaderboardModel(userName,points,UID));
-                            LeaderboardFragment.newInstance().getView();
+                            dataModels.add(new LeaderboardModel(userName, points, UID));
+                            leaderboardAdapter.notifyDataSetChanged();
                             sortList();
 
 
@@ -141,12 +130,12 @@ public class LeaderboardFragment extends Fragment {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                LeaderboardFragment.newInstance().getView();
+
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                LeaderboardFragment.newInstance().getView();
+
             }
 
             @Override
@@ -158,9 +147,8 @@ public class LeaderboardFragment extends Fragment {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                leaderboardAdapter.clear();
-                LeaderboardFragment.newInstance().getView();
-                friendRef.child(currentUser.getUserId()).child(currentUser.getUserId()).setValue(Math.random()*2000000000);
+                //leaderboardAdapter.clear();
+                friendRef.child(theCurrenUser.getUid()).child(theCurrenUser.getUid()).setValue(Math.random() * 2000000000);
             }
 
             @Override
@@ -169,7 +157,7 @@ public class LeaderboardFragment extends Fragment {
             }
         });
 
-        leaderboardAdapter = new LeaderboardAdapter(dataModels,getApplicationContext());
+        leaderboardAdapter = new LeaderboardAdapter(dataModels, getApplicationContext());
         leaderboardList.setAdapter(leaderboardAdapter);
         return theView;
     }
@@ -180,5 +168,5 @@ public class LeaderboardFragment extends Fragment {
         leaderboardAdapter.notifyDataSetChanged();
     }
 
-
 }
+

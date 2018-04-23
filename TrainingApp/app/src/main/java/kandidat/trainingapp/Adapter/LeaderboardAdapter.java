@@ -84,7 +84,7 @@ public class LeaderboardAdapter extends ArrayAdapter<LeaderboardModel> implement
         }else{
             String userName = model.getUserName();
             String points = model.getPoints();
-            int color = Color.BLUE;
+            int color = Color.WHITE;
 
             setText(viewHolder, userName,points,color);
         }
