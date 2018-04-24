@@ -28,15 +28,15 @@
             android:id="@+id/btn_easy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@android:color/holo_green_dark"
             android:padding="8dp"
-            android:text="Easy"
-            android:button="@drawable/green_checkbox_selector" />
+            android:text="Easy" />
 
         <CheckBox
             android:id="@+id/btn_med"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/yellow_checkbox_selector"
+            android:buttonTint="@android:color/holo_orange_light"
             android:checked="true"
             android:padding="8dp"
             android:text="Medium" />
@@ -45,9 +45,9 @@
             android:id="@+id/btn_hard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@android:color/holo_red_dark"
             android:padding="8dp"
-            android:text="Hard"
-            android:button="@drawable/red_checkbox_selector" />
+            android:text="Hard" />
     </LinearLayout>
 
     <Button
