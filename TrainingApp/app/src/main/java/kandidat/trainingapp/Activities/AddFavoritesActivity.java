@@ -56,6 +56,7 @@ public class AddFavoritesActivity extends AppCompatActivity {
     private void addStairsClicked(View view){
         Intent intent = new Intent(this, FavoriteStairsActivity.class);
         startActivity(intent);
+        finish();
     }
 
     /**
@@ -65,6 +66,8 @@ public class AddFavoritesActivity extends AppCompatActivity {
     private void addBusClicked(View view){
         Intent intent = new Intent(this, FavoriteBusStopActivity.class);
         startActivity(intent);
+        finish();
+
     }
 
     /**
@@ -74,5 +77,7 @@ public class AddFavoritesActivity extends AppCompatActivity {
     private void addStandClicked(View view){
         Intent intent = new Intent(this, FavoriteTimeStandingActivity.class);
         startActivity(intent);
+        finish();
+
     }
 }
