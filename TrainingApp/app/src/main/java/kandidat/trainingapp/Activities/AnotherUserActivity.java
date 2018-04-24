@@ -118,7 +118,7 @@ public class AnotherUserActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.child(currentUser.getUid()).child(userId).hasChild("friend state")){
-                    friendRequest.setBackgroundColor(Color.GREEN);
+                    friendRequest.setBackgroundColor(Color.rgb(62, 188, 115));
                     currentFriendState = 0;
                 }else{
                     currentFriendState = dataSnapshot.child(currentUser.getUid()).child(userId).child("friend state").getValue(Integer.class);
@@ -127,27 +127,27 @@ public class AnotherUserActivity extends AppCompatActivity {
                         case 0:
                             declineRequest.setVisibility(View.GONE);
                             friendRequest.setText("Send Friend Request");
-                            friendRequest.setBackgroundColor(Color.GREEN);
+                            friendRequest.setBackgroundColor(Color.rgb(62, 188, 115));
                             friendRequest.setEnabled(true);
                             break;
                         // Friend Request Pending
                         case 1:
                             declineRequest.setVisibility(View.GONE);
                             friendRequest.setText("Cancel The Request");
-                            friendRequest.setBackgroundColor(Color.RED);
+                            friendRequest.setBackgroundColor(Color.rgb(217, 54, 86));
                             friendRequest.setEnabled(true);
                              break;
                         // Friend Request Received
                         case 2:
                             declineRequest.setVisibility(View.VISIBLE);
                             friendRequest.setText("Accept Friend Request");
-                            friendRequest.setBackgroundColor(Color.GREEN);
+                            friendRequest.setBackgroundColor(Color.rgb(62, 188, 115));
                             friendRequest.setEnabled(true);
                             break;
                         //Friends
                         case 3:
                             declineRequest.setVisibility(View.GONE);
-                            friendRequest.setBackgroundColor(Color.RED);
+                            friendRequest.setBackgroundColor(Color.rgb(217, 54, 86));
                             friendRequest.setText("Remove Friend");
                             friendRequest.setEnabled(true);
                     }

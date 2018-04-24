@@ -26,6 +26,7 @@ tools:showIn="@layout/activity_another_user">
         android:id="@+id/profilePicture"
         android:layout_width="match_parent"
         android:layout_height="130dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:src="@android:drawable/sym_def_app_icon" />
 
@@ -74,14 +75,15 @@ tools:showIn="@layout/activity_another_user">
 
         <Button
             android:id="@+id/sendRequestBtn"
-            android:layout_width="156dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
             android:layout_weight="1"
             android:background="@color/colorButtonCharts"
-            android:text="@string/send_request" />
+            android:text="@string/send_request"
+            android:textColor="@color/colorWhite" />
 
     </LinearLayout>
 
@@ -95,11 +97,12 @@ tools:showIn="@layout/activity_another_user">
 
         <Button
             android:id="@+id/declineRequestBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/errorColor"
-            android:text="@string/decline" />
+            android:text="@string/decline"
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
 
     <LinearLayout
