@@ -21,11 +21,12 @@ android:layout_height="match_parent"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/find"
-            android:layout_marginStart="60dp"
             android:layout_marginEnd="60dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/find"
             android:textColor="@color/colorWhite"
-            android:textSize="30sp" />
+            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/searchText"

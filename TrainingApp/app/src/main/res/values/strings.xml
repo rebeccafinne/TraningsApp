@@ -128,7 +128,7 @@
     <string name="change_name">Change Name</string>
     <string name="display_name">Display Name</string>
     <string name="add_new_favorite">Add New Favorite</string>
-    <string name="empty_favorites_string">You have no favorites yet, add favorites by pressing the menu in the right upper corner</string>
+    <string name="empty_favorites_string">You have no favorites yet, add favorites by clicking the plus sign</string>
     <string name="explain_favorites">Click on your favorite, when activity is done, to earn points</string>
     <string name="which_daily_log">Which type of activity do you want to log?</string>
     <string name="how_much_did_you_do">How much did you do?</string>
@@ -138,7 +138,7 @@
     <string name="add_new">Add New Friend</string>
     <string name="friend_email">Enter your friends email</string>
     <string name="add_remove">Add/Remove Friends</string>
-    <string name="find">Find Your Friend</string>
+    <string name="find">Find Your Friends</string>
     <string name="settings">Settings</string>
     <string name="how_many_stairs">How many flight of stairs did you walk?</string>
     <string name="how_many_minutes">How many minutes did you stand up?</string>

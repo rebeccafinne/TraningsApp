@@ -144,7 +144,7 @@ public class LeaderboardFragment extends Fragment {
             }
         });
 
-        userRef.addValueEventListener(new ValueEventListener() {
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //leaderboardAdapter.clear();
