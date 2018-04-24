@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 import kandidat.trainingapp.Activities.AddFriendActivity;
 import kandidat.trainingapp.Adapter.LeaderboardAdapter;
@@ -82,41 +83,26 @@ public class LeaderboardFragment extends Fragment {
         });
 
 
-        friendRef.addChildEventListener(new ChildEventListener() {
+        friendRef.child(theCurrenUser.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                sortList();
                 userRef.child(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                leaderboardAdapter.clear();
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    userRef.child(ds.getKey()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
                             String userName = dataSnapshot.child("displayName").getValue().toString();
                             String points = dataSnapshot.child("points").getValue().toString();
                             String UID = dataSnapshot.child("userId").getValue().toString();
+                        Iterator<LeaderboardModel> theIteration = dataModels.iterator();
+
+                        while (theIteration.hasNext()) {
+                            LeaderboardModel lm = theIteration.next();
+                            if (lm.getUID().equals(UID)) {
+                                theIteration.remove();
+                            }
+                        }
 
                             dataModels.add(new LeaderboardModel(userName, points, UID));
-                            leaderboardAdapter.notifyDataSetChanged();
                             sortList();
-
-
                         }
 
                         @Override
@@ -124,31 +110,28 @@ public class LeaderboardFragment extends Fragment {
 
                         }
                     });
-                }
+            }
 
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String theFriendRemoved = dataSnapshot.getKey();
+                Iterator<LeaderboardModel> theIteration = dataModels.iterator();
 
+                while (theIteration.hasNext()) {
+                    LeaderboardModel lm = theIteration.next();
+                    if (lm.getUID().equals(theFriendRemoved)) {
+                        theIteration.remove();
+                    }
+                }
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //leaderboardAdapter.clear();
-                friendRef.child(theCurrenUser.getUid()).child(theCurrenUser.getUid()).setValue(Math.random() * 2000000000);
             }
 
             @Override
