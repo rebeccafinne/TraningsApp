@@ -50,7 +50,7 @@ public class Points {
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("points").getValue(Integer.class) == 0){
+                if(dataSnapshot.child("points").getValue(Integer.class) == 0 || dataSnapshot.child("points").getValue(Integer.class) == null){
                     Integer currentLevel = dataSnapshot.child("level").getValue(Integer.class);
                     userRef.child("points").setValue(newPoint);
                     while (calculateLevel(newPoint, currentLevel)) {
