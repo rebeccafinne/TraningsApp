@@ -118,7 +118,15 @@ public class LeaderboardFragment extends Fragment {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String theFriendRemoved = dataSnapshot.getKey();
+                Iterator<LeaderboardModel> theIteration = dataModels.iterator();
 
+                while (theIteration.hasNext()) {
+                    LeaderboardModel lm = theIteration.next();
+                    if (lm.getUID().equals(theFriendRemoved)) {
+                        theIteration.remove();
+                    }
+                }
             }
 
             @Override
