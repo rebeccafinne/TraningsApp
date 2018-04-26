@@ -100,7 +100,7 @@ tools:showIn="@layout/activity_another_user">
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/errorColor"
+            android:background="@color/red"
             android:text="@string/decline"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
