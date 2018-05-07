@@ -126,7 +126,7 @@
     <string name="title_activity_another_user">AnotherUserActivity</string>
     <string name="group_invite">Send Group Invite</string>
     <string name="change_name">Change Name</string>
-    <string name="display_name">Username</string>
+    <string name="display_name">Change username</string>
     <string name="add_new_favorite">Add New Favorite</string>
     <string name="empty_favorites_string">You have no favorites yet, add favorites by clicking the plus sign</string>
     <string name="explain_favorites">Click on your favorite, when activity is done, to earn points</string>
